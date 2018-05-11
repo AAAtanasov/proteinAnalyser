@@ -13,8 +13,7 @@ public class SQLiteJDBCDriverConnection {
 
     private Connection connection;
 
-    private static final String connectionUrl =
-            "jdbc:sqlite:D:/Projekt IOT-MS/Beispiel Daten/Ecoli_04_RD2_01_1275.d/analysis.tdf";
+    private static final String connectionUrl = "jdbc:sqlite:F:\\proteinProjData\\Ecoli_04_RD2_01_1275.d\\analysis.tdf";
 
 
     public Connection getConnection() {
