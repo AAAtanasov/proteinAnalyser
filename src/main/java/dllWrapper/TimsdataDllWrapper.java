@@ -4,23 +4,27 @@ package dllWrapper;
 
 
 import com.sun.jna.*;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 import sqliteReader.SQLiteJDBCDriverConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class TimsdataDllWrapper {
-    public interface TimsdataDll extends Library {
-        TimsdataDll INSTANCE = (TimsdataDll)Native.loadLibrary("C:\\Users\\Anton\\Documents\\sqliteReader\\lib\\timsdata\\timsdata.dll", TimsdataDll.class);
-
-    }
+//    public interface TimsdataDll extends Library {
+//        long tims_open(String analysisDirectory);
+//        TimsdataDll INSTANCE = (TimsdataDll)Native.loadLibrary("C:\\Users\\Anton\\Documents\\sqliteReader\\lib\\timsdata\\timsdata.dll", TimsdataDll.class);
+//    }
 
     public static void main(String[] args) {
 
         SQLiteJDBCDriverConnection sqlite = new SQLiteJDBCDriverConnection();
         Connection connection = null;
+
         try {
             connection = sqlite.getConnection();
             if (connection == null) {
@@ -32,12 +36,23 @@ public class TimsdataDllWrapper {
 
             ResultSet resultSet = stmt.executeQuery("SELECT NumScans FROM Frames WHERE Id=10");
             int numScans = resultSet.getInt("NumScans");
+
+
             int minMz = 0;
             int maxMz = 3000;
+            int numPlotBins = 500;
+            INDArray mzbins =  Nd4j.linspace(minMz, maxMz, numScans);
 
 
+            TimsdataService sdll = TimsdataService.INSTANCE;
+            String analysisDir = "F:\\proteinProjData\\Ecoli_04_RD2_01_1275.d";
+            long test = sdll.tims_open(analysisDir);
+            INDArray summedIntensities = Nd4j.zeros(numPlotBins + 1);
 
-//            TimsdataDll sdll = TimsdataDll.INSTANCE;
+            Timsdata temp = new Timsdata();
+            List<ResultWrapper> wrappers = temp.readScans(frameId, 0, numScans, test);
+
+
 
             System.out.println("test");
         } catch (SQLException e){
