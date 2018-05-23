@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9c28b99-0ea8-43e2-b6a4-acfbff19cb2e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/dllWrapper/Timsdata.class" afterPath="$PROJECT_DIR$/out/production/classes/dllWrapper/Timsdata.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/dllWrapper/Timsdata.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dllWrapper/ResultWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/dllWrapper/ResultWrapper.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java" afterPath="$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDllWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDllWrapper.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataService.java" afterPath="$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -62,7 +62,7 @@
       <file leaf-file-name="TimsdataDllWrapper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDllWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
+            <state relative-caret-position="226">
               <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -75,12 +75,11 @@
       <file leaf-file-name="Timsdata.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1296">
-              <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state relative-caret-position="322">
+              <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1843#1858#0" expanded="true" />
-                <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+                <element signature="e#1503#1518#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,7 +89,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/ResultWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -99,8 +98,8 @@
       <file leaf-file-name="TimsdataService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+            <state relative-caret-position="153">
+              <caret line="9" column="108" lean-forward="true" selection-start-line="9" selection-start-column="108" selection-end-line="9" selection-end-column="108" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,7 +131,10 @@
     <findStrings>
       <find>li</find>
       <find>test</find>
+      <find>kur</find>
+      <find>scanBegin</find>
       <find>pivotArr</find>
+      <find>readsca</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -500,9 +502,9 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/sqliteReader/SQLiteJDBCDriverConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDll.java" />
+        <option value="$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDllWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataService.java" />
         <option value="$PROJECT_DIR$/src/main/java/dllWrapper/ResultWrapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDllWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java" />
       </list>
     </option>
@@ -514,8 +516,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="204" />
-    <option name="y" value="-12" />
+    <option name="x" value="6" />
+    <option name="y" value="-13" />
     <option name="width" value="1616" />
     <option name="height" value="876" />
   </component>
@@ -776,12 +778,12 @@
       <workItem from="1526548572859" duration="9373000" />
       <workItem from="1526634542714" duration="469000" />
       <workItem from="1527015026776" duration="27000" />
-      <workItem from="1527063959892" duration="3435000" />
+      <workItem from="1527063959892" duration="6548000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40013000" />
+    <option name="totallyTimeSpent" value="43126000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -790,7 +792,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873806" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -801,7 +803,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.111979164" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -810,7 +812,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17073171" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36055142" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -853,27 +855,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java</url>
-          <line>94</line>
+          <line>84</line>
           <properties />
           <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java</url>
-          <line>47</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java</url>
-          <line>89</line>
-          <properties />
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java</url>
-          <line>38</line>
-          <properties />
-          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDllWrapper.java</url>
@@ -881,8 +865,26 @@
           <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java</url>
+          <line>55</line>
+          <properties />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java</url>
+          <line>67</line>
+          <properties />
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java</url>
+          <line>43</line>
+          <properties />
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="30" />
+      <option name="time" value="34" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -893,8 +895,7 @@
           <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1843#1858#0" expanded="true" />
-            <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+            <element signature="e#1503#1518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -942,8 +943,7 @@
           <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1843#1858#0" expanded="true" />
-            <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+            <element signature="e#1503#1518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -991,8 +991,7 @@
           <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1843#1858#0" expanded="true" />
-            <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+            <element signature="e#1503#1518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1058,8 +1057,7 @@
           <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1843#1858#0" expanded="true" />
-            <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+            <element signature="e#1503#1518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1080,8 +1078,7 @@
           <caret line="6" column="43" lean-forward="false" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1843#1858#0" expanded="true" />
-            <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+            <element signature="e#1503#1518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1121,8 +1118,7 @@
           <caret line="6" column="43" lean-forward="false" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1843#1858#0" expanded="true" />
-            <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+            <element signature="e#1503#1518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1162,8 +1158,7 @@
           <caret line="6" column="43" lean-forward="false" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1843#1858#0" expanded="true" />
-            <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+            <element signature="e#1503#1518#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1328,14 +1323,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDll.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/sqliteReader/SQLiteJDBCDriverConnection.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1347,10 +1334,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        <state relative-caret-position="153">
+          <caret line="9" column="108" lean-forward="true" selection-start-line="9" selection-start-column="108" selection-end-line="9" selection-end-column="108" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1360,14 +1355,14 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/ResultWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/TimsdataDllWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
+        <state relative-caret-position="226">
           <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1378,12 +1373,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dllWrapper/Timsdata.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1296">
-          <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        <state relative-caret-position="322">
+          <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1843#1858#0" expanded="true" />
-            <element signature="method#transformLongToUint#0;class#Timsdata#0" expanded="false" />
+            <element signature="e#1503#1518#0" expanded="true" />
           </folding>
         </state>
       </provider>

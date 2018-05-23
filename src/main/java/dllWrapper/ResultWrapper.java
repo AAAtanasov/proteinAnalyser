@@ -1,6 +1,6 @@
 package dllWrapper;
 
 public class ResultWrapper {
-    public long[] intensities;
-    public long[] indicies;
+    public int[] intensities;
+    public int[] indicies;
 }
