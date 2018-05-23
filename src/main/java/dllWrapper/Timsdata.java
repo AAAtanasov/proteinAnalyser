@@ -1,5 +1,6 @@
 package dllWrapper;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,11 +35,18 @@ public class Timsdata {
             }
         }
 
+        // TODO: map pivotArr values to converted
+        long[] convertedFromUint = new long[pivotArr.length];
+
+        for (int i = 0; i < pivotArr.length; i++) {
+            long initialValue = pivotArr[i];
+            long converedUint = transformLongToUint(initialValue);
+            convertedFromUint[i] = converedUint;
+        }
+
 
         int startIndex = scanEnd - scanBegin;
         int endOfScan = startIndex;
-//        long asdasdasd = 4294967297L;
-//        int testus = (int)asdasdasd;
         int currentLength = pivotArr.length;
         int tempInt = startIndex;
 
@@ -48,25 +56,31 @@ public class Timsdata {
         for (int i = scanBegin; i < endOfScan; i++) {
             try {
                 int npeaks = (int)pivotArr[i - scanBegin];
-                long[] intensities;
-                long[] indicies;
-
-                tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
-
-                indicies = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
-                startIndex += npeaks;
+                if (npeaks > endOfScan) {
+                    System.out.println("Npeaks bigger than end of scan!");
+                }
+                long[] intensities = new long[0];
+                long[] indicies = new long[0];
 
                 if (startIndex > currentLength) {
-                    break;
+                    System.out.println("Skip this i: " + i);
                 } else {
+                    tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
+                    indicies = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
+                }
+
+
+                startIndex += npeaks;
+
+                if (startIndex > currentLength) {
+                    System.out.println("Skip this i: " + i);
+
+                } else {
+                    tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
+                    intensities = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
 
                 }
-                tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
-                intensities = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
                 startIndex += npeaks;
-                if (startIndex > currentLength) {
-                    break;
-                }
 
                 ResultWrapper wrapper = new ResultWrapper();
                 wrapper.indicies = indicies;
@@ -80,18 +94,29 @@ public class Timsdata {
 
         return resultWrappers;
     }
+
+    public long transformLongToUint(long value)
+    {
+        byte[] bytes = new byte[8];
+        ByteBuffer.wrap(bytes).putLong(value);
+        byte[] newOnes = Arrays.copyOfRange(bytes, 4, 8);
+
+        int sizeMissing = Long.BYTES - newOnes.length;
+        byte[] zeroArray = new byte[sizeMissing];
+        byte[] resultingArray = new byte[newOnes.length + zeroArray.length];
+
+        // Copy sliced array and artificial zeroes array into a new target array.
+        System.arraycopy(zeroArray, 0, resultingArray, 0, zeroArray.length);
+        System.arraycopy(newOnes, 0, resultingArray, zeroArray.length, newOnes.length);
+
+        ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
+        buffer.put(resultingArray);
+        buffer.flip();//need flip
+
+        return buffer.getLong();
+
+    }
+
+
 }
 
-
-
-//        while (true) {
-//            int cnt = initialFrameBUfferSize;
-//            int[] pivotArr = new int[cnt];
-//            INDArray buf = Nd4j.zeros(pivotArr, DataBuffer.Type.LONG);
-//            TimsdataService sdll = TimsdataService.INSTANCE;
-//            int len = 4 * cnt;
-//
-//            long hailCall = sdll.tims_read_scans_v2(handle, frameId, scanBegin, scanEnd, buf, len);
-//            System.out.println(hailCall);
-//
-//        }

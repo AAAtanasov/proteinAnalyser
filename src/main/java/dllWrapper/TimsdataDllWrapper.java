@@ -8,10 +8,12 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import sqliteReader.SQLiteJDBCDriverConnection;
 
+import java.nio.ByteBuffer;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.List;
 
 public class TimsdataDllWrapper {
@@ -58,6 +60,9 @@ public class TimsdataDllWrapper {
         } catch (SQLException e){
             System.out.println(e.getMessage());
 
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
         } finally {
             try {
                 if (connection != null) {
@@ -73,4 +78,6 @@ public class TimsdataDllWrapper {
 
 
     }
+
+
 }
