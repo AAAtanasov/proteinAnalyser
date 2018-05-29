@@ -4,7 +4,9 @@ package dllWrapper;
 
 
 import com.sun.jna.*;
+import org.nd4j.linalg.api.environment.Nd4jEnvironment;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.cpu.nativecpu.NDArray;
 import org.nd4j.linalg.factory.Nd4j;
 import sqliteReader.SQLiteJDBCDriverConnection;
 
@@ -43,20 +45,88 @@ public class TimsdataDllWrapper {
             int minMz = 0;
             int maxMz = 3000;
             int numPlotBins = 500;
-            INDArray mzbins =  Nd4j.linspace(minMz, maxMz, numScans);
+            INDArray mzbinLinspace =  Nd4j.linspace(minMz, maxMz, numPlotBins);
+            double[] mzBins = new double[mzbinLinspace.length()];
+            for (int i = 0; i < mzbinLinspace.length(); i++) {
+                mzBins[i] = mzbinLinspace.getDouble(i);
+            }
 
 
             TimsdataService sdll = TimsdataService.INSTANCE;
             String analysisDir = "F:\\proteinProjData\\Ecoli_04_RD2_01_1275.d";
-            long test = sdll.tims_open(analysisDir);
-            INDArray summedIntensities = Nd4j.zeros(numPlotBins + 1);
+            long handle = sdll.tims_open(analysisDir);
+            double[] summedIntensities = new double[(numPlotBins + 1)];
 
             Timsdata temp = new Timsdata();
-            List<ResultWrapper> wrappers = temp.readScans(frameId, 0, numScans, test);
+            List<ResultWrapper> wrappers = temp.readScans(frameId, 0, numScans, handle);
+
+
+            for (ResultWrapper wrapper: wrappers) {
+                double[] indexArray = new double[wrapper.indicies.length];
+                for (int i = 0; i < wrapper.indicies.length; i++) {
+                    indexArray[i] = (double)wrapper.indicies[i];
+                }
+                PayloadContainer container = new PayloadContainer();
+                container.handle = handle;
+                container.frameId = frameId;
+                container.inArrayOfPointers = indexArray;
+                container.ourArrayOfPointers = new double[wrapper.indicies.length];
+                container.count = wrapper.indicies.length;
+
+
+                ConversionFunctionHelper.indexToMz(container, sdll);
+                System.out.println("Asdas");
+
+                if (container.ourArrayOfPointers.length > 0) {
+                    int[] plotBins = ConversionFunctionHelper.
+                            npDigitizeImplementation(container.ourArrayOfPointers, mzBins);
+                    for (int i = 0; i < wrapper.intensities.length; i++) {
+                        summedIntensities[plotBins[i]] += wrapper.intensities[i];
+
+                    }
+                }
+            }
+
+            double[] scanNumberAxis = new double[numScans];
+            for (int i = 0; i < numScans; i++) {
+                scanNumberAxis[i] = i;
+            }
+            PayloadContainer scanNumberContainer = new PayloadContainer();
+            scanNumberContainer.handle = handle;
+            scanNumberContainer.frameId = frameId;
+            scanNumberContainer.inArrayOfPointers = scanNumberAxis;
+            scanNumberContainer.ourArrayOfPointers = new double[scanNumberContainer.inArrayOfPointers.length];
+            scanNumberContainer.count = scanNumberContainer.inArrayOfPointers.length;
+
+            //TODO: sdll part of container class
+            ConversionFunctionHelper.scanNumToOneOverK0(scanNumberContainer, sdll);
+            double[] ook0_axis = scanNumberContainer.ourArrayOfPointers;
+
+            scanNumberContainer.inArrayOfPointers = ook0_axis;
+            scanNumberContainer.ourArrayOfPointers = new double[scanNumberContainer.inArrayOfPointers.length];
+            ConversionFunctionHelper.oneOverK0ToScanNum(scanNumberContainer, sdll);
+            scanNumberContainer.count = scanNumberContainer.inArrayOfPointers.length;
+            double[] scan_number_from_ook0_axis = scanNumberContainer.ourArrayOfPointers;
+
+            scanNumberContainer.inArrayOfPointers = scanNumberAxis;
+            scanNumberContainer.ourArrayOfPointers = new double[scanNumberContainer.inArrayOfPointers.length];
+            scanNumberContainer.count = scanNumberContainer.inArrayOfPointers.length;
+            ConversionFunctionHelper.scanNumToVoltage(scanNumberContainer, sdll);
+            double[] voltageAxis = scanNumberContainer.ourArrayOfPointers;
+
+            scanNumberContainer.inArrayOfPointers = voltageAxis;
+            scanNumberContainer.ourArrayOfPointers = new double[scanNumberContainer.inArrayOfPointers.length];
+            scanNumberContainer.count = scanNumberContainer.inArrayOfPointers.length;
+            ConversionFunctionHelper.voltageToScanNum(scanNumberContainer, sdll);
+            double[] scan_number_from_voltage_axis = scanNumberContainer.ourArrayOfPointers;
+
+
+
 
 
 
             System.out.println("test");
+
         } catch (SQLException e){
             System.out.println(e.getMessage());
 
@@ -73,11 +143,9 @@ public class TimsdataDllWrapper {
             }
         }
 
-
-
-
-
     }
+
+
 
 
 }
