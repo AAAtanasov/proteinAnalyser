@@ -59,7 +59,7 @@ public class TimsdataDllWrapper {
                 int numScans = resultSet.getInt("NumScans");
 
                 Statement precursorStatement = connection.createStatement();
-                ResultSet precursorMsInfo = precursorStatement.executeQuery()
+//                ResultSet precursorMsInfo = precursorStatement.executeQuery();
 
                 List<MzArrayWrapper> frameInformation = readFrame(currentFrameId, analysisDir, numScans, sdll, handle );
 
@@ -68,14 +68,13 @@ public class TimsdataDllWrapper {
                 frameDataWrapper.frameInformation = frameInformation;
 
 
-//                frames.add(frameDataWrapper);
-                bufferedWriter.write("BEGIN IONS\n");
-                bufferedWriter.write("TITLE=" + dateiName + "_FRAMEID="+ currentFrameId + "_NUMSCANS="+ numScans);
-
-
-                bufferedWriter.write("END IONS\n\n");
-                bufferedWriter.close();
-break;
+                frames.add(frameDataWrapper);
+//                bufferedWriter.write("BEGIN IONS\n");
+//                bufferedWriter.write("TITLE=" + dateiName + "_FRAMEID="+ currentFrameId + "_NUMSCANS="+ numScans);
+//
+//
+//                bufferedWriter.write("END IONS\n\n");
+//                bufferedWriter.close();
 
 
             }
@@ -83,7 +82,7 @@ break;
 
 
 
-            bufferedWriter.close();
+//            bufferedWriter.close();
 
             System.out.println("test");
 
