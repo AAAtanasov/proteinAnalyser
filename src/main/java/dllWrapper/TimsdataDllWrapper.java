@@ -33,10 +33,9 @@ public class TimsdataDllWrapper {
             connection = sqlite.getConnection();
             if (connection == null) {
                 System.out.println("Failed connecting...");
-                return;
+                throw new RuntimeException("Failed to connect to a database");
             }
             Statement stmt = connection.createStatement();
-            int frameId = 11;
 
             ResultSet frameIdResultSet = stmt.executeQuery("SELECT Id FROM Frames ");
 
@@ -44,13 +43,8 @@ public class TimsdataDllWrapper {
             TimsdataService sdll = TimsdataService.INSTANCE;
             long handle = sdll.tims_open(analysisDir);
 
-
-            int count = 0;
-
             // init file
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("test.mgf")));
-
-
 
             while (frameIdResultSet.next()){
                 int currentFrameId = frameIdResultSet.getInt("Id");
@@ -164,59 +158,14 @@ public class TimsdataDllWrapper {
                 mzWrapper.mzArray = container.outArrayOfPointers;
                 mzWrapper.intensitiesArray = wrapper.intensities;
                 frameScanInformationList.add(mzWrapper);
-                //TODO: see if this is needed as this is part of the plot functionality
-//                    int[] plotBins = ConversionFunctionHelper.
-//                            npDigitizeImplementation(container.outArrayOfPointers, mzBins);
-//
-//                    for (int i = 0; i < wrapper.intensities.length; i++) {
-//                        summedIntensities[plotBins[i]] += wrapper.intensities[i];
-//
-//                    }
             }
         }
-
-        //TODO: check if this functionality will be required or is it just part of the example.
-        //pythonExampleImplementation(numScans, handle, frameId, sdll);
 
         return frameScanInformationList;
     }
 
 
-    public static void pythonExampleImplementation(int numScans, long handle, int frameId, TimsdataService sdll){
-        double[] scanNumberAxis = new double[numScans];
-        for (int i = 0; i < numScans; i++) {
-            scanNumberAxis[i] = i;
-        }
-        PayloadContainer scanNumberContainer = new PayloadContainer();
-        scanNumberContainer.handle = handle;
-        scanNumberContainer.frameId = frameId;
-        scanNumberContainer.inArrayOfPointers = scanNumberAxis;
-        scanNumberContainer.outArrayOfPointers = new double[scanNumberContainer.inArrayOfPointers.length];
-        scanNumberContainer.count = scanNumberContainer.inArrayOfPointers.length;
 
-        //TODO: sdll part of container class
-        ConversionFunctionHelper.scanNumToOneOverK0(scanNumberContainer, sdll);
-        double[] ook0_axis = scanNumberContainer.outArrayOfPointers;
-
-        scanNumberContainer.inArrayOfPointers = ook0_axis;
-        scanNumberContainer.outArrayOfPointers = new double[scanNumberContainer.inArrayOfPointers.length];
-        ConversionFunctionHelper.oneOverK0ToScanNum(scanNumberContainer, sdll);
-        scanNumberContainer.count = scanNumberContainer.inArrayOfPointers.length;
-        double[] scan_number_from_ook0_axis = scanNumberContainer.outArrayOfPointers;
-
-        scanNumberContainer.inArrayOfPointers = scanNumberAxis;
-        scanNumberContainer.outArrayOfPointers = new double[scanNumberContainer.inArrayOfPointers.length];
-        scanNumberContainer.count = scanNumberContainer.inArrayOfPointers.length;
-        ConversionFunctionHelper.scanNumToVoltage(scanNumberContainer, sdll);
-        double[] voltageAxis = scanNumberContainer.outArrayOfPointers;
-
-        scanNumberContainer.inArrayOfPointers = voltageAxis;
-        scanNumberContainer.outArrayOfPointers = new double[scanNumberContainer.inArrayOfPointers.length];
-        scanNumberContainer.count = scanNumberContainer.inArrayOfPointers.length;
-        ConversionFunctionHelper.voltageToScanNum(scanNumberContainer, sdll);
-        double[] scan_number_from_voltage_axis = scanNumberContainer.outArrayOfPointers;
-
-    }
 
 
 
