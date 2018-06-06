@@ -6,10 +6,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Timsdata {
+    //Initially set data amount seen from the example implementation
     private  int initialFrameBUfferSize = 128;
     private static final int maxBufferSize = 16777216;
 
     public List<ResultWrapper> readScans(int frameId, int scanBegin, int scanEnd, long handle) {
+        // Pivot array contains all the scan information regarding a Frame. It is constructed from 3 separate data arrays
+        // where the first half of the array with size = scanEnd - scanBegin is used to describe the peaks of each scan.
+        // Second part of the array is build by the concatenation of indexes-intensities pairs. The second part of the
+        // array is like a stack for scans with peaks bigger than 0, each result is added separately, the next peak
+        // information comes after that
         int[] pivotArr;
         while (true) {
             int cnt = initialFrameBUfferSize;
@@ -18,11 +24,10 @@ public class Timsdata {
             int len = 4 * cnt;
 
             long requiredLength = sdll.tims_read_scans_v2(handle, frameId, scanBegin, scanEnd, pivotArr, len);
-            // wtb exception handling
 
             if (requiredLength == 0) {
                 throw  new RuntimeException("Timsdata error");
-                //TODO: implement proper error handling by calling also the dll
+                //TODO: check if calling the dll errors is needed
             }
 
             if (requiredLength > len) {
@@ -43,37 +48,21 @@ public class Timsdata {
 
         List<ResultWrapper> resultWrappers = new ArrayList<ResultWrapper>();
 
+        int[] intensities;
+        int[] indicies;
+
         for (int i = scanBegin; i < endOfScan; i++) {
             int npeaks = pivotArr[i - scanBegin];
-            if (npeaks > endOfScan) {
-                System.out.println("Npeaks bigger than end of scan!");
-            }
-            int[] intensities = new int[0];
-            int[] indicies = new int[0];
 
-            //TODO: remove if-s after certain that the behaviour is stable
-            if (startIndex > currentLength) {
-                System.out.println("Skip this i: " + i);
-                throw new RuntimeException("Start index is bigger than current length");
-
-            } else {
-                tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
-                indicies = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
-            }
-
+            //Ternary operator used in order to avoid Array out of bounds exception.
+            tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
+            indicies = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
 
             startIndex += npeaks;
 
-            if (startIndex > currentLength) {
-                System.out.println("Skip this i: " + i);
-                throw new RuntimeException("Start index is bigger than current length indicating problem with conversion" +
-                        " and using plain int values instead of uint.");
+            tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
+            intensities = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
 
-            } else {
-                tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
-                intensities = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
-
-            }
             startIndex += npeaks;
 
             ResultWrapper wrapper = new ResultWrapper();

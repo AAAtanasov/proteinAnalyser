@@ -1,9 +1,10 @@
 package dllWrapper;
 
+// Helper class used to call timsdata.dll methods
 public class ConversionFunctionHelper {
     static void indexToMz(PayloadContainer inputData, TimsdataService dll) {
         long result = dll.tims_index_to_mz(inputData.handle, inputData.frameId, inputData.inArrayOfPointers,
-                inputData.ourArrayOfPointers, inputData.count);
+                inputData.outArrayOfPointers, inputData.count);
 
        if (result == 0) {
            throw  new RuntimeException("Failed to convert index to mz");
@@ -13,45 +14,45 @@ public class ConversionFunctionHelper {
 
     static void scanNumToOneOverK0(PayloadContainer inputData, TimsdataService dll) {
         long result = dll.tims_scannum_to_oneoverk0(inputData.handle, inputData.frameId, inputData.inArrayOfPointers,
-                inputData.ourArrayOfPointers, inputData.count);
+                inputData.outArrayOfPointers, inputData.count);
 
         if (result == 0) {
-            throw  new RuntimeException("Failed to convert index to mz");
+            throw  new RuntimeException("Failed to convert scannum to one over K0");
         }
 
     }
 
     static void oneOverK0ToScanNum(PayloadContainer inputData, TimsdataService dll) {
         long result = dll.tims_oneoverk0_to_scannum(inputData.handle, inputData.frameId, inputData.inArrayOfPointers,
-                inputData.ourArrayOfPointers, inputData.count);
+                inputData.outArrayOfPointers, inputData.count);
 
         if (result == 0) {
-            throw  new RuntimeException("Failed to convert index to mz");
+            throw  new RuntimeException("Failed to convert one over K0 to scannum");
         }
 
     }
 
     static void voltageToScanNum(PayloadContainer inputData, TimsdataService dll) {
         long result = dll.tims_voltage_to_scannum(inputData.handle, inputData.frameId, inputData.inArrayOfPointers,
-                inputData.ourArrayOfPointers, inputData.count);
+                inputData.outArrayOfPointers, inputData.count);
 
         if (result == 0) {
-            throw  new RuntimeException("Failed to convert index to mz");
+            throw  new RuntimeException("Failed to convert voltage to scan number");
         }
 
     }
 
     static void scanNumToVoltage (PayloadContainer inputData, TimsdataService dll) {
         long result = dll.tims_scannum_to_voltage(inputData.handle, inputData.frameId, inputData.inArrayOfPointers,
-                inputData.ourArrayOfPointers, inputData.count);
+                inputData.outArrayOfPointers, inputData.count);
 
         if (result == 0) {
-            throw  new RuntimeException("Failed to convert index to mz");
+            throw  new RuntimeException("Failed to convert scan number to voltage");
         }
     }
 
 
-
+    //TODO: implement better search if this functionality will be used
     static int[] npDigitizeImplementation(double[] searchedData, double[] mzBins){
         int[] result = new int[searchedData.length];
         for (int i = 0; i < searchedData.length; i++) {
@@ -66,13 +67,5 @@ public class ConversionFunctionHelper {
         return result;
     }
 
-    //TODO: implement better search
-//    static int search(double element, double[] mzbins){
-//        int startIndex = mzbins.length / 2;
-//        if (element > mzbins[startIndex]){
-//
-//        } else{
-//
-//        }
-//    }
+
 }
