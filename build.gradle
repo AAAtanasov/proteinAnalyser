@@ -2,11 +2,18 @@ group 'proteins'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'dllWrapper.TimsdataDllWrapper'
+    }
 }
 
 dependencies {
@@ -16,5 +23,6 @@ dependencies {
     compile 'org.nd4j:nd4j-native-platform:0.9.1'
 // https://mvnrepository.com/artifact/net.java.dev.jna/jna
     compile group: 'net.java.dev.jna', name: 'jna', version: '4.5.1'
+    compile  'log4j:log4j:1.2.16'
 
 }
