@@ -6,3 +6,4 @@ lib/timsdata/timsdata.dll
 /target/
 /.classpath
 /.project
+/test.mgf
