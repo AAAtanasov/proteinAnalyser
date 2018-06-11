@@ -1,9 +1,0 @@
-lib/timsdata/timsdata.dll
-/.gradle/
-/bin/
-/timsdata.dll
-/timsdata.lib
-/target/
-/.classpath
-/.project
-/test.mgf
