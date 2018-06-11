@@ -13,5 +13,5 @@ public interface TimsdataInterface extends Library {
     long tims_oneoverk0_to_scannum(long handle, int frameId, double[] inArrayOfPointers, double[] ourArrayOfPointers, int count);
     long tims_scannum_to_voltage(long handle, int frameId, double[] inArrayOfPointers, double[] ourArrayOfPointers, int count);
     long tims_voltage_to_scannum(long handle, int frameId, double[] inArrayOfPointers, double[] ourArrayOfPointers, int count);
-    TimsdataInterface INSTANCE = (TimsdataInterface) Native.loadLibrary(Properties.timsdatadllLocation, TimsdataInterface.class);
+    TimsdataInterface INSTANCE = Native.loadLibrary(Properties.timsdatadllLocation, TimsdataInterface.class);
 }

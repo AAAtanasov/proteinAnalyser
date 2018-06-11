@@ -43,9 +43,7 @@ public class BrukerFrame {
 	}
 	
 	public Spectrum getSpectrum() {
-		// TODO
-		bkFile.readRawdata2(this);
-		return null;
+		return bkFile.readRawdata2(this);
 	}
 	
 }

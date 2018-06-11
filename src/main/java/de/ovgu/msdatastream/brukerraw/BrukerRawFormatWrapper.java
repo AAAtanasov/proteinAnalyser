@@ -7,11 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
-
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataDLLWrapper;
-import de.ovgu.msdatastream.brukerraw.dll.TimsdataInterface;
 import de.ovgu.msdatastream.brukerraw.sqllite.BrukerFrame;
 import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPasefFrameMSMSInfo;
 import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
@@ -108,7 +104,7 @@ public class BrukerRawFormatWrapper {
 			throw  new RuntimeException("Maximum expected frame size exceeded");
 		}
 		pivotArr = new int[correctSize];
-		dll.timsReadScansV2(dll.handle, f.frameId, 0, f.numScans, pivotArr, correctSize);
+		dll.timsReadScansV2(dll.handle, f.frameId, 0, f.numScans, pivotArr, correctSize*4);
 		
 		// TODO: why is the first entry so big (64k) ??? MS1 ??
 //		System.out.println("Test: " + correctSize);
@@ -116,25 +112,27 @@ public class BrukerRawFormatWrapper {
 		int[] indicies = new int[f.numScans];
         int[] intensities = new int[f.numScans];
         indicies = Arrays.copyOfRange(pivotArr, 0, f.numScans);
-        
-        for (int i = 0; i > pivotArr.length; i++) {
-        	if (pivotArr[i] > 0) {
-        		System.out.println("TEST " + pivotArr[i]);
-        	}
-        }
-        
         int index = f.numScans + 1;
-        for (int i = 0; i >  f.numScans; i++) {
+        for (int i = 0; i <  f.numScans; i++) {
         	if (indicies[i] != 0) {
-//        		if (pivotArr[index] != 0) {
-//        			System.out.println(f.frameId);
-//        		}
         		intensities[i] = pivotArr[index];
         		index++;
         	}
         }
         
-//        System.out.println("correct?");
+        // TODO: indexToMz is still broken ... 
+        
+		PayloadContainer container = new PayloadContainer();
+		container.handle = dll.handle;
+		container.frameId = f.frameId;
+		container.inArrayOfPointers = new double[indicies.length];
+		container.outArrayOfPointers = new double[indicies.length];
+		container.count = indicies.length;
+		// Load mzindex into container.outArrayOfPointers
+		dll.indexToMz(container);
+		if (container.outArrayOfPointers.length > 0) {
+			spectrum = new Spectrum(container.outArrayOfPointers, intensities);
+		}
 		
 		return spectrum;
 	}
@@ -177,12 +175,9 @@ public class BrukerRawFormatWrapper {
         int countDebug = 0;
         while (true) {
         	countDebug++;
-//        	System.out.println(countDebug);
             pivotArr = new int[initialFrameBUfferSize];
 
-            // this method is problematic
             long requiredLength = dll.timsReadScansV2(handle, frameId, scanBegin, scanEnd, pivotArr, 4 * initialFrameBUfferSize);
-//            System.out.println("requiredLength " + requiredLength);
 
             if (requiredLength == 0) {
                 throw  new RuntimeException("Timsdata error");
@@ -205,21 +200,14 @@ public class BrukerRawFormatWrapper {
         int currentLength = pivotArr.length;
         int tempInt = startIndex;
 
-        for (int i = 0; i > pivotArr.length; i++) {
-        	if (pivotArr[i] > 0) {
-        		System.out.println("TEST " + pivotArr[i]);
-        	}
-        }
-
-        ArrayList<ResultWrapper> resultWrappers = new ArrayList<ResultWrapper>();
+        ArrayList<Spectrum> resultWrappers = new ArrayList<Spectrum>();
 
         int[] intensities;
         int[] indicies;
         
-        // why is there a loop here???
+        // what is going on here ... ??
         for (int i = scanBegin; i < endOfScan; i++) {
             int npeaks = pivotArr[i - scanBegin];
-
             //Ternary operator used in order to avoid Array out of bounds exception.
             tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
             indicies = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
@@ -228,27 +216,24 @@ public class BrukerRawFormatWrapper {
 
             tempInt = (startIndex + npeaks) > currentLength ? currentLength : (startIndex + npeaks);
             intensities = Arrays.copyOfRange(pivotArr, startIndex, tempInt);
-
+            
             startIndex += npeaks;
 
-            ResultWrapper wrapper = new ResultWrapper();
+            Spectrum wrapper = new Spectrum();
             wrapper.indicies = indicies;
             wrapper.intensities = intensities;
             resultWrappers.add(wrapper);
+
         }
-		
-        ArrayList<ResultWrapper> wrappers = resultWrappers;
+        
+        ArrayList<Spectrum> wrappers = resultWrappers;
         
 		PayloadContainer container;
-//		System.out.println("Index2MZLoop Starts");
-		int count = 0;
-		for (ResultWrapper wrapper: wrappers) {
-			count++;
-//			System.out.println("Wrapper " + count + " Of " + wrappers.size());
+		for (Spectrum wrapper: wrappers) {
 			double[] indexArray = new double[wrapper.indicies.length];
 			// shouldnt those indexes be an int
 			for (int i = 0; i < wrapper.indicies.length; i++) {
-				indexArray[i] = (double)wrapper.indicies[i];
+				indexArray[i] = wrapper.indicies[i];
 			}
 
 			container = new PayloadContainer();
@@ -267,14 +252,8 @@ public class BrukerRawFormatWrapper {
 				frameScanInformationList.add(mzWrapper);
 			}
 		}
-//		System.out.println("Finished: " + frameScanInformationList.size());
-//		for (Spectrum spec : frameScanInformationList) {
-//			for (int i = 0; i > 10; i++) {
-//				System.out.println("MZ: " + spec.mzArray[i] + " INT: " +spec.intensitiesArray[i]);
-//			}
-//		}
 		
-		return new Spectrum();
+		return frameScanInformationList.get(1);
 	}
 	
 	public void close() {
