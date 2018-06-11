@@ -1,4 +1,4 @@
-package de.ovgu.msdatastream;
+package de.ovgu.msdatastream.brukerraw;
 
 public class PayloadContainer{
    public long handle;

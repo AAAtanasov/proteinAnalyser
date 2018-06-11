@@ -1,16 +1,15 @@
-package de.ovgu.msdatastream;
+package de.ovgu.msdatastream.brukerraw;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Timsdata {
+	
     //Initially set data amount seen from the example implementation
     private  int initialFrameBUfferSize = 128;
     private static final int maxBufferSize = 16777216;
 
-    public List<ResultWrapper> readScans(int frameId, int scanBegin, int scanEnd, long handle) {
+    public ArrayList<ResultWrapper> readScans(int frameId, int scanBegin, int scanEnd, long handle) {
         // Pivot array contains all the scan information regarding a Frame. It is constructed from 3 separate data arrays
         // where the first half of the array with size = scanEnd - scanBegin is used to describe the peaks of each scan.
         // Second part of the array is build by the concatenation of indexes-intensities pairs. The second part of the
@@ -20,7 +19,7 @@ public class Timsdata {
         while (true) {
             int cnt = initialFrameBUfferSize;
             pivotArr = new int[cnt];
-            TimsdataService sdll = TimsdataService.INSTANCE;
+            TimsdataInterface sdll = TimsdataInterface.INSTANCE;
             int len = 4 * cnt;
 
             long requiredLength = sdll.tims_read_scans_v2(handle, frameId, scanBegin, scanEnd, pivotArr, len);
@@ -46,7 +45,7 @@ public class Timsdata {
         int tempInt = startIndex;
 
 
-        List<ResultWrapper> resultWrappers = new ArrayList<ResultWrapper>();
+        ArrayList<ResultWrapper> resultWrappers = new ArrayList<ResultWrapper>();
 
         int[] intensities;
         int[] indicies;
