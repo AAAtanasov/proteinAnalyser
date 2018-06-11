@@ -1,8 +1,8 @@
 package de.ovgu.msdatastream;
 
-import de.ovgu.msdatastream.brukerraw.BrukerFrame;
-import de.ovgu.msdatastream.brukerraw.BrukerPrecusor;
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
+import de.ovgu.msdatastream.brukerraw.sqllite.BrukerFrame;
+import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
 import de.ovgu.msdatastream.model.Spectrum;
 import de.ovgu.msdatastream.output.MGFWriter;
 
@@ -18,6 +18,7 @@ public class Starter {
 			// write spectrum
 			Spectrum spec = fr.getSpectrum();
 			writer.writeSpectrum(spec);
+//			break;
 		}
 		// close everything
 		writer.close();

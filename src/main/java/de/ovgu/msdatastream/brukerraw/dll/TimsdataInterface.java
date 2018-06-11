@@ -1,4 +1,4 @@
-package de.ovgu.msdatastream.brukerraw;
+package de.ovgu.msdatastream.brukerraw.dll;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;

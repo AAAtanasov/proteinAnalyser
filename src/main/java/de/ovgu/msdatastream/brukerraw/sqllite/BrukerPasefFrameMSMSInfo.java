@@ -1,8 +1,9 @@
-package de.ovgu.msdatastream.brukerraw;
+package de.ovgu.msdatastream.brukerraw.sqllite;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
 import de.ovgu.msdatastream.model.Spectrum;
 
 public class BrukerPasefFrameMSMSInfo {

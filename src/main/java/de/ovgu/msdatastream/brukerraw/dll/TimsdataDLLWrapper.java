@@ -1,9 +1,13 @@
-package de.ovgu.msdatastream.brukerraw;
+package de.ovgu.msdatastream.brukerraw.dll;
+
+import de.ovgu.msdatastream.brukerraw.PayloadContainer;
 
 // Helper class used to call timsdata.dll methods
 public class TimsdataDLLWrapper {
 	
 	private TimsdataInterface tdInterface = TimsdataInterface.INSTANCE;
+	// TODO get rid of this hack
+	public long handle = 0; 
 	
 	public TimsdataDLLWrapper(String analysisDir) {
 		this.timsOpen(analysisDir);
@@ -11,9 +15,18 @@ public class TimsdataDLLWrapper {
 	
 	public void timsOpen(String analysisDir) {
 		long result = tdInterface.tims_open(analysisDir);
+		handle = result;
 		if (result == 0) {
 			throw new RuntimeException("Failed to timsOpen");
 		}
+	}
+	
+	public long timsReadScansV2(long handle, int frameId, int scanBegin, int scanEnd, int[] buffer, int length) {
+		long result = tdInterface.tims_read_scans_v2(handle, frameId, scanBegin, scanEnd, buffer, length);
+		if (result == 0) {
+			throw new RuntimeException("Failed to tims_read_scans_v2");
+		}
+		return result;
 	}
 	
 	public void indexToMz(PayloadContainer inputData) {

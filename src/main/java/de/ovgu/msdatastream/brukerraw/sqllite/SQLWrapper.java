@@ -1,4 +1,4 @@
-package de.ovgu.msdatastream.brukerraw;
+package de.ovgu.msdatastream.brukerraw.sqllite;
 
 import java.sql.*;
 

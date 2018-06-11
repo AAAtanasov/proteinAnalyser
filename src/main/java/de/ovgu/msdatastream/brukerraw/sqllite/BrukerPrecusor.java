@@ -1,7 +1,8 @@
-package de.ovgu.msdatastream.brukerraw;
+package de.ovgu.msdatastream.brukerraw.sqllite;
 
 import java.util.ArrayList;
 
+import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
 import de.ovgu.msdatastream.model.Spectrum;
 
 public class BrukerPrecusor {
