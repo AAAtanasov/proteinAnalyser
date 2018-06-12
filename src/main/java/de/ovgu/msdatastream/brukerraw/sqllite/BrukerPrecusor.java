@@ -10,7 +10,7 @@ public class BrukerPrecusor {
 	// File
 	public BrukerRawFormatWrapper bkFile;
 	// Precursor
-	private Integer precursorId;
+	public Integer precursorId;
 	private Double monoisotopicMz;
 	private Double intensity;
 	private Integer precursorParent;
@@ -37,8 +37,14 @@ public class BrukerPrecusor {
 	}
 	
 	public Spectrum getSpectrum() {
-		// TODO
-		return null;
+		// init empty spectrum
+		Spectrum spectrum = new Spectrum();
+		// retrieve data from each frame and append
+		for (BrukerPasefFrameMSMSInfo pasefItem : this.pasefItems) {
+			Spectrum newSpectrum = bkFile.readRawdata(bkFile.getFrame(pasefItem.frameId), pasefItem.scanNumBegin, pasefItem.scanNumEnd);
+			spectrum.appendData(newSpectrum);
+		}
+		return spectrum; 
 	}
 	
 	

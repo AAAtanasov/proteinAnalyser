@@ -12,7 +12,7 @@ public class SQLWrapper {
 
 	// fields
 
-	private Connection conn;
+	public Connection conn;
 
 	// constructor
 
@@ -40,15 +40,4 @@ public class SQLWrapper {
 		}
 	}
 	
-	public ResultSet executeSQL(String statement) {
-		try {
-			PreparedStatement ps = conn.prepareStatement(statement);
-			ResultSet rs = ps.executeQuery();
-//			ps.close();
-			return rs;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 }

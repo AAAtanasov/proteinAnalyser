@@ -49,8 +49,8 @@ public class BrukerPasefFrameMSMSInfo {
 	}
 	
 	public Spectrum getSpectrum() {
-		// TODO
-		return null;
+		// read specific range from specific frame
+		return  bkFile.readRawdata(bkFile.getFrame(this.frameId), this.scanNumBegin, this.scanNumEnd);
 	}
 
 }

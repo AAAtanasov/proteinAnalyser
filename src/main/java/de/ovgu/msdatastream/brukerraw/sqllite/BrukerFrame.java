@@ -43,7 +43,8 @@ public class BrukerFrame {
 	}
 	
 	public Spectrum getSpectrum() {
-		return bkFile.readRawdata2(this);
+		// read from 0 to numScans (= entire frame)
+		return bkFile.readRawdata(this, 0, this.numScans);
 	}
 	
 }

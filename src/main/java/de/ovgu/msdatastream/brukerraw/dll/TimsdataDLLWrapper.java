@@ -1,7 +1,5 @@
 package de.ovgu.msdatastream.brukerraw.dll;
 
-import de.ovgu.msdatastream.brukerraw.PayloadContainer;
-
 // Helper class used to call timsdata.dll methods
 public class TimsdataDLLWrapper {
 	
@@ -29,35 +27,35 @@ public class TimsdataDLLWrapper {
 		return result;
 	}
 	
-	public void indexToMz(PayloadContainer inputData) {
+	public void indexToMz(TimsdataPayloadContainer inputData) {
 		long result = tdInterface.tims_index_to_mz(inputData.handle, inputData.frameId, inputData.inArrayOfPointers, inputData.outArrayOfPointers, inputData.count);
 		if (result == 0) {
 			throw new RuntimeException("Failed to convert index to mz");
 		}
 	}
 
-	public void scanNumToOneOverK0(PayloadContainer inputData) {
+	public void scanNumToOneOverK0(TimsdataPayloadContainer inputData) {
 		long result = tdInterface.tims_scannum_to_oneoverk0(inputData.handle, inputData.frameId, inputData.inArrayOfPointers, inputData.outArrayOfPointers, inputData.count);
 		if (result == 0) {
 			throw new RuntimeException("Failed to convert scannum to one over K0");
 		}
 	}
 
-	public void oneOverK0ToScanNum(PayloadContainer inputData) {
+	public void oneOverK0ToScanNum(TimsdataPayloadContainer inputData) {
 		long result = tdInterface.tims_oneoverk0_to_scannum(inputData.handle, inputData.frameId, inputData.inArrayOfPointers, inputData.outArrayOfPointers, inputData.count);
 		if (result == 0) {
 			throw new RuntimeException("Failed to convert one over K0 to scannum");
 		}
 	}
 
-	public void voltageToScanNum(PayloadContainer inputData, TimsdataInterface dll) {
+	public void voltageToScanNum(TimsdataPayloadContainer inputData, TimsdataInterface dll) {
 		long result = tdInterface.tims_voltage_to_scannum(inputData.handle, inputData.frameId, inputData.inArrayOfPointers, inputData.outArrayOfPointers, inputData.count);
 		if (result == 0) {
 			throw new RuntimeException("Failed to convert voltage to scan number");
 		}
 	}
 
-	public void scanNumToVoltage (PayloadContainer inputData, TimsdataInterface dll) {
+	public void scanNumToVoltage (TimsdataPayloadContainer inputData, TimsdataInterface dll) {
 		long result = tdInterface.tims_scannum_to_voltage(inputData.handle, inputData.frameId, inputData.inArrayOfPointers, inputData.outArrayOfPointers, inputData.count);
 		if (result == 0) {
 			throw new RuntimeException("Failed to convert scan number to voltage");

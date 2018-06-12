@@ -3,7 +3,7 @@ package de.ovgu.msdatastream;
 import java.io.IOException;
 
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
-import de.ovgu.msdatastream.brukerraw.sqllite.BrukerFrame;
+import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
 import de.ovgu.msdatastream.model.Spectrum;
 import de.ovgu.msdatastream.output.MGFWriter;
 
@@ -14,10 +14,28 @@ public class Starter {
 			// inits
 			BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(Properties.analysisDir);
 			MGFWriter writer = new MGFWriter(Properties.targetFile);
+//			// loop Frames
+//			int framecount = 0;
+//			for (BrukerFrame fr : bruker.getFrames()) {
+//				framecount++;
+//				if ((framecount % 1000) == 0) {
+//					System.out.println("Writing Frame " + framecount + " of " + bruker.getFrames().size());
+//				}
+//				// write spectrum
+//				Spectrum spec = fr.getSpectrum();
+//				if (spec != null) {
+//					writer.writeSpectrum(spec);
+//				}
+//			}
 			// loop precursors
-			for (BrukerFrame fr : bruker.getFrames()) {
+			int precursorcount = 0;
+			for (BrukerPrecusor pc : bruker.getPrecursors()) {
+				precursorcount++;
+				if ((precursorcount % 1000) == 0) {
+					System.out.println("Writing Precursor " + precursorcount + " of " + bruker.getPrecursors().size());
+				}
 				// write spectrum
-				Spectrum spec = fr.getSpectrum();
+				Spectrum spec = pc.getSpectrum();
 				if (spec != null) {
 					writer.writeSpectrum(spec);
 				}

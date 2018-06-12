@@ -1,6 +1,6 @@
-package de.ovgu.msdatastream.brukerraw;
+package de.ovgu.msdatastream.brukerraw.dll;
 
-public class PayloadContainer{
+public class TimsdataPayloadContainer{
    public long handle;
    public int frameId;
    public double[] inArrayOfPointers;
