@@ -107,6 +107,7 @@ public class BrukerRawFormatWrapper {
 		
 		// TODO: clean up :)
 		// TODO: more comments!!
+		// TODO: hard-coded values into the property file! 
 		
 		
 		Spectrum spectrum = new Spectrum();
@@ -119,9 +120,6 @@ public class BrukerRawFormatWrapper {
 		}
 		pivotArr = new int[correctSize];
 		dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, correctSize*4);
-		
-		// TODO: why is the first entry so big (64k) ??? MS1 ??
-//		System.out.println("Test: " + correctSize);
 		
 		// figure out size of arrays
 		int arraySize = 0;

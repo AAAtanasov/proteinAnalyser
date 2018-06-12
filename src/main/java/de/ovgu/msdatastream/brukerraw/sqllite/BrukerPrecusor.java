@@ -44,6 +44,8 @@ public class BrukerPrecusor {
 			Spectrum newSpectrum = bkFile.readRawdata(bkFile.getFrame(pasefItem.frameId), pasefItem.scanNumBegin, pasefItem.scanNumEnd);
 			spectrum.appendData(newSpectrum);
 		}
+		spectrum.precursorMZ = this.monoisotopicMz;
+		spectrum.precursorINT = this.intensity;
 		return spectrum; 
 	}
 	

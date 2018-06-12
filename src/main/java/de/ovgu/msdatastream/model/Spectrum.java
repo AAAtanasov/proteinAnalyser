@@ -3,6 +3,9 @@ package de.ovgu.msdatastream.model;
 import java.util.Arrays;
 
 public class Spectrum {
+	
+	public Double precursorMZ;
+	public Double precursorINT;
 
 	public double[] mzArray;
 	public int[] intensitiesArray;
@@ -31,4 +34,5 @@ public class Spectrum {
 			e.printStackTrace();
 		}
 	}
+	
 }

@@ -23,14 +23,14 @@ public class MGFWriter {
 	public void writeSpectrum(Spectrum spec) throws IOException {
 		bw.write("BEGIN IONS");
 		bw.write("\n");
-		
+		bw.write("PEPMASS=" + spec.precursorMZ + "\t" + spec.precursorINT);
+		bw.write("\n");
 		for (int i = 0; i < spec.intensitiesArray.length; i++) {
 			if (spec.intensitiesArray[i] != 0) {
 				bw.write(spec.mzArray[i] + "\t" + spec.intensitiesArray[i]);
 				bw.write("\n");
 			}
 		}
-		
 		bw.write("END IONS");
 		bw.write("\n");
 		bw.write("\n");
