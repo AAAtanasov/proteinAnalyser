@@ -7,15 +7,15 @@ public class Spectrum {
 	public Double precursorMZ;
 	public Double precursorINT;
 
-	public double[] mzArray;
+	public Double[] mzArray;
 	public int[] intensitiesArray;
 
 	public Spectrum() {
 		// intialize empty spectrum
-		this(new double[0], new int[0]);
+		this(new Double[0], new int[0]);
 	}
 	
-	public Spectrum(double[] mz, int[] intensities) {
+	public Spectrum(Double[] mz, int[] intensities) {
 		mzArray = mz;
 		intensitiesArray = intensities;
 	}

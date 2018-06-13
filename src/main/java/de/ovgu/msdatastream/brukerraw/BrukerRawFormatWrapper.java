@@ -29,6 +29,9 @@ public class BrukerRawFormatWrapper {
 	// convenience mappings
 	private HashMap<Integer, HashSet<BrukerPrecusor>> frameToPrecursorMapping;
 	private HashMap<Integer, HashSet<BrukerFrame>> precursorToFrameMapping;
+
+	//constants
+	private long initialFrameBufferSize = 128;
 	
 	public BrukerRawFormatWrapper(String analysisDir) {
 		dll = new TimsdataDLLWrapper(analysisDir);
@@ -45,7 +48,7 @@ public class BrukerRawFormatWrapper {
 		try {
 			// get all metadata and save it as frames and precursors
 			PreparedStatement ps = sql.conn.prepareStatement("SELECT * FROM Frames f INNER JOIN PasefFrameMSMsInfo ms2 ON f.Id = ms2.Frame INNER JOIN Precursors p ON p.Id = ms2.Precursor");
-			ResultSet rs = ps.executeQuery(); 
+			ResultSet rs = ps.executeQuery();
 			HashSet<Long> frameIdSet = new HashSet<Long>();
 			HashSet<Long> precIdsSet = new HashSet<Long>();
 			while (rs.next()) {
@@ -111,13 +114,23 @@ public class BrukerRawFormatWrapper {
 		
 		
 		Spectrum spectrum = new Spectrum();
-		
-		int[] pivotArr = new int[512];
+		int[] pivotArr;
+		//TODO: check if that is correct
+		while (true){
+			long count = initialFrameBufferSize;
+			pivotArr = new int[(int)initialFrameBufferSize];
+
+
+		}
+
+
+		 // Why is this set to 512?
 		long requiredLength = dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, 512);
-		int correctSize = ((int) requiredLength / 4 ) + 1;
-		if (correctSize > 16777216) {
+		if (requiredLength > 16777216) {
 			throw  new RuntimeException("Maximum expected frame size exceeded");
 		}
+		int correctSize = ((int) requiredLength / 4 ) + 1;
+
 		pivotArr = new int[correctSize];
 		dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, correctSize*4);
 		
@@ -127,7 +140,7 @@ public class BrukerRawFormatWrapper {
 			arraySize += pivotArr[i];
 		}
 		// initialize with correct size 
-		int[] indicies = new int[arraySize];
+		Integer[] indicies = new Integer[arraySize];
         int[] intensities = new int[arraySize];
         // the index running over the concatenated part of the pivotArr where the actual data is
         int indexPivotArr = (scanEnd - scanBegin);
@@ -158,11 +171,11 @@ public class BrukerRawFormatWrapper {
 		TimsdataPayloadContainer container = new TimsdataPayloadContainer();
 		container.handle = dll.handle;
 		container.frameId = f.frameId;
-		container.inArrayOfPointers = new double[indicies.length];
+		container.inArrayOfPointers = new Double[indicies.length];
 		for (int i = 0; i < indicies.length; i++) {
-			container.inArrayOfPointers[i] = indicies[i];
+			container.inArrayOfPointers[i] = (double)indicies[i];
 		}
-		container.outArrayOfPointers = new double[indicies.length];
+		container.outArrayOfPointers = new Double[indicies.length];
 		container.count = indicies.length;
 		// Load mzindex into container.outArrayOfPointers
 		dll.indexToMz(container);
