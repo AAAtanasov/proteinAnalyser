@@ -64,6 +64,7 @@ public class BrukerRawFormatWrapper {
 					frame = frames.get(frameID);
 				} else {
 					frame = new BrukerFrame(bkFr);
+					frame.time = rs.getTime("Time").toString();
 					frames.put(frameID, frame);
 					frameToPrecursorMapping.put(frameID, new HashSet<BrukerPrecusor>());
 				}
@@ -72,7 +73,7 @@ public class BrukerRawFormatWrapper {
 				if (precIdsSet.contains(precursorID)) {
 					precursor = precursors.get(precursorID);
 				} else {
-					precursor = new BrukerPrecusor(bkFr);
+					precursor = new BrukerPrecusor(bkFr, rs.getInt("Charge"));
 					precursors.put(precursorID, precursor);
 					precursorToFrameMapping.put(precursorID, new HashSet<BrukerFrame>());
 				}
@@ -126,7 +127,6 @@ public class BrukerRawFormatWrapper {
 
 			if (requiredLength == 0) {
 				throw  new RuntimeException("Timsdata error");
-				//TODO: check if calling the dll errors is needed
 			}
 
 			if (requiredLength > len) {
@@ -138,8 +138,6 @@ public class BrukerRawFormatWrapper {
 				break;
 			}
 		}
-
-
 
 		
 		// figure out size of arrays
@@ -190,6 +188,13 @@ public class BrukerRawFormatWrapper {
 		if (container.outArrayOfPointers.length > 0) {
 			spectrum.appendData(new Spectrum(container.outArrayOfPointers, intensities));
 		}
+
+		spectrum.frameId = brukerFrame.frameId;
+		spectrum.scanBegin = scanBegin;
+		spectrum.scanEnd = scanEnd;
+		spectrum.rtinseconds = brukerFrame.time;
+//		spectrum.charge =
+
 		return spectrum;
 	}
 

@@ -16,6 +16,7 @@ public class BrukerFrame {
 	public Integer timsId;
 	public Integer numScans;
 	public Integer numPeaks;
+	public String time;
 	// PasefItems
 	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
 	// Spectrum

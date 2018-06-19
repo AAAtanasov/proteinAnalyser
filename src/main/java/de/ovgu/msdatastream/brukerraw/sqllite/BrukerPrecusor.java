@@ -14,12 +14,13 @@ public class BrukerPrecusor {
 	private Double monoisotopicMz;
 	private Double intensity;
 	private Integer precursorParent;
+	private Integer charge;
 	// PasefItems
 	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
 	// Spectrum
 	private Spectrum spectrum;
 	
-	public BrukerPrecusor(BrukerPasefFrameMSMSInfo pasefItem) {
+	public BrukerPrecusor(BrukerPasefFrameMSMSInfo pasefItem, int chargeValue) {
 		// File
 		bkFile = pasefItem.bkFile;
 		// Precursor
@@ -30,6 +31,7 @@ public class BrukerPrecusor {
 		// PasefItems
 		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);
+		charge = chargeValue;
 	}
 
 	public void addPasefItem(BrukerPasefFrameMSMSInfo pasefItem) {
@@ -43,9 +45,15 @@ public class BrukerPrecusor {
 		for (BrukerPasefFrameMSMSInfo pasefItem : this.pasefItems) {
 			Spectrum newSpectrum = bkFile.readRawdata(bkFile.getFrame(pasefItem.frameId), pasefItem.scanNumBegin, pasefItem.scanNumEnd);
 			spectrum.appendData(newSpectrum);
+			spectrum.scanBegin = newSpectrum.scanBegin;
+			spectrum.scanEnd = newSpectrum.scanEnd;
+			spectrum.frameId = newSpectrum.frameId;
+			spectrum.rtinseconds = newSpectrum.rtinseconds;
+
 		}
 		spectrum.precursorMZ = this.monoisotopicMz;
 		spectrum.precursorINT = this.intensity;
+		spectrum.charge = this.charge;
 		return spectrum; 
 	}
 	

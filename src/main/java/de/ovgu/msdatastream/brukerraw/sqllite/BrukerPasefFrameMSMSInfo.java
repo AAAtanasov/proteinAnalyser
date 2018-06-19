@@ -33,7 +33,7 @@ public class BrukerPasefFrameMSMSInfo {
 		bkFile = brkFile;
 		// Frame
 		frameId = rs.getInt("Frame");
-		polarity = rs.getString("Polarity");
+		polarity = rs.getString("Polarity"); // What is this, no such column
 		msmsType = rs.getInt("MsMsType");
 		timsId = rs.getInt("TimsId");
 		numScans = rs.getInt("NumScans");

@@ -14,19 +14,7 @@ public class Starter {
 			// inits
 			BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(Properties.analysisDir);
 			MGFWriter writer = new MGFWriter(Properties.targetFile);
-//			// loop Frames
-//			int framecount = 0;
-//			for (BrukerFrame fr : bruker.getFrames()) {
-//				framecount++;
-//				if ((framecount % 1000) == 0) {
-//					System.out.println("Writing Frame " + framecount + " of " + bruker.getFrames().size());
-//				}
-//				// write spectrum
-//				Spectrum spec = fr.getSpectrum();
-//				if (spec != null) {
-//					writer.writeSpectrum(spec);
-//				}
-//			}
+
 			// loop precursors
 			int precursorcount = 0;
 			for (BrukerPrecusor pc : bruker.getPrecursors()) {

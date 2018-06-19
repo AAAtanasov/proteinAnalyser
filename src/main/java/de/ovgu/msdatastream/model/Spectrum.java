@@ -10,9 +10,18 @@ public class Spectrum {
 	public double[] mzArray;
 	public int[] intensitiesArray;
 
+	public String rtinseconds;
+	public int scanBegin;
+	public int scanEnd;
+	public int frameId;
+	public String polarity;
+	public int charge;
+
+
 	public Spectrum() {
 		// intialize empty spectrum
-		this(new double[0], new int[0]);
+		mzArray = new double[0];
+		intensitiesArray = new int[0];
 	}
 	
 	public Spectrum(double[] mz, int[] intensities) {

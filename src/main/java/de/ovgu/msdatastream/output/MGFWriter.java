@@ -21,9 +21,16 @@ public class MGFWriter {
 	}
 	
 	public void writeSpectrum(Spectrum spec) throws IOException {
+		bw.write("###FrameId:" + spec.frameId);
+		bw.write("\n");
 		bw.write("BEGIN IONS");
 		bw.write("\n");
+		bw.write("TITLE: fake title, Charge:" + spec.charge);
+		bw.write("\n");
 		bw.write("PEPMASS=" + spec.precursorMZ + "\t" + spec.precursorINT);
+		bw.write("\n");
+		bw.write("RTINSECONDS=" + spec.rtinseconds + "\n");
+		bw.write("SCANS=" + spec.scanBegin+ ", " + spec.scanEnd);
 		bw.write("\n");
 		for (int i = 0; i < spec.intensitiesArray.length; i++) {
 			if (spec.intensitiesArray[i] != 0) {
