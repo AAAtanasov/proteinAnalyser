@@ -1,19 +1,19 @@
 package de.ovgu.msdatastream.brukerraw;
 
+import de.ovgu.msdatastream.brukerraw.dll.TimsdataDLLWrapper;
+import de.ovgu.msdatastream.brukerraw.dll.TimsdataPayloadContainer;
+import de.ovgu.msdatastream.brukerraw.sqllite.BrukerFrame;
+import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPasefFrameMSMSInfo;
+import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
+import de.ovgu.msdatastream.brukerraw.sqllite.SQLWrapper;
+import de.ovgu.msdatastream.model.Spectrum;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-
-import de.ovgu.msdatastream.brukerraw.dll.TimsdataPayloadContainer;
-import de.ovgu.msdatastream.brukerraw.dll.TimsdataDLLWrapper;
-import de.ovgu.msdatastream.brukerraw.sqllite.BrukerFrame;
-import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPasefFrameMSMSInfo;
-import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
-import de.ovgu.msdatastream.brukerraw.sqllite.SQLWrapper;
-import de.ovgu.msdatastream.model.Spectrum;
 
 public class BrukerRawFormatWrapper {
 
@@ -31,7 +31,8 @@ public class BrukerRawFormatWrapper {
 	private HashMap<Integer, HashSet<BrukerFrame>> precursorToFrameMapping;
 
 	//constants
-	private long initialFrameBufferSize = 128;
+	private int initialFrameBufferSize = 128;
+	private int maxBufferSize = 16777216;
 	
 	public BrukerRawFormatWrapper(String analysisDir) {
 		dll = new TimsdataDLLWrapper(analysisDir);
@@ -106,7 +107,7 @@ public class BrukerRawFormatWrapper {
 	}
 	
 	
-	public Spectrum readRawdata(BrukerFrame f, int scanBegin, int scanEnd) {
+	public Spectrum readRawdata(BrukerFrame brukerFrame, int scanBegin, int scanEnd) {
 		
 		// TODO: clean up :)
 		// TODO: more comments!!
@@ -115,24 +116,31 @@ public class BrukerRawFormatWrapper {
 		
 		Spectrum spectrum = new Spectrum();
 		int[] pivotArr;
-		//TODO: check if that is correct
-		while (true){
-			long count = initialFrameBufferSize;
-			pivotArr = new int[(int)initialFrameBufferSize];
+		while (true) {
+			int cnt = initialFrameBufferSize;
+			pivotArr = new int[cnt];
+			int len = 4 * cnt;
+			long handle = dll.getHandle();
 
+			long requiredLength = dll.timsReadScansV2(handle, brukerFrame.frameId, scanBegin, scanEnd, pivotArr, len);
 
+			if (requiredLength == 0) {
+				throw  new RuntimeException("Timsdata error");
+				//TODO: check if calling the dll errors is needed
+			}
+
+			if (requiredLength > len) {
+				if (requiredLength > maxBufferSize) {
+					throw  new RuntimeException("Maximum expected frame size exceeded");
+				}
+				initialFrameBufferSize = ((int)requiredLength / 4 )+ 1; // grow buffer size
+			} else {
+				break;
+			}
 		}
 
 
-		 // Why is this set to 512?
-		long requiredLength = dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, 512);
-		if (requiredLength > 16777216) {
-			throw  new RuntimeException("Maximum expected frame size exceeded");
-		}
-		int correctSize = ((int) requiredLength / 4 ) + 1;
 
-		pivotArr = new int[correctSize];
-		dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, correctSize*4);
 		
 		// figure out size of arrays
 		int arraySize = 0;
@@ -169,13 +177,13 @@ public class BrukerRawFormatWrapper {
         }
         // prepare payload container and retrieve mzvalues
 		TimsdataPayloadContainer container = new TimsdataPayloadContainer();
-		container.handle = dll.handle;
-		container.frameId = f.frameId;
-		container.inArrayOfPointers = new Double[indicies.length];
+		container.handle = dll.getHandle();
+		container.frameId = brukerFrame.frameId;
+		container.inArrayOfPointers = new double[indicies.length];
 		for (int i = 0; i < indicies.length; i++) {
 			container.inArrayOfPointers[i] = (double)indicies[i];
 		}
-		container.outArrayOfPointers = new Double[indicies.length];
+		container.outArrayOfPointers = new double[indicies.length];
 		container.count = indicies.length;
 		// Load mzindex into container.outArrayOfPointers
 		dll.indexToMz(container);

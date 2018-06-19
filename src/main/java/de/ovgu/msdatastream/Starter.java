@@ -1,11 +1,11 @@
 package de.ovgu.msdatastream;
 
-import java.io.IOException;
-
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
 import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
 import de.ovgu.msdatastream.model.Spectrum;
 import de.ovgu.msdatastream.output.MGFWriter;
+
+import java.io.IOException;
 
 public class Starter {
 

@@ -1,12 +1,10 @@
 package de.ovgu.msdatastream.brukerraw.sqllite;
 
+import de.ovgu.msdatastream.Properties;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import de.ovgu.msdatastream.Properties;
 
 public class SQLWrapper {
 

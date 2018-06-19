@@ -1,11 +1,11 @@
 package de.ovgu.msdatastream.output;
 
+import de.ovgu.msdatastream.model.Spectrum;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import de.ovgu.msdatastream.model.Spectrum;
 
 public class MGFWriter {
 

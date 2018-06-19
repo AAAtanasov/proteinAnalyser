@@ -5,7 +5,7 @@ public class TimsdataDLLWrapper {
 	
 	private TimsdataInterface tdInterface = TimsdataInterface.INSTANCE;
 	// TODO get rid of this hack
-	public long handle = 0; 
+	private long handle = 0;
 	
 	public TimsdataDLLWrapper(String analysisDir) {
 		this.timsOpen(analysisDir);
@@ -17,6 +17,10 @@ public class TimsdataDLLWrapper {
 		if (result == 0) {
 			throw new RuntimeException("Failed to timsOpen");
 		}
+	}
+
+	public long getHandle(){
+		return this.handle;
 	}
 	
 	public long timsReadScansV2(long handle, int frameId, int scanBegin, int scanEnd, int[] buffer, int length) {
