@@ -36,6 +36,18 @@ public class BrukerPrecusor implements ISpectrum {
 		charge = rs.getInt("Charge");
 	}
 
+	public double getMonoisotopicMz(){
+		return  this.monoisotopicMz;
+	}
+
+	public double getIntensity() {
+		return  this.intensity;
+	}
+
+	public Integer getCharge() {
+		return this.charge;
+	}
+
 	public void addPasefItem(BrukerPasefFrameMSMSInfo pasefItem) {
 		pasefItems.add(pasefItem);
 	}
@@ -45,24 +57,9 @@ public class BrukerPrecusor implements ISpectrum {
 		// init empty spectrum
 		// retrieve data from each frame and append
 
-		// multiple precursors -> should be batch ?
 		for (BrukerPasefFrameMSMSInfo pasefItem : this.pasefItems) {
-			Spectrum spectrum = new Spectrum();
-			BrukerFrame frame = bkFile.getFrame(pasefItem.frameId);
-
-			Spectrum newSpectrum = bkFile.readRawdata(frame, pasefItem.scanNumBegin, pasefItem.scanNumEnd);
-			spectrum.appendData(newSpectrum);
-			spectrum.scanBegin = pasefItem.scanNumBegin;
-			spectrum.scanEnd = pasefItem.scanNumEnd;
-			spectrum.frameId = pasefItem.frameId;
-			spectrum.precursorId = pasefItem.precursorId;
-			spectrum.rtinseconds = frame.time;
-
-			spectrum.precursorMZ = this.monoisotopicMz;
-			spectrum.precursorINT = this.intensity;
-			spectrum.charge = this.charge;
-			spectrum.polarity = frame.polarity;
-			result.add(spectrum);
+			ArrayList<Spectrum> spectrums = pasefItem.getSpectrum();
+			result.addAll(spectrums);
 
 		}
 

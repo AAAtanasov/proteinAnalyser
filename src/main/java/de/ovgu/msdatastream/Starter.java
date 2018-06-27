@@ -8,6 +8,7 @@ import de.ovgu.msdatastream.output.MGFWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Starter {
 
@@ -20,7 +21,7 @@ public class Starter {
 			// loop precursors
 			int precursorcount = 0;
 
-			for (ISpectrum pc : bruker.getPrecursors()) {
+			for (ISpectrum pc : Arrays.asList(bruker.getFrame(10)) ) {
 				precursorcount++;
 				if ((precursorcount % 1000) == 0) {
 					System.out.println("Writing Precursor " + precursorcount + " of " + bruker.getPrecursors().size());

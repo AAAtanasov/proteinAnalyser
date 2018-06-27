@@ -45,7 +45,21 @@ public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 	
 	public ArrayList<Spectrum> getSpectrum() {
 		// read specific range from specific frame
-		Spectrum spectrum = bkFile.readRawdata(bkFile.getFrame(this.frameId), this.scanNumBegin, this.scanNumEnd);
+		BrukerFrame frame = bkFile.getFrame(this.frameId);
+		BrukerPrecusor precusor = bkFile.getPrecursor(this.precursorId);
+		Spectrum spectrum = bkFile.readRawdata(frame, this.scanNumBegin, this.scanNumEnd);
+		spectrum.scanBegin = this.scanNumBegin;
+		spectrum.scanEnd = this.scanNumEnd;
+		spectrum.frameId = this.frameId;
+		spectrum.precursorId = this.precursorId;
+		spectrum.rtinseconds = frame.time;
+
+		spectrum.precursorMZ = precusor.getMonoisotopicMz();
+		spectrum.precursorINT = precusor.getIntensity();
+		spectrum.charge = precusor.getCharge();
+		spectrum.polarity = frame.polarity;
+
+
 		return new ArrayList<Spectrum>(Arrays.asList(spectrum));
 	}
 

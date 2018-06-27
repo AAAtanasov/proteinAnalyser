@@ -73,7 +73,6 @@ public class BrukerRawFormatWrapper {
 					frame = frames.get(frameID);
 				} else {
 					frame = new BrukerFrame(this, rs, bkFr);
-					frame.time = rs.getTime("Time").toString();
 					frames.put(frameID, frame);
 					frameToPrecursorMapping.put(frameID, new HashSet<BrukerPrecusor>());
 				}
@@ -161,12 +160,6 @@ public class BrukerRawFormatWrapper {
 		if (container.outArrayOfPointers.length > 0) {
 			spectrum.appendData(new Spectrum(container.outArrayOfPointers, intensities));
 		}
-
-//		spectrum.frameId = brukerFrame.frameId;
-//		spectrum.scanBegin = scanBegin;
-//		spectrum.scanEnd = scanEnd;
-//		spectrum.rtinseconds = brukerFrame.time;
-//		spectrum.charge =
 
 		return spectrum;
 	}

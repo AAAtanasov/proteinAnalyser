@@ -19,7 +19,7 @@ public class BrukerFrame implements ISpectrum {
 	public Integer timsId;
 	public Integer numScans;
 	public Integer numPeaks;
-	public String time;
+	public Double time;
 	// PasefItems
 	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
 	// Spectrum
@@ -33,7 +33,7 @@ public class BrukerFrame implements ISpectrum {
 		// Frame
 		frameId = rs.getInt("Frame");
 		polarity = rs.getString("Polarity");
-		time = rs.getString("Time");
+		time = rs.getDouble("Time");
 //		msmsType = pasefItem.msmsType;
 //		timsId = pasefItem.timsId;
 		numScans = rs.getInt("NumScans");
@@ -48,9 +48,14 @@ public class BrukerFrame implements ISpectrum {
 	}
 	
 	public ArrayList<Spectrum> getSpectrum() {
-		// read from 0 to numScans (= entire frame)
-		Spectrum spectrum = bkFile.readRawdata(this, 0, this.numScans);
-		return new ArrayList<Spectrum>(Arrays.asList(spectrum));
+		ArrayList<Spectrum> result = new ArrayList<Spectrum>();
+
+		for (BrukerPasefFrameMSMSInfo pasefItem : this.pasefItems) {
+			ArrayList<Spectrum> spectrums = pasefItem.getSpectrum();
+			result.addAll(spectrums);
+		}
+
+		return result;
 	}
 	
 }

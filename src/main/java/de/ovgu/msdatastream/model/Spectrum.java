@@ -10,7 +10,7 @@ public class Spectrum {
 	public double[] mzArray;
 	public int[] intensitiesArray;
 
-	public String rtinseconds;
+	public Double rtinseconds;
 	public int scanBegin;
 	public int scanEnd;
 	public int frameId;
