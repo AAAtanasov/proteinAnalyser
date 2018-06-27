@@ -39,7 +39,8 @@ public class BrukerRawFormatWrapper {
 		sql = new SQLWrapper();
 		frames = new HashMap<Integer, BrukerFrame>();
 		precursors = new HashMap<Integer, BrukerPrecusor>();
-		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
+		//Not needed anywhere - will delete after confirm fixme
+		//pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		frameToPrecursorMapping = new HashMap<Integer, HashSet<BrukerPrecusor>>();
 		precursorToFrameMapping = new HashMap<Integer, HashSet<BrukerFrame>>();
 		readMetaData();
@@ -50,22 +51,28 @@ public class BrukerRawFormatWrapper {
 			// get all metadata and save it as frames and precursors
 			PreparedStatement ps = sql.conn.prepareStatement("SELECT * FROM Frames f INNER JOIN PasefFrameMSMsInfo ms2 ON f.Id = ms2.Frame INNER JOIN Precursors p ON p.Id = ms2.Precursor");
 			ResultSet rs = ps.executeQuery();
+			// do we need a second set of these?
 			HashSet<Long> frameIdSet = new HashSet<Long>();
 			HashSet<Long> precIdsSet = new HashSet<Long>();
+
 			while (rs.next()) {
 				// edit here
 
 				Integer frameID = rs.getInt("Frame");
 				Integer precursorID = rs.getInt("Precursor");
+
 				// read data
-				BrukerPasefFrameMSMSInfo bkFr = new BrukerPasefFrameMSMSInfo(this, rs, sql);
-				this.pasefItems.add(bkFr);
+				BrukerPasefFrameMSMSInfo bkFr = new BrukerPasefFrameMSMSInfo(this, rs);
+
+				//this.pasefItems.add(bkFr); - removed because was not used and frames-precursors already contain
+				// references to
+
 				// create frames
 				BrukerFrame frame;
 				if (frameIdSet.contains(frameID)) {
 					frame = frames.get(frameID);
 				} else {
-					frame = new BrukerFrame(bkFr);
+					frame = new BrukerFrame(this, rs, bkFr);
 					frame.time = rs.getTime("Time").toString();
 					frames.put(frameID, frame);
 					frameToPrecursorMapping.put(frameID, new HashSet<BrukerPrecusor>());
@@ -75,7 +82,7 @@ public class BrukerRawFormatWrapper {
 				if (precIdsSet.contains(precursorID)) {
 					precursor = precursors.get(precursorID);
 				} else {
-					precursor = new BrukerPrecusor(bkFr, rs.getInt("Charge"));
+					precursor = new BrukerPrecusor(this, rs, bkFr);
 					precursors.put(precursorID, precursor);
 					precursorToFrameMapping.put(precursorID, new HashSet<BrukerFrame>());
 				}
@@ -101,6 +108,10 @@ public class BrukerRawFormatWrapper {
 	
 	public BrukerFrame getFrame(Integer frameID) {
 		return frames.get(frameID);
+	}
+
+	public BrukerPrecusor getPrecursor(Integer precursorID) {
+		return precursors.get(precursorID);
 	}
 	
 	public ArrayList<BrukerPrecusor> getPrecursors() {

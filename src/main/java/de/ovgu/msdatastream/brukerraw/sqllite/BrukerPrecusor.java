@@ -3,9 +3,11 @@ package de.ovgu.msdatastream.brukerraw.sqllite;
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
 import de.ovgu.msdatastream.model.Spectrum;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BrukerPrecusor implements SpectrumInterface {
+public class BrukerPrecusor implements ISpectrum {
 
 	// File
 	public BrukerRawFormatWrapper bkFile;
@@ -20,18 +22,18 @@ public class BrukerPrecusor implements SpectrumInterface {
 	// Spectrum
 	private Spectrum spectrum;
 	
-	public BrukerPrecusor(BrukerPasefFrameMSMSInfo pasefItem, int chargeValue) {
+	public BrukerPrecusor(BrukerRawFormatWrapper brkFile, ResultSet rs, BrukerPasefFrameMSMSInfo pasefItem) throws SQLException {
 		// File
-		bkFile = pasefItem.bkFile;
+		bkFile = brkFile;
 		// Precursor
-		precursorId = pasefItem.precursorId;
-		monoisotopicMz = pasefItem.monoisotopicMz;
-		intensity = pasefItem.intensity;
-		precursorParent = pasefItem.precursorParent;
+		precursorId = rs.getInt("Precursor");
+//		monoisotopicMz = pasefItem.monoisotopicMz;
+//		intensity = pasefItem.intensity;
+//		precursorParent = pasefItem.precursorParent;
 		// PasefItems
 		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);
-		charge = chargeValue;
+		charge = rs.getInt("Charge");
 	}
 
 	public void addPasefItem(BrukerPasefFrameMSMSInfo pasefItem) {

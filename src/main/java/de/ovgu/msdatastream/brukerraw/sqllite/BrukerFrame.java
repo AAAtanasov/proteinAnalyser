@@ -3,9 +3,11 @@ package de.ovgu.msdatastream.brukerraw.sqllite;
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
 import de.ovgu.msdatastream.model.Spectrum;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BrukerFrame implements SpectrumInterface {
+public class BrukerFrame implements ISpectrum {
 
 	// File
 	private BrukerRawFormatWrapper bkFile;
@@ -24,16 +26,17 @@ public class BrukerFrame implements SpectrumInterface {
 	
 	// TODO: Implementation for remaining data
 
-	public BrukerFrame(BrukerPasefFrameMSMSInfo pasefItem) {
+	public BrukerFrame(BrukerRawFormatWrapper brkFile, ResultSet rs, BrukerPasefFrameMSMSInfo pasefItem) throws SQLException {
 		// File
-		bkFile = pasefItem.bkFile;
+		bkFile = brkFile;
 		// Frame
-		frameId = pasefItem.frameId;
-		polarity = pasefItem.polarity;
-		msmsType = pasefItem.msmsType;
-		timsId = pasefItem.timsId;
-		numScans = pasefItem.numScans;
-		numPeaks = pasefItem.numPeaks;
+		frameId = rs.getInt("Frame");
+		polarity = rs.getString("Polarity");
+		time = rs.getString("Time");
+//		msmsType = pasefItem.msmsType;
+//		timsId = pasefItem.timsId;
+		numScans = rs.getInt("NumScans");
+		numPeaks = rs.getInt("NumPeaks");
 		// PasefItems
 		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);

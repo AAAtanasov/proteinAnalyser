@@ -2,10 +2,12 @@ package de.ovgu.msdatastream;
 
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
 import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
+import de.ovgu.msdatastream.brukerraw.sqllite.ISpectrum;
 import de.ovgu.msdatastream.model.Spectrum;
 import de.ovgu.msdatastream.output.MGFWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Starter {
 
@@ -17,10 +19,13 @@ public class Starter {
 
 			// loop precursors
 			int precursorcount = 0;
-			for (BrukerPrecusor pc : bruker.getPrecursors()) {
+
+			for (ISpectrum pc : bruker.getPrecursors()) {
 				precursorcount++;
 				if ((precursorcount % 1000) == 0) {
 					System.out.println("Writing Precursor " + precursorcount + " of " + bruker.getPrecursors().size());
+					// for testing purpouses
+					break;
 				}
 				// write spectrum
 				Spectrum spec = pc.getSpectrum();

@@ -6,46 +6,39 @@ import de.ovgu.msdatastream.model.Spectrum;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BrukerPasefFrameMSMSInfo implements SpectrumInterface {
+public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 
 	// File
 	public BrukerRawFormatWrapper bkFile;
+	public Integer pasefFrameMSMSInfoId;
 	// Frame
 	public Integer frameId;
-	public String polarity;
-	public Integer msmsType;
-	public Integer timsId;
-	public Integer numScans;
-	public Integer numPeaks;
+
 	// PasefMSMSInfo
 	public Integer scanNumBegin;
 	public Integer scanNumEnd;
 	// Precursor
 	public Integer precursorId;
-	public Double monoisotopicMz;
+	public Double isolationMz;
 	public Double intensity;
 	public Integer precursorParent;
 	// Spectrum
 	private Spectrum spectrum;
 
-	public BrukerPasefFrameMSMSInfo(BrukerRawFormatWrapper brkFile, ResultSet rs, SQLWrapper sql) throws SQLException {
+	public BrukerPasefFrameMSMSInfo(BrukerRawFormatWrapper brkFile, ResultSet rs) throws SQLException {
 		// File
 		bkFile = brkFile;
+		pasefFrameMSMSInfoId = rs.getInt("PasefFrameMSMSInfo");
 		// Frame
 		frameId = rs.getInt("Frame");
-		polarity = rs.getString("Polarity"); // What is this, no such column
-		msmsType = rs.getInt("MsMsType");
-		timsId = rs.getInt("TimsId");
-		numScans = rs.getInt("NumScans");
-		numPeaks = rs.getInt("NumPeaks");
+		//polarity = rs.getString("Polarity");
+
 		// PasefMSMSInfo
 		scanNumBegin = rs.getInt("ScanNumBegin");
 		scanNumEnd = rs.getInt("ScanNumEnd");
 		// Precursor
 		precursorId = rs.getInt("Precursor");
-		monoisotopicMz = (double) rs.getDouble("MonoisotopicMz");
-		intensity = (double) rs.getDouble("Intensity");
-		precursorParent = rs.getInt("Parent");
+
 	}
 	
 	public Spectrum getSpectrum() {
