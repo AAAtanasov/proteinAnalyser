@@ -21,12 +21,10 @@ public class Starter {
 			// loop precursors
 			int precursorcount = 0;
 
-			for (ISpectrum pc : Arrays.asList(bruker.getFrame(10)) ) {
+			for (ISpectrum pc : bruker.getPrecursors()) {
 				precursorcount++;
 				if ((precursorcount % 1000) == 0) {
 					System.out.println("Writing Precursor " + precursorcount + " of " + bruker.getPrecursors().size());
-					// for testing purpouses
-					break;
 				}
 				// write spectrum
 				ArrayList<Spectrum> spectrums = pc.getSpectrum();

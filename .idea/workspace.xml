@@ -4,10 +4,6 @@
     <list default="true" id="a0635670-9bf6-43cb-9b1a-59c9b9db75e7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/Starter.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/Starter.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPasefFrameMSMSInfo.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPasefFrameMSMSInfo.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/model/Spectrum.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/model/Spectrum.java" />
       <change beforePath="$PROJECT_DIR$/test.mgf" afterPath="$PROJECT_DIR$/test.mgf" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,22 +18,20 @@
     <splitter split-orientation="horizontal" split-proportion="0.46906567">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="BrukerRawFormatWrapper.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="BrukerRawFormatWrapper.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="367">
-                  <caret line="85" column="43" lean-forward="false" selection-start-line="85" selection-start-column="20" selection-end-line="85" selection-end-column="43" />
+                <state relative-caret-position="469">
+                  <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#2112#2118#0" expanded="true" />
-                    <element signature="e#2163#2169#0" expanded="true" />
-                    <element signature="e#3774#3775#0" expanded="true" />
-                    <element signature="e#3807#3808#0" expanded="true" />
-                    <element signature="e#3867#3868#0" expanded="true" />
-                    <element signature="e#3908#3909#0" expanded="true" />
+                    <element signature="e#3795#3796#0" expanded="true" />
+                    <element signature="e#3828#3829#0" expanded="true" />
+                    <element signature="e#3888#3889#0" expanded="true" />
+                    <element signature="e#3929#3930#0" expanded="true" />
                     <element signature="method#growBufferSize#0;class#BrukerRawFormatWrapper#0" expanded="false" />
                     <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-                    <marker date="1530134439588" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
+                    <marker date="1530136657899" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
                   </folding>
                 </state>
               </provider>
@@ -53,11 +47,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Starter.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Starter.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/Starter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="629">
-                  <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+                <state relative-caret-position="141">
+                  <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -66,8 +60,8 @@
           <file leaf-file-name="test.mgf" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test.mgf">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+                <state relative-caret-position="-3681">
+                  <caret line="44" column="21" lean-forward="true" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
@@ -76,7 +70,7 @@
           <file leaf-file-name="BrukerPrecusor.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1005">
+                <state relative-caret-position="985">
                   <caret line="67" column="4" lean-forward="true" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
                   <folding>
                     <element signature="e#1145#1146#0" expanded="true" />
@@ -108,9 +102,11 @@
           <file leaf-file-name="BrukerFrame.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="611">
-                  <caret line="52" column="65" lean-forward="false" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="65" />
+                <state relative-caret-position="478">
+                  <caret line="45" column="16" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
                   <folding>
+                    <element signature="e#1282#1283#0" expanded="true" />
+                    <element signature="e#1314#1315#0" expanded="true" />
                     <element signature="e#1406#1416#0" expanded="true" />
                   </folding>
                 </state>
@@ -168,9 +164,10 @@
       <find>PasefFrameMSMSInfo</find>
       <find>brukerFrame</find>
       <find>BrukerPasefFrameMSMSInfo</find>
-      <find>monoisotopicMz</find>
       <find>pasefItems</find>
       <find>precursorToFrameMapping</find>
+      <find>monoisotopicMz</find>
+      <find>add</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -190,11 +187,11 @@
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/ISpectrum.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/output/MGFWriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/model/Spectrum.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPasefFrameMSMSInfo.java" />
         <option value="$PROJECT_DIR$/test.mgf" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/Starter.java" />
       </list>
     </option>
@@ -483,12 +480,12 @@
       <workItem from="1529535734551" duration="70000" />
       <workItem from="1529862831157" duration="599000" />
       <workItem from="1529914539119" duration="1236000" />
-      <workItem from="1530033689514" duration="18596000" />
+      <workItem from="1530033689514" duration="19280000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27447000" />
+    <option name="totallyTimeSpent" value="28131000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -504,7 +501,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31601274" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31601274" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -517,7 +514,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3997879" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997879" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -552,8 +549,14 @@
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/Starter.java</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -564,15 +567,13 @@
           <caret line="96" column="26" lean-forward="false" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2112#2118#0" expanded="true" />
-            <element signature="e#2163#2169#0" expanded="true" />
-            <element signature="e#3774#3775#0" expanded="true" />
-            <element signature="e#3807#3808#0" expanded="true" />
-            <element signature="e#3867#3868#0" expanded="true" />
-            <element signature="e#3908#3909#0" expanded="true" />
+            <element signature="e#3795#3796#0" expanded="true" />
+            <element signature="e#3828#3829#0" expanded="true" />
+            <element signature="e#3888#3889#0" expanded="true" />
+            <element signature="e#3929#3930#0" expanded="true" />
             <element signature="method#growBufferSize#0;class#BrukerRawFormatWrapper#0" expanded="false" />
             <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <marker date="1530134439588" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
+            <marker date="1530136657899" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
           </folding>
         </state>
       </provider>
@@ -638,15 +639,13 @@
           <caret line="96" column="26" lean-forward="false" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2112#2118#0" expanded="true" />
-            <element signature="e#2163#2169#0" expanded="true" />
-            <element signature="e#3774#3775#0" expanded="true" />
-            <element signature="e#3807#3808#0" expanded="true" />
-            <element signature="e#3867#3868#0" expanded="true" />
-            <element signature="e#3908#3909#0" expanded="true" />
+            <element signature="e#3795#3796#0" expanded="true" />
+            <element signature="e#3828#3829#0" expanded="true" />
+            <element signature="e#3888#3889#0" expanded="true" />
+            <element signature="e#3929#3930#0" expanded="true" />
             <element signature="method#growBufferSize#0;class#BrukerRawFormatWrapper#0" expanded="false" />
             <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <marker date="1530134439588" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
+            <marker date="1530136657899" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
           </folding>
         </state>
       </provider>
@@ -728,15 +727,13 @@
           <caret line="96" column="26" lean-forward="false" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2112#2118#0" expanded="true" />
-            <element signature="e#2163#2169#0" expanded="true" />
-            <element signature="e#3774#3775#0" expanded="true" />
-            <element signature="e#3807#3808#0" expanded="true" />
-            <element signature="e#3867#3868#0" expanded="true" />
-            <element signature="e#3908#3909#0" expanded="true" />
+            <element signature="e#3795#3796#0" expanded="true" />
+            <element signature="e#3828#3829#0" expanded="true" />
+            <element signature="e#3888#3889#0" expanded="true" />
+            <element signature="e#3929#3930#0" expanded="true" />
             <element signature="method#growBufferSize#0;class#BrukerRawFormatWrapper#0" expanded="false" />
             <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <marker date="1530134439588" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
+            <marker date="1530136657899" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
           </folding>
         </state>
       </provider>
@@ -818,15 +815,13 @@
           <caret line="96" column="26" lean-forward="false" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2112#2118#0" expanded="true" />
-            <element signature="e#2163#2169#0" expanded="true" />
-            <element signature="e#3774#3775#0" expanded="true" />
-            <element signature="e#3807#3808#0" expanded="true" />
-            <element signature="e#3867#3868#0" expanded="true" />
-            <element signature="e#3908#3909#0" expanded="true" />
+            <element signature="e#3795#3796#0" expanded="true" />
+            <element signature="e#3828#3829#0" expanded="true" />
+            <element signature="e#3888#3889#0" expanded="true" />
+            <element signature="e#3929#3930#0" expanded="true" />
             <element signature="method#growBufferSize#0;class#BrukerRawFormatWrapper#0" expanded="false" />
             <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <marker date="1530134439588" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
+            <marker date="1530136657899" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
           </folding>
         </state>
       </provider>
@@ -978,17 +973,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="52" column="65" lean-forward="false" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="65" />
+        <state relative-caret-position="478">
+          <caret line="45" column="16" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
           <folding>
+            <element signature="e#1282#1283#0" expanded="true" />
+            <element signature="e#1314#1315#0" expanded="true" />
             <element signature="e#1406#1416#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/output/MGFWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="36" lean-forward="true" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
+        <state relative-caret-position="985">
           <caret line="67" column="4" lean-forward="true" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
           <folding>
             <element signature="e#1145#1146#0" expanded="true" />
@@ -1002,11 +1007,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/output/MGFWriter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="36" lean-forward="true" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="469">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3795#3796#0" expanded="true" />
+            <element signature="e#3828#3829#0" expanded="true" />
+            <element signature="e#3888#3889#0" expanded="true" />
+            <element signature="e#3929#3930#0" expanded="true" />
+            <element signature="method#growBufferSize#0;class#BrukerRawFormatWrapper#0" expanded="false" />
+            <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
+            <marker date="1530136657899" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1017,36 +1031,17 @@
         </state>
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        <state relative-caret-position="-3681">
+          <caret line="44" column="21" lean-forward="true" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/Starter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        <state relative-caret-position="141">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="85" column="43" lean-forward="false" selection-start-line="85" selection-start-column="20" selection-end-line="85" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2112#2118#0" expanded="true" />
-            <element signature="e#2163#2169#0" expanded="true" />
-            <element signature="e#3774#3775#0" expanded="true" />
-            <element signature="e#3807#3808#0" expanded="true" />
-            <element signature="e#3867#3868#0" expanded="true" />
-            <element signature="e#3908#3909#0" expanded="true" />
-            <element signature="method#growBufferSize#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <marker date="1530134439588" expanded="true" signature="1866:1990" ph="SELECT * FRO... Frames" />
-          </folding>
         </state>
       </provider>
     </entry>

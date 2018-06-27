@@ -51,13 +51,8 @@ public class BrukerRawFormatWrapper {
 			// get all metadata and save it as frames and precursors
 			PreparedStatement ps = sql.conn.prepareStatement("SELECT * FROM Frames f INNER JOIN PasefFrameMSMsInfo ms2 ON f.Id = ms2.Frame INNER JOIN Precursors p ON p.Id = ms2.Precursor");
 			ResultSet rs = ps.executeQuery();
-			// do we need a second set of these?
-			HashSet<Long> frameIdSet = new HashSet<Long>();
-			HashSet<Long> precIdsSet = new HashSet<Long>();
 
 			while (rs.next()) {
-				// edit here
-
 				Integer frameID = rs.getInt("Frame");
 				Integer precursorID = rs.getInt("Precursor");
 
@@ -69,8 +64,10 @@ public class BrukerRawFormatWrapper {
 
 				// create frames
 				BrukerFrame frame;
-				if (frameIdSet.contains(frameID)) {
+				if (frames.containsKey(frameID)) {
 					frame = frames.get(frameID);
+					//assume here each iteration is bound to PasefFrameMsMsInfo and this will introduce always new such records
+					frame.addPasefItem(bkFr);
 				} else {
 					frame = new BrukerFrame(this, rs, bkFr);
 					frames.put(frameID, frame);
@@ -78,8 +75,9 @@ public class BrukerRawFormatWrapper {
 				}
 				// create precursors
 				BrukerPrecusor precursor;
-				if (precIdsSet.contains(precursorID)) {
+				if (precursors.containsKey(precursorID)) {
 					precursor = precursors.get(precursorID);
+					precursor.addPasefItem(bkFr);
 				} else {
 					precursor = new BrukerPrecusor(this, rs, bkFr);
 					precursors.put(precursorID, precursor);
