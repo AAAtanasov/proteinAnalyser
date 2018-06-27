@@ -16,6 +16,7 @@ public class Spectrum {
 	public int frameId;
 	public String polarity;
 	public int charge;
+	public int precursorId;
 
 
 	public Spectrum() {
@@ -40,7 +41,9 @@ public class Spectrum {
 				intensitiesArray[i] = newSpectrum.intensitiesArray[i - oldlength];
 			}
 		} catch (NullPointerException e) {
+			//FIXME: shouldn't we throw an exception here?
 			e.printStackTrace();
+
 		}
 	}
 	

@@ -5,7 +5,7 @@ import de.ovgu.msdatastream.model.Spectrum;
 
 import java.util.ArrayList;
 
-public class BrukerPrecusor {
+public class BrukerPrecusor implements SpectrumInterface {
 
 	// File
 	public BrukerRawFormatWrapper bkFile;

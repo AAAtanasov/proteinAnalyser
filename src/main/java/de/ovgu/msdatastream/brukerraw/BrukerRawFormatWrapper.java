@@ -53,6 +53,8 @@ public class BrukerRawFormatWrapper {
 			HashSet<Long> frameIdSet = new HashSet<Long>();
 			HashSet<Long> precIdsSet = new HashSet<Long>();
 			while (rs.next()) {
+				// edit here
+
 				Integer frameID = rs.getInt("Frame");
 				Integer precursorID = rs.getInt("Precursor");
 				// read data
@@ -116,63 +118,21 @@ public class BrukerRawFormatWrapper {
 		
 		
 		Spectrum spectrum = new Spectrum();
-		int[] pivotArr;
-		while (true) {
-			int cnt = initialFrameBufferSize;
-			pivotArr = new int[cnt];
-			int len = 4 * cnt;
-			long handle = dll.getHandle();
-
-			long requiredLength = dll.timsReadScansV2(handle, brukerFrame.frameId, scanBegin, scanEnd, pivotArr, len);
-
-			if (requiredLength == 0) {
-				throw  new RuntimeException("Timsdata error");
-			}
-
-			if (requiredLength > len) {
-				if (requiredLength > maxBufferSize) {
-					throw  new RuntimeException("Maximum expected frame size exceeded");
-				}
-				initialFrameBufferSize = ((int)requiredLength / 4 )+ 1; // grow buffer size
-			} else {
-				break;
-			}
-		}
+		int[] pivotArr = growBufferSize(brukerFrame.frameId, scanBegin, scanEnd);
 
 		
 		// figure out size of arrays
 		int arraySize = 0;
-		for (int i = 0; i < (scanEnd - scanBegin); i++) {
+		int scanRange = scanEnd - scanBegin;
+		for (int i = 0; i < scanRange; i++) {
 			arraySize += pivotArr[i];
 		}
 		// initialize with correct size 
 		Integer[] indicies = new Integer[arraySize];
         int[] intensities = new int[arraySize];
-        // the index running over the concatenated part of the pivotArr where the actual data is
-        int indexPivotArr = (scanEnd - scanBegin);
-        // the indicies for our indicies/intensities arrays
-		int indexData = 0;
-		// loop over first part of pivotArray using i
-        for (int i = 0; i <  (scanEnd - scanBegin); i++) {
-        	// get the number of peaks to be collected
-        	int npeaks = pivotArr[i];
-        	// proceed if there are peaks to be collected
-        	while (npeaks != 0) {
-        		// collect peaks 
-        		// mzindex -> -> first we have npeaks times mzindicies
-        		indicies[indexData] = pivotArr[indexPivotArr];
-        		// intensity -> first we have npeaks times intensities
-        		intensities[indexData] = pivotArr[indexPivotArr + pivotArr[i]];
-        		indexPivotArr++;
-        		// move indicies
-        		indexData++;
-        		npeaks--;
-        		// weird bit: we have to jump over the intensity portion here to prepare for the next peaks 
-        		if (npeaks == 0) {
-                	indexPivotArr += pivotArr[i];
-        		}
-        	}
-        }
+
+		fillIntensitiesAndIndexesForSpecter(pivotArr, indicies, intensities, scanRange );
+
         // prepare payload container and retrieve mzvalues
 		TimsdataPayloadContainer container = new TimsdataPayloadContainer();
 		container.handle = dll.getHandle();
@@ -185,6 +145,8 @@ public class BrukerRawFormatWrapper {
 		container.count = indicies.length;
 		// Load mzindex into container.outArrayOfPointers
 		dll.indexToMz(container);
+
+		// do we need this check?
 		if (container.outArrayOfPointers.length > 0) {
 			spectrum.appendData(new Spectrum(container.outArrayOfPointers, intensities));
 		}
@@ -201,6 +163,58 @@ public class BrukerRawFormatWrapper {
 	public void close() {
 		this.dll = null;
 		this.sql.closeConnection();
+	}
+
+	private int[] growBufferSize(int frameId, int scanBegin, int scanEnd) {
+		while (true) {
+			int cnt = initialFrameBufferSize;
+			int[] pivotArr = new int[cnt];
+			int len = 4 * cnt;
+			long handle = dll.getHandle();
+
+			long requiredLength = dll.timsReadScansV2(handle, frameId, scanBegin, scanEnd, pivotArr, len);
+
+			if (requiredLength == 0) {
+				throw  new RuntimeException("Timsdata error");
+			}
+
+			if (requiredLength > len) {
+				if (requiredLength > maxBufferSize) {
+					throw  new RuntimeException("Maximum expected frame size exceeded");
+				}
+				initialFrameBufferSize = ((int)requiredLength / 4 )+ 1; // grow buffer size
+			} else {
+				return pivotArr;
+			}
+		}
+	}
+
+	private void fillIntensitiesAndIndexesForSpecter(int[] pivotArr, Integer[] indicies, int[] intensities, int scanRange){
+		// the index running over the concatenated part of the pivotArr where the actual data is
+		int indexPivotArr = scanRange;
+		// the indicies for our indicies/intensities arrays
+		int indexData = 0;
+		// loop over first part of pivotArray using i
+		for (int i = 0; i <  scanRange; i++) {
+			// get the number of peaks to be collected
+			int npeaks = pivotArr[i];
+			// proceed if there are peaks to be collected
+			while (npeaks != 0) {
+				// collect peaks
+				// mzindex -> -> first we have npeaks times mzindicies
+				indicies[indexData] = pivotArr[indexPivotArr];
+				// intensity -> first we have npeaks times intensities
+				intensities[indexData] = pivotArr[indexPivotArr + pivotArr[i]];
+				indexPivotArr++;
+				// move indicies
+				indexData++;
+				npeaks--;
+				// weird bit: we have to jump over the intensity portion here to prepare for the next peaks
+				if (npeaks == 0) {
+					indexPivotArr += pivotArr[i];
+				}
+			}
+		}
 	}
 	
 }

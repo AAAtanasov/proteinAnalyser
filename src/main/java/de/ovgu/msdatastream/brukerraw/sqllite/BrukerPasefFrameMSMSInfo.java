@@ -6,7 +6,7 @@ import de.ovgu.msdatastream.model.Spectrum;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BrukerPasefFrameMSMSInfo {
+public class BrukerPasefFrameMSMSInfo implements SpectrumInterface {
 
 	// File
 	public BrukerRawFormatWrapper bkFile;
