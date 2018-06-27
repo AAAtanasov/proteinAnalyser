@@ -5,6 +5,8 @@ import de.ovgu.msdatastream.model.Spectrum;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 
@@ -28,7 +30,7 @@ public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 	public BrukerPasefFrameMSMSInfo(BrukerRawFormatWrapper brkFile, ResultSet rs) throws SQLException {
 		// File
 		bkFile = brkFile;
-		pasefFrameMSMSInfoId = rs.getInt("PasefFrameMSMSInfo");
+		pasefFrameMSMSInfoId = rs.getInt("Id");
 		// Frame
 		frameId = rs.getInt("Frame");
 		//polarity = rs.getString("Polarity");
@@ -41,9 +43,10 @@ public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 
 	}
 	
-	public Spectrum getSpectrum() {
+	public ArrayList<Spectrum> getSpectrum() {
 		// read specific range from specific frame
-		return  bkFile.readRawdata(bkFile.getFrame(this.frameId), this.scanNumBegin, this.scanNumEnd);
+		Spectrum spectrum = bkFile.readRawdata(bkFile.getFrame(this.frameId), this.scanNumBegin, this.scanNumEnd);
+		return new ArrayList<Spectrum>(Arrays.asList(spectrum));
 	}
 
 }

@@ -28,10 +28,13 @@ public class Starter {
 					break;
 				}
 				// write spectrum
-				Spectrum spec = pc.getSpectrum();
-				if (spec != null) {
-					writer.writeSpectrum(spec);
+				ArrayList<Spectrum> spectrums = pc.getSpectrum();
+				for (Spectrum spec : spectrums){
+					if (spec != null) {
+						writer.writeSpectrum(spec);
+					}
 				}
+
 			}
 			// close everything
 			writer.close();

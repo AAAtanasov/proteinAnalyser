@@ -97,7 +97,7 @@ public class BrukerRawFormatWrapper {
 		}
 		System.out.println("Frames: " + frames.size());
 		System.out.println("Precursors: " + precursors.size());
-		System.out.println("Pasefs: " + pasefItems.size());
+//		System.out.println("Pasefs: " + pasefItems.size());
 	}
 	
 	public ArrayList<BrukerFrame> getFrames() {
@@ -162,10 +162,10 @@ public class BrukerRawFormatWrapper {
 			spectrum.appendData(new Spectrum(container.outArrayOfPointers, intensities));
 		}
 
-		spectrum.frameId = brukerFrame.frameId;
-		spectrum.scanBegin = scanBegin;
-		spectrum.scanEnd = scanEnd;
-		spectrum.rtinseconds = brukerFrame.time;
+//		spectrum.frameId = brukerFrame.frameId;
+//		spectrum.scanBegin = scanBegin;
+//		spectrum.scanEnd = scanEnd;
+//		spectrum.rtinseconds = brukerFrame.time;
 //		spectrum.charge =
 
 		return spectrum;

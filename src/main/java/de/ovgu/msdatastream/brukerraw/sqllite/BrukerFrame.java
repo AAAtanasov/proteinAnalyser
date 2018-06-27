@@ -6,6 +6,7 @@ import de.ovgu.msdatastream.model.Spectrum;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BrukerFrame implements ISpectrum {
 
@@ -46,9 +47,10 @@ public class BrukerFrame implements ISpectrum {
 		pasefItems.add(pasefItem);
 	}
 	
-	public Spectrum getSpectrum() {
+	public ArrayList<Spectrum> getSpectrum() {
 		// read from 0 to numScans (= entire frame)
-		return bkFile.readRawdata(this, 0, this.numScans);
+		Spectrum spectrum = bkFile.readRawdata(this, 0, this.numScans);
+		return new ArrayList<Spectrum>(Arrays.asList(spectrum));
 	}
 	
 }

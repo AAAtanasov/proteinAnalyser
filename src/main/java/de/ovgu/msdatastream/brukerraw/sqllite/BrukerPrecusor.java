@@ -27,8 +27,8 @@ public class BrukerPrecusor implements ISpectrum {
 		bkFile = brkFile;
 		// Precursor
 		precursorId = rs.getInt("Precursor");
-//		monoisotopicMz = pasefItem.monoisotopicMz;
-//		intensity = pasefItem.intensity;
+		monoisotopicMz = rs.getDouble("MonoisotopicMz");
+		intensity = rs.getDouble("Intensity");;
 //		precursorParent = pasefItem.precursorParent;
 		// PasefItems
 		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
@@ -40,23 +40,33 @@ public class BrukerPrecusor implements ISpectrum {
 		pasefItems.add(pasefItem);
 	}
 	
-	public Spectrum getSpectrum() {
+	public ArrayList<Spectrum> getSpectrum() {
+		ArrayList<Spectrum> result = new ArrayList<Spectrum>();
 		// init empty spectrum
-		Spectrum spectrum = new Spectrum();
 		// retrieve data from each frame and append
+
+		// multiple precursors -> should be batch ?
 		for (BrukerPasefFrameMSMSInfo pasefItem : this.pasefItems) {
-			Spectrum newSpectrum = bkFile.readRawdata(bkFile.getFrame(pasefItem.frameId), pasefItem.scanNumBegin, pasefItem.scanNumEnd);
+			Spectrum spectrum = new Spectrum();
+			BrukerFrame frame = bkFile.getFrame(pasefItem.frameId);
+
+			Spectrum newSpectrum = bkFile.readRawdata(frame, pasefItem.scanNumBegin, pasefItem.scanNumEnd);
 			spectrum.appendData(newSpectrum);
-			spectrum.scanBegin = newSpectrum.scanBegin;
-			spectrum.scanEnd = newSpectrum.scanEnd;
-			spectrum.frameId = newSpectrum.frameId;
-			spectrum.rtinseconds = newSpectrum.rtinseconds;
+			spectrum.scanBegin = pasefItem.scanNumBegin;
+			spectrum.scanEnd = pasefItem.scanNumEnd;
+			spectrum.frameId = pasefItem.frameId;
+			spectrum.precursorId = pasefItem.precursorId;
+			spectrum.rtinseconds = frame.time;
+
+			spectrum.precursorMZ = this.monoisotopicMz;
+			spectrum.precursorINT = this.intensity;
+			spectrum.charge = this.charge;
+			spectrum.polarity = frame.polarity;
+			result.add(spectrum);
 
 		}
-		spectrum.precursorMZ = this.monoisotopicMz;
-		spectrum.precursorINT = this.intensity;
-		spectrum.charge = this.charge;
-		return spectrum; 
+
+		return result;
 	}
 	
 	
