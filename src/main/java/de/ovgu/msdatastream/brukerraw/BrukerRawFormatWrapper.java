@@ -1,5 +1,6 @@
 package de.ovgu.msdatastream.brukerraw;
 
+import de.ovgu.msdatastream.Properties;
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataDLLWrapper;
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataPayloadContainer;
 import de.ovgu.msdatastream.brukerraw.sqllite.BrukerFrame;
@@ -31,12 +32,12 @@ public class BrukerRawFormatWrapper {
 	private HashMap<Integer, HashSet<BrukerFrame>> precursorToFrameMapping;
 
 	//constants
-	private int initialFrameBufferSize = 128;
-	private int maxBufferSize = 16777216;
+    private Properties properties;
 	
-	public BrukerRawFormatWrapper(String analysisDir) {
-		dll = new TimsdataDLLWrapper(analysisDir);
-		sql = new SQLWrapper();
+	public BrukerRawFormatWrapper(Properties properties) {
+	    this.properties = properties;
+		dll = new TimsdataDLLWrapper(properties.getAnalysisDir());
+		sql = new SQLWrapper(properties);
 		frames = new HashMap<Integer, BrukerFrame>();
 		precursors = new HashMap<Integer, BrukerPrecusor>();
 		//Not needed anywhere - will delete after confirm fixme
@@ -169,7 +170,7 @@ public class BrukerRawFormatWrapper {
 
 	private int[] growBufferSize(int frameId, int scanBegin, int scanEnd) {
 		while (true) {
-			int cnt = initialFrameBufferSize;
+			int cnt = properties.getInitialFrameBufferSize();
 			int[] pivotArr = new int[cnt];
 			int len = 4 * cnt;
 			long handle = dll.getHandle();
@@ -181,10 +182,10 @@ public class BrukerRawFormatWrapper {
 			}
 
 			if (requiredLength > len) {
-				if (requiredLength > maxBufferSize) {
+				if (requiredLength > properties.getMaxBufferSize()) {
 					throw  new RuntimeException("Maximum expected frame size exceeded");
 				}
-				initialFrameBufferSize = ((int)requiredLength / 4 )+ 1; // grow buffer size
+				properties.setInitialFrameBufferSize(((int)requiredLength / 4 )+ 1);// grow buffer size
 			} else {
 				return pivotArr;
 			}

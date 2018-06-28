@@ -11,10 +11,12 @@ public class SQLWrapper {
 	// fields
 
 	public Connection conn;
+	private Properties properties;
 
 	// constructor
 
-	public SQLWrapper() {
+	public SQLWrapper(Properties properties) {
+		this.properties = properties;
 		openConnection();
 	}
 
@@ -23,7 +25,7 @@ public class SQLWrapper {
 	public void openConnection() {
 		try {
 			if (conn == null || !conn.isClosed()) {
-				conn = DriverManager.getConnection(Properties.connectionUrl);
+				conn = DriverManager.getConnection(this.properties.getConnectionUrl());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
