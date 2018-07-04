@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BrukerFrame implements ISpectrum {
 
@@ -21,7 +23,7 @@ public class BrukerFrame implements ISpectrum {
 	public Integer numPeaks;
 	public Double time;
 	// PasefItems
-	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
+	private Queue<BrukerPasefFrameMSMSInfo> pasefItems;
 	// Spectrum
 	private Spectrum spectrum;
 	
@@ -39,7 +41,7 @@ public class BrukerFrame implements ISpectrum {
 		numScans = rs.getInt("NumScans");
 		numPeaks = rs.getInt("NumPeaks");
 		// PasefItems
-		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
+		pasefItems = new LinkedList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);
 	}
 
@@ -50,8 +52,10 @@ public class BrukerFrame implements ISpectrum {
 	public Spectrum[] getSpectrum() {
 		Spectrum[] result = new Spectrum[pasefItems.size()];
 
+		Queue<BrukerPasefFrameMSMSInfo> pasefItemsCopueQueue = this.pasefItems;
+
 		for (int i = 0; i < this.pasefItems.size(); i++) {
-			result[i] = this.pasefItems.get(i).getSpecificSpectrum();
+			result[i] = pasefItemsCopueQueue.remove().getSpecificSpectrum();
 		}
 
 		return result;
