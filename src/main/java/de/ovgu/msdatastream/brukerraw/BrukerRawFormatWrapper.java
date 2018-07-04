@@ -155,7 +155,6 @@ public class BrukerRawFormatWrapper {
 		// Load mzindex into container.outArrayOfPointers
 		dll.indexToMz(container);
 
-		// do we need this check?
 		if (container.outArrayOfPointers.length > 0) {
 			spectrum.appendData(new Spectrum(container.outArrayOfPointers, intensities));
 		}

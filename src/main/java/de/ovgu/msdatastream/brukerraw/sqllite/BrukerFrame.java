@@ -47,12 +47,11 @@ public class BrukerFrame implements ISpectrum {
 		pasefItems.add(pasefItem);
 	}
 	
-	public ArrayList<Spectrum> getSpectrum() {
-		ArrayList<Spectrum> result = new ArrayList<Spectrum>();
+	public Spectrum[] getSpectrum() {
+		Spectrum[] result = new Spectrum[pasefItems.size()];
 
-		for (BrukerPasefFrameMSMSInfo pasefItem : this.pasefItems) {
-			ArrayList<Spectrum> spectrums = pasefItem.getSpectrum();
-			result.addAll(spectrums);
+		for (int i = 0; i < this.pasefItems.size(); i++) {
+			result[i] = this.pasefItems.get(i).getSpecificSpectrum();
 		}
 
 		return result;

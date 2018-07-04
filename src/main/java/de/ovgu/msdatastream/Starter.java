@@ -16,7 +16,7 @@ public class Starter {
 		try {
 			// inits
 			// will accept directory file from args
-			Properties properties = new Properties("F:\\\\proteinProjData\\\\Roh\\\\Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.d");
+			Properties properties = new Properties("F:\\proteinProjData\\Roh\\Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.d");
 			BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(properties);
 			MGFWriter writer = new MGFWriter(properties.getTargetFile());
 
@@ -27,10 +27,10 @@ public class Starter {
 				precursorcount++;
 				if ((precursorcount % 1000) == 0) {
 					System.out.println("Writing Precursor " + precursorcount + " of " + bruker.getPrecursors().size());
-					break;
+//					break;
 				}
 				// write spectrum
-				ArrayList<Spectrum> spectrums = pc.getSpectrum();
+				Spectrum[] spectrums = pc.getSpectrum();
 				for (Spectrum spec : spectrums){
 					if (spec != null) {
 						writer.writeSpectrum(spec);

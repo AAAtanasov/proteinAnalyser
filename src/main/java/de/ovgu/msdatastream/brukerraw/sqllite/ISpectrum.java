@@ -5,5 +5,5 @@ import de.ovgu.msdatastream.model.Spectrum;
 import java.util.ArrayList;
 
 public interface ISpectrum {
-    ArrayList<Spectrum> getSpectrum();
+    Spectrum[] getSpectrum();
 }

@@ -43,7 +43,7 @@ public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 
 	}
 	
-	public ArrayList<Spectrum> getSpectrum() {
+	public Spectrum getSpecificSpectrum() {
 		// read specific range from specific frame
 		BrukerFrame frame = bkFile.getFrame(this.frameId);
 		BrukerPrecusor precusor = bkFile.getPrecursor(this.precursorId);
@@ -60,7 +60,11 @@ public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 		spectrum.polarity = frame.polarity;
 
 
-		return new ArrayList<Spectrum>(Arrays.asList(spectrum));
+		return spectrum;
+	}
+
+	public Spectrum[] getSpectrum(){
+		return new Spectrum[]{ getSpecificSpectrum() };
 	}
 
 }
