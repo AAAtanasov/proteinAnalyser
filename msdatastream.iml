@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -31,7 +31,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.nd4j:nd4j-native-api:0.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.nd4j:nd4j-buffer:0.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.nd4j:nd4j-api:0.9.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.slf4j:slf4j-api:1.7.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.nd4j:jackson:0.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.yaml:snakeyaml:1.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.woodstox:stax2-api:3.1.4" level="project" />
@@ -55,5 +54,20 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.nd4j:nd4j-native:macosx-x86_64:0.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.nd4j:nd4j-native:windows-x86_64:0.9.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.nd4j:nd4j-native:linux-ppc64le:0.9.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.kafka:kafka_2.12:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.kafka:kafka-clients:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.lz4:lz4-java:1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial.snappy:snappy-java:1.1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.4" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.jopt-simple:jopt-simple:5.0.4" level="project" />
+    <orderEntry type="library" name="Maven: com.yammer.metrics:metrics-core:2.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.12.4" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-reflect:2.12.4" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.scala-logging:scala-logging_2.12:3.7.2" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: com.101tec:zkclient:0.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.zookeeper:zookeeper:3.4.10" level="project" />
   </component>
 </module>

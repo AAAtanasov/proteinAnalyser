@@ -15,6 +15,11 @@
       </plugin>
     </plugins>
   </build>
+
+    <applicationProperties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </applicationProperties>
   
   <dependencies>
   	<!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
@@ -38,7 +43,15 @@
     	<version>0.9.1</version>
     	<scope>test</scope>
 	</dependency>
-</dependencies>
+
+      <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
+      <dependency>
+          <groupId>org.apache.kafka</groupId>
+          <artifactId>kafka_2.12</artifactId>
+          <version>1.1.0</version>
+      </dependency>
+
+  </dependencies>
   
 </project>
 

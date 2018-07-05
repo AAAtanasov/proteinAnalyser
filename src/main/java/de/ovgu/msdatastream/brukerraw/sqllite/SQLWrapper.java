@@ -1,6 +1,6 @@
 package de.ovgu.msdatastream.brukerraw.sqllite;
 
-import de.ovgu.msdatastream.Properties;
+import de.ovgu.msdatastream.ApplicationProperties;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,12 +11,12 @@ public class SQLWrapper {
 	// fields
 
 	public Connection conn;
-	private Properties properties;
+	private ApplicationProperties applicationProperties;
 
 	// constructor
 
-	public SQLWrapper(Properties properties) {
-		this.properties = properties;
+	public SQLWrapper(ApplicationProperties applicationProperties) {
+		this.applicationProperties = applicationProperties;
 		openConnection();
 	}
 
@@ -25,7 +25,7 @@ public class SQLWrapper {
 	public void openConnection() {
 		try {
 			if (conn == null || !conn.isClosed()) {
-				conn = DriverManager.getConnection(this.properties.getConnectionUrl());
+				conn = DriverManager.getConnection(this.applicationProperties.getConnectionUrl());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

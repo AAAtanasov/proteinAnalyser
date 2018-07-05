@@ -1,6 +1,6 @@
 package de.ovgu.msdatastream.brukerraw;
 
-import de.ovgu.msdatastream.Properties;
+import de.ovgu.msdatastream.ApplicationProperties;
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataDLLWrapper;
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataPayloadContainer;
 import de.ovgu.msdatastream.brukerraw.sqllite.BrukerFrame;
@@ -32,12 +32,12 @@ public class BrukerRawFormatWrapper {
 	private HashMap<Integer, HashSet<BrukerFrame>> precursorToFrameMapping;
 
 	//constants
-    private Properties properties;
+    private ApplicationProperties applicationProperties;
 	
-	public BrukerRawFormatWrapper(Properties properties) {
-	    this.properties = properties;
-		dll = new TimsdataDLLWrapper(properties.getAnalysisDir());
-		sql = new SQLWrapper(properties);
+	public BrukerRawFormatWrapper(ApplicationProperties applicationProperties) {
+	    this.applicationProperties = applicationProperties;
+		dll = new TimsdataDLLWrapper(applicationProperties.getAnalysisDir());
+		sql = new SQLWrapper(applicationProperties);
 		frames = new HashMap<Integer, BrukerFrame>();
 		precursors = new HashMap<Integer, BrukerPrecusor>();
 		//Not needed anywhere - will delete after confirm fixme
@@ -50,7 +50,7 @@ public class BrukerRawFormatWrapper {
 	public void readMetaData() {
 		try {
 			// get all metadata and save it as frames and precursors
-			PreparedStatement ps = sql.conn.prepareStatement("SELECT * FROM Frames f INNER JOIN PasefFrameMSMsInfo ms2 ON f.Id = ms2.Frame INNER JOIN Precursors p ON p.Id = ms2.Precursor");
+			PreparedStatement ps = sql.conn.prepareStatement("SELECT f.Id, ms2.Frame, p.Id, f.Polarity, f.Time, f.NumScans, f.NumPeaks, ms2.ScanNumBegin, ms2.ScanNumEnd, ms2.Precursor, p.MonoisotopicMz, p.Intensity, p.Charge  FROM Frames f INNER JOIN PasefFrameMSMsInfo ms2 ON f.Id = ms2.Frame INNER JOIN Precursors p ON p.Id = ms2.Precursor");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -169,7 +169,7 @@ public class BrukerRawFormatWrapper {
 
 	private int[] growBufferSize(int frameId, int scanBegin, int scanEnd) {
 		while (true) {
-			int cnt = properties.getInitialFrameBufferSize();
+			int cnt = applicationProperties.getInitialFrameBufferSize();
 			int[] pivotArr = new int[cnt];
 			int len = 4 * cnt;
 			long handle = dll.getHandle();
@@ -181,10 +181,10 @@ public class BrukerRawFormatWrapper {
 			}
 
 			if (requiredLength > len) {
-				if (requiredLength > properties.getMaxBufferSize()) {
+				if (requiredLength > applicationProperties.getMaxBufferSize()) {
 					throw  new RuntimeException("Maximum expected frame size exceeded");
 				}
-				properties.setInitialFrameBufferSize(((int)requiredLength / 4 )+ 1);// grow buffer size
+				applicationProperties.setInitialFrameBufferSize(((int)requiredLength / 4 )+ 1);// grow buffer size
 			} else {
 				return pivotArr;
 			}

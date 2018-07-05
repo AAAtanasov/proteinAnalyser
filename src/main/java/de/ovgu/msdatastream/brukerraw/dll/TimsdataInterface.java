@@ -2,7 +2,7 @@ package de.ovgu.msdatastream.brukerraw.dll;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
-import de.ovgu.msdatastream.Properties;
+import de.ovgu.msdatastream.ApplicationProperties;
 
 public interface TimsdataInterface extends Library {
     long tims_open(String analysisDirectory);
@@ -12,5 +12,5 @@ public interface TimsdataInterface extends Library {
     long tims_oneoverk0_to_scannum(long handle, int frameId, double[] inArrayOfPointers, double[] ourArrayOfPointers, int count);
     long tims_scannum_to_voltage(long handle, int frameId, double[] inArrayOfPointers, double[] ourArrayOfPointers, int count);
     long tims_voltage_to_scannum(long handle, int frameId, double[] inArrayOfPointers, double[] ourArrayOfPointers, int count);
-    TimsdataInterface INSTANCE = Native.loadLibrary(Properties.timsdatadllLocation, TimsdataInterface.class);
+    TimsdataInterface INSTANCE = Native.loadLibrary(ApplicationProperties.timsdatadllLocation, TimsdataInterface.class);
 }

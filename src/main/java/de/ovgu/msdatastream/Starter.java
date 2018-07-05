@@ -1,14 +1,11 @@
 package de.ovgu.msdatastream;
 
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
-import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
 import de.ovgu.msdatastream.brukerraw.sqllite.ISpectrum;
 import de.ovgu.msdatastream.model.Spectrum;
 import de.ovgu.msdatastream.output.MGFWriter;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Starter {
 
@@ -16,9 +13,9 @@ public class Starter {
 		try {
 			// inits
 			// will accept directory file from args
-			Properties properties = new Properties("F:\\proteinProjData\\Roh\\Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.d");
-			BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(properties);
-			MGFWriter writer = new MGFWriter(properties.getTargetFile());
+			ApplicationProperties applicationProperties = new ApplicationProperties("F:\\proteinProjData\\Roh\\Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.d");
+			BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(applicationProperties);
+			MGFWriter writer = new MGFWriter(applicationProperties.getTargetFile());
 
 			// loop precursors
 			int precursorcount = 0;

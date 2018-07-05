@@ -12,7 +12,6 @@ public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 
 	// File
 	public BrukerRawFormatWrapper bkFile;
-	public Integer pasefFrameMSMSInfoId;
 	// Frame
 	public Integer frameId;
 
@@ -30,7 +29,6 @@ public class BrukerPasefFrameMSMSInfo implements ISpectrum {
 	public BrukerPasefFrameMSMSInfo(BrukerRawFormatWrapper brkFile, ResultSet rs) throws SQLException {
 		// File
 		bkFile = brkFile;
-		pasefFrameMSMSInfoId = rs.getInt("Id");
 		// Frame
 		frameId = rs.getInt("Frame");
 		//polarity = rs.getString("Polarity");
