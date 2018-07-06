@@ -34,7 +34,7 @@ public class BrukerRawFormatWrapper {
 	//constants
     private ApplicationProperties applicationProperties;
 	
-	public BrukerRawFormatWrapper(ApplicationProperties applicationProperties) {
+	public BrukerRawFormatWrapper(ApplicationProperties applicationProperties) throws SQLException {
 	    this.applicationProperties = applicationProperties;
 		dll = new TimsdataDLLWrapper(applicationProperties.getAnalysisDir());
 		sql = new SQLWrapper(applicationProperties);
@@ -44,13 +44,23 @@ public class BrukerRawFormatWrapper {
 		//pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		frameToPrecursorMapping = new HashMap<Integer, HashSet<BrukerPrecusor>>();
 		precursorToFrameMapping = new HashMap<Integer, HashSet<BrukerFrame>>();
+		//FIXME: always try to create?
+		PreparedStatement createTableIfNotExist = sql.conn.prepareStatement("CREATE TABLE IF NOT EXISTS ProcessedFramePrecursorPairs (Id INTEGER PRIMARY KEY AUTOINCREMENT, FrameId INTEGER , PrecursorId INTEGER, FOREIGN KEY (FrameId) REFERENCES  Frames (Id), FOREIGN  KEY (PrecursorId) REFERENCES Precursors (Id));");
 		readMetaData();
 	}
 	
 	public void readMetaData() {
 		try {
+
 			// get all metadata and save it as frames and precursors
-			PreparedStatement ps = sql.conn.prepareStatement("SELECT f.Id, ms2.Frame, p.Id, f.Polarity, f.Time, f.NumScans, f.NumPeaks, ms2.ScanNumBegin, ms2.ScanNumEnd, ms2.Precursor, p.MonoisotopicMz, p.Intensity, p.Charge  FROM Frames f INNER JOIN PasefFrameMSMsInfo ms2 ON f.Id = ms2.Frame INNER JOIN Precursors p ON p.Id = ms2.Precursor");
+			PreparedStatement ps = sql.conn.prepareStatement("Select f.Id, nt.Frame, p.Id, f.Polarity, f.Time," +
+					" f.NumScans, f.NumPeaks, nt.ScanNumBegin, nt.ScanNumEnd, nt.Precursor, p.MonoisotopicMz," +
+					" p.Intensity, p.Charge From" +
+					" (Select pf.Frame, pf.Precursor, pf.ScanNumBegin, pf.ScanNumEnd from PasefFrameMsMsInfo as pf" +
+					" left join ProcessedFramePrecursorPairs as pp on pf.Precursor == pp.PrecursorId and pf.Frame = pp.FrameId" +
+					" where id is Null) as nt \n" +
+					"inner join Frames as f on nt.Frame = f.Id inner join Precursors as p on nt.Precursor = p.id");
+
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -120,12 +130,6 @@ public class BrukerRawFormatWrapper {
 	
 	
 	public Spectrum readRawdata(BrukerFrame brukerFrame, int scanBegin, int scanEnd) {
-		
-		// TODO: clean up :)
-		// TODO: more comments!!
-		// TODO: hard-coded values into the property file! 
-		
-		
 		Spectrum spectrum = new Spectrum();
 		int[] pivotArr = growBufferSize(brukerFrame.frameId, scanBegin, scanEnd);
 
@@ -165,6 +169,14 @@ public class BrukerRawFormatWrapper {
 	public void close() {
 		this.dll = null;
 		this.sql.closeConnection();
+	}
+
+	public void insertVisitedFramesAndPrecursors(Integer FrameId, Integer PrecursorId) throws SQLException {
+		PreparedStatement ps = sql.conn.prepareStatement("INSERT INTO ProcessedFramePrecursorPairs (FrameId, PrecursorId) VALUES (" + FrameId+ "," + PrecursorId +")");
+		ps.execute();
+//		if (hasSaved == false) {
+//			throw new SQLException("Failed to insert records for Frame: " + FrameId + " and precursor: " + PrecursorId);
+//		}
 	}
 
 	private int[] growBufferSize(int frameId, int scanBegin, int scanEnd) {

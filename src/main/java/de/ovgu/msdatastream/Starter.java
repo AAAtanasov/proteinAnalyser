@@ -41,6 +41,9 @@ public class Starter {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
