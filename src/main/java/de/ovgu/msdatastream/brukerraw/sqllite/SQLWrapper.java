@@ -7,20 +7,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLWrapper {
-
-	// fields
-
 	public Connection conn;
 	private ApplicationProperties applicationProperties;
-
-	// constructor
 
 	public SQLWrapper(ApplicationProperties applicationProperties) {
 		this.applicationProperties = applicationProperties;
 		openConnection();
 	}
-
-	// connection
 
 	public void openConnection() {
 		try {
@@ -39,7 +32,4 @@ public class SQLWrapper {
 			e.printStackTrace();
 		}
 	}
-
-
-	
 }

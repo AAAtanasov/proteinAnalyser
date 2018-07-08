@@ -17,13 +17,10 @@ public class BrukerPrecusor implements ISpectrum {
 	public Integer precursorId;
 	private Double monoisotopicMz;
 	private Double intensity;
-	private Integer precursorParent;
 	private Integer charge;
 	// PasefItems
 	private Queue<BrukerPasefFrameMSMSInfo> pasefItems;
-	// Spectrum
-	private Spectrum spectrum;
-	
+
 	public BrukerPrecusor(BrukerRawFormatWrapper brkFile, ResultSet rs, BrukerPasefFrameMSMSInfo pasefItem) throws SQLException {
 		// File
 		bkFile = brkFile;
@@ -31,7 +28,6 @@ public class BrukerPrecusor implements ISpectrum {
 		precursorId = rs.getInt("Precursor");
 		monoisotopicMz = rs.getDouble("MonoisotopicMz");
 		intensity = rs.getDouble("Intensity");;
-//		precursorParent = pasefItem.precursorParent;
 		// PasefItems
 		pasefItems = new LinkedList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);

@@ -36,8 +36,6 @@ public class BrukerFrame implements ISpectrum {
 		frameId = rs.getInt("Frame");
 		polarity = rs.getString("Polarity");
 		time = rs.getDouble("Time");
-//		msmsType = pasefItem.msmsType;
-//		timsId = pasefItem.timsId;
 		numScans = rs.getInt("NumScans");
 		numPeaks = rs.getInt("NumPeaks");
 		// PasefItems
@@ -51,7 +49,6 @@ public class BrukerFrame implements ISpectrum {
 	
 	public Spectrum[] getSpectrum() {
 		Spectrum[] result = new Spectrum[pasefItems.size()];
-
 		Queue<BrukerPasefFrameMSMSInfo> pasefItemsCopueQueue = this.pasefItems;
 
 		for (int i = 0; i < this.pasefItems.size(); i++) {

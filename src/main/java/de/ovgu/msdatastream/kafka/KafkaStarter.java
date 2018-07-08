@@ -11,19 +11,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class KafkaAdapter {
-    public final static String KAFKA_URL = System.getenv("KAFKA_URL") != null ? System.getenv("KAFKA_URL")
-            : "localhost:9092";
-
-    public final static String KAFKA_TOPIC = System.getenv("KAFKA_TOPIC") != null ? System.getenv("KAFKA_TOPIC")
-            : "test-topic";
+public class KafkaStarter {
+    public final static String KAFKA_TOPIC = "test-topic";
 
     public static void main(String[] args){
         ApplicationProperties applicationProperties = new ApplicationProperties("F:\\proteinProjData\\Roh\\Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.d");
         String url = applicationProperties.getKafkaUrl();
         int batchSize = applicationProperties.getBatchSize();
 
-        KafkaProducer<String, String> kafkaProducer = KafkaProducerSingleton.getSingletonInstance(url);
+        KafkaProducer<String, String> kafkaProducer = KafkaProducerSingleton.getSingletonInstance(applicationProperties);
 
         String sqlStatement = "INSERT INTO ProcessedFramePrecursorPairs (FrameId, PrecursorId) VALUES (?, ?)";
 
@@ -32,12 +28,13 @@ public class KafkaAdapter {
             BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(applicationProperties);
             Connection connection = bruker.getCurrentConnection();
             PreparedStatement pstmt = connection.prepareStatement(sqlStatement);
+
+            // Set auto commit to false so we can perform batch commits.
             connection.setAutoCommit(false);
 
             try {
                 for (ISpectrum spectrum : bruker.getPrecursors()) {
                     precursorcount++;
-
                     Spectrum[] spectrums = spectrum.getSpectrum();
 
                     for (Spectrum spec : spectrums){

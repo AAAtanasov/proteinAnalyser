@@ -101,7 +101,6 @@ public class BrukerRawFormatWrapper {
 		}
 		System.out.println("Frames: " + frames.size());
 		System.out.println("Precursors: " + precursors.size());
-//		System.out.println("Pasefs: " + pasefItems.size());
 	}
 	
 	public ArrayList<BrukerFrame> getFrames() {

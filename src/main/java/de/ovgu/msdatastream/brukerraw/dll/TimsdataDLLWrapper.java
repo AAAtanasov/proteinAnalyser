@@ -66,19 +66,4 @@ public class TimsdataDLLWrapper {
 		}
 	}
 
-	// TODO: this does not belong here?
-//	//TODO: implement better search if this functionality will be used
-//	public int[] npDigitizeImplementation(double[] searchedData, double[] mzBins){
-//		int[] result = new int[searchedData.length];
-//		for (int i = 0; i < searchedData.length; i++) {
-//			for (int j = 0; j < mzBins.length - 1 ; j++) {
-//				if (searchedData[i] > mzBins[j] && searchedData[i] < mzBins[j + 1]){
-//					result[i] = j + 1;
-//					break;
-//				}
-//			}
-//		}
-//		return result;
-//	}
-
 }

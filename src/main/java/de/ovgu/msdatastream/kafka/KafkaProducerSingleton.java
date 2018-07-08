@@ -1,5 +1,6 @@
 package de.ovgu.msdatastream.kafka;
 
+import de.ovgu.msdatastream.ApplicationProperties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
@@ -11,10 +12,10 @@ public class KafkaProducerSingleton {
 
     private KafkaProducerSingleton() { }
 
-    public static KafkaProducer<String, String> getSingletonInstance(String url){
+    public static KafkaProducer<String, String> getSingletonInstance(ApplicationProperties properties){
         if (singletonInstance == null) {
             Map<String, Object> producerConfig = new HashMap<>();
-            producerConfig.put("bootstrap.servers", url);
+            producerConfig.put("bootstrap.servers", properties.getKafkaUrl());
             producerConfig.put("metadata.fetch.timeout.ms", "3000");
             producerConfig.put("request.timeout.ms", "3000");
             // ... other options: http://kafka.apache.org/documentation.html#producerconfigs
