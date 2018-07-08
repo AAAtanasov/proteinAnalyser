@@ -16,68 +16,87 @@ public class KafkaStarter {
 
     public static void main(String[] args){
         ApplicationProperties applicationProperties = new ApplicationProperties("F:\\proteinProjData\\Roh\\Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.d");
-        String url = applicationProperties.getKafkaUrl();
-        int batchSize = applicationProperties.getBatchSize();
 
-        KafkaProducer<String, String> kafkaProducer = KafkaProducerSingleton.getSingletonInstance(applicationProperties);
+        boolean shouldEnd = false;
 
-        String sqlStatement = "INSERT INTO ProcessedFramePrecursorPairs (FrameId, PrecursorId) VALUES (?, ?)";
-
-        try {
-            int precursorcount = 0;
-            BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(applicationProperties);
-            Connection connection = bruker.getCurrentConnection();
-            PreparedStatement pstmt = connection.prepareStatement(sqlStatement);
-
-            // Set auto commit to false so we can perform batch commits.
-            connection.setAutoCommit(false);
-
-            try {
-                for (ISpectrum spectrum : bruker.getPrecursors()) {
-                    precursorcount++;
-                    Spectrum[] spectrums = spectrum.getSpectrum();
-
-                    for (Spectrum spec : spectrums){
-                        if (spec != null){
-                            // Producer sends messaged
-                            sendMessage(url, spec.getSpectrumInformationAsString(), kafkaProducer);
-
-                            //We prepare a statement to insert the already processed Frame-Precursor Pair
-                            pstmt.setString(1, spec.frameId.toString());
-                            pstmt.setString(2, spec.precursorId.toString());
-                            pstmt.addBatch();
-                        }
-                    }
-
-                    if ((precursorcount % batchSize) == 0) {
-                        System.out.println("Writing Precursor " + precursorcount + " of " + bruker.getPrecursors().size());
-                        //execute batch
-                        pstmt.executeBatch();
-                        connection.commit();
-                    }
-                }
-
-                // ensure no trailing changes are left
-                pstmt.executeBatch();
-                connection.commit();
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-                // If error occurs we wish to rollback any changes.
-                connection.rollback();
-            } finally {
-                bruker.close();
+        while (true){
+            if (shouldEnd) {
+                break;
             }
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            try {
+                // Connect to SQLiteDB, Perform Select statement and populate object with information regarding
+                // the non processed Frames and Precursors.
+                BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(applicationProperties);
+
+                //Use the BrukerRawFormatWrapper to iterate over its ISpectrum object returned by the bruker object.
+                processData(bruker);
+
+                System.out.println("Processed iteration...");
+
+                Thread.sleep(5000);
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                //FIXME: or should it break?
+                break;
+            }
+
         }
+
 
     }
 
-    public static void sendMessage(String url, String content, KafkaProducer kafkaProducer) {
+    private static void processData(BrukerRawFormatWrapper bruker) throws SQLException{
+        int iterationCount = 0;
+        Connection connection = bruker.getCurrentConnection();
+        PreparedStatement pstmt = connection.prepareStatement(bruker.getApplicationProperties().insertProcessedIdsSqlString);
+        KafkaProducer<String, String> kafkaProducer = KafkaProducerSingleton.getSingletonInstance(bruker.getApplicationProperties());
+
+        // Set auto commit to false so we can perform batch commits.
+        connection.setAutoCommit(false);
+
+        try {
+            for (ISpectrum spectrum : bruker.getPrecursors()) {
+                iterationCount++;
+                Spectrum[] spectrums = spectrum.getSpectrum();
+
+                for (Spectrum spec : spectrums){
+                    if (spec != null){
+                        // Producer sends messaged
+                        sendMessage(bruker.getApplicationProperties().getKafkaUrl(), spec.getSpectrumInformationAsString(), kafkaProducer);
+
+                        //We prepare a statement to insert the already processed Frame-Precursor Pair
+                        pstmt.setString(1, spec.frameId.toString());
+                        pstmt.setString(2, spec.precursorId.toString());
+                        pstmt.addBatch();
+                    }
+                }
+
+                if ((iterationCount % bruker.getApplicationProperties().getBatchSize()) == 0) {
+                    System.out.println("Writing Precursor " + iterationCount + " of " + bruker.getPrecursors().size());
+                    //execute batch
+                    pstmt.executeBatch();
+                    connection.commit();
+                }
+            }
+
+            // ensure no trailing changes are left
+            pstmt.executeBatch();
+            connection.commit();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            // If error occurs we wish to rollback any changes.
+            connection.rollback();
+        } finally {
+            bruker.close();
+        }
+    }
+
+    private static void sendMessage(String url, String content, KafkaProducer kafkaProducer) {
         String message = content;
         ProducerRecord<String, String> record = new ProducerRecord<>(KAFKA_TOPIC, message);
         kafkaProducer.send(record);

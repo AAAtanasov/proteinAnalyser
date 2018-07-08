@@ -36,6 +36,8 @@ public class ApplicationProperties {
 			" where FrameId is Null) as nt \n" +
 			"inner join Frames as f on nt.Frame = f.Id inner join Precursors as p on nt.Precursor = p.Id";
 
+	public final String insertProcessedIdsSqlString = "INSERT INTO ProcessedFramePrecursorPairs (FrameId, PrecursorId) VALUES (?, ?)";
+
 	public String getTargetFile(){
 		return this.targetFile;
 	}

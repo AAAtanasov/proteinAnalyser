@@ -165,6 +165,10 @@ public class BrukerRawFormatWrapper {
 		this.sql.closeConnection();
 	}
 
+	public ApplicationProperties getApplicationProperties() {
+		return applicationProperties;
+	}
+
 	private int[] growBufferSize(int frameId, int scanBegin, int scanEnd) {
 		while (true) {
 			int cnt = applicationProperties.getInitialFrameBufferSize();
