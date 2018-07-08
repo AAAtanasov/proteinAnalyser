@@ -9,6 +9,7 @@ import de.ovgu.msdatastream.brukerraw.sqllite.BrukerPrecusor;
 import de.ovgu.msdatastream.brukerraw.sqllite.SQLWrapper;
 import de.ovgu.msdatastream.model.Spectrum;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,33 +34,31 @@ public class BrukerRawFormatWrapper {
 
 	//constants
     private ApplicationProperties applicationProperties;
-	
+
 	public BrukerRawFormatWrapper(ApplicationProperties applicationProperties) throws SQLException {
 	    this.applicationProperties = applicationProperties;
 		dll = new TimsdataDLLWrapper(applicationProperties.getAnalysisDir());
 		sql = new SQLWrapper(applicationProperties);
 		frames = new HashMap<Integer, BrukerFrame>();
 		precursors = new HashMap<Integer, BrukerPrecusor>();
-		//Not needed anywhere - will delete after confirm fixme
-		//pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		frameToPrecursorMapping = new HashMap<Integer, HashSet<BrukerPrecusor>>();
 		precursorToFrameMapping = new HashMap<Integer, HashSet<BrukerFrame>>();
-		//FIXME: always try to create?
-		PreparedStatement createTableIfNotExist = sql.conn.prepareStatement("CREATE TABLE IF NOT EXISTS ProcessedFramePrecursorPairs (Id INTEGER PRIMARY KEY AUTOINCREMENT, FrameId INTEGER , PrecursorId INTEGER, FOREIGN KEY (FrameId) REFERENCES  Frames (Id), FOREIGN  KEY (PrecursorId) REFERENCES Precursors (Id));");
+
+		//ensure table is present
+		PreparedStatement createTableIfNotExist = sql.conn.prepareStatement("CREATE TABLE IF NOT EXISTS ProcessedFramePrecursorPairs (FrameId INTEGER , PrecursorId INTEGER, PRIMARY KEY(FrameId, PrecursorId), FOREIGN KEY (FrameId) REFERENCES  Frames (FrameId), FOREIGN  KEY (PrecursorId) REFERENCES Precursors (PrecursorId));");
+		createTableIfNotExist.execute();
+		createTableIfNotExist.close();
+
 		readMetaData();
+	}
+
+	public Connection getCurrentConnection() {
+		return this.sql.conn;
 	}
 	
 	public void readMetaData() {
 		try {
-
-			// get all metadata and save it as frames and precursors
-			PreparedStatement ps = sql.conn.prepareStatement("Select f.Id, nt.Frame, p.Id, f.Polarity, f.Time," +
-					" f.NumScans, f.NumPeaks, nt.ScanNumBegin, nt.ScanNumEnd, nt.Precursor, p.MonoisotopicMz," +
-					" p.Intensity, p.Charge From" +
-					" (Select pf.Frame, pf.Precursor, pf.ScanNumBegin, pf.ScanNumEnd from PasefFrameMsMsInfo as pf" +
-					" left join ProcessedFramePrecursorPairs as pp on pf.Precursor == pp.PrecursorId and pf.Frame = pp.FrameId" +
-					" where id is Null) as nt \n" +
-					"inner join Frames as f on nt.Frame = f.Id inner join Precursors as p on nt.Precursor = p.id");
+			PreparedStatement ps = sql.conn.prepareStatement(applicationProperties.precursorJoinQuerry);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -69,9 +68,6 @@ public class BrukerRawFormatWrapper {
 
 				// read data
 				BrukerPasefFrameMSMSInfo bkFr = new BrukerPasefFrameMSMSInfo(this, rs);
-
-				//this.pasefItems.add(bkFr); - removed because was not used and frames-precursors already contain
-				// references to
 
 				// create frames
 				BrukerFrame frame;
@@ -133,7 +129,6 @@ public class BrukerRawFormatWrapper {
 		Spectrum spectrum = new Spectrum();
 		int[] pivotArr = growBufferSize(brukerFrame.frameId, scanBegin, scanEnd);
 
-		
 		// figure out size of arrays
 		int arraySize = 0;
 		int scanRange = scanEnd - scanBegin;
@@ -169,14 +164,6 @@ public class BrukerRawFormatWrapper {
 	public void close() {
 		this.dll = null;
 		this.sql.closeConnection();
-	}
-
-	public void insertVisitedFramesAndPrecursors(Integer FrameId, Integer PrecursorId) throws SQLException {
-		PreparedStatement ps = sql.conn.prepareStatement("INSERT INTO ProcessedFramePrecursorPairs (FrameId, PrecursorId) VALUES (" + FrameId+ "," + PrecursorId +")");
-		ps.execute();
-//		if (hasSaved == false) {
-//			throw new SQLException("Failed to insert records for Frame: " + FrameId + " and precursor: " + PrecursorId);
-//		}
 	}
 
 	private int[] growBufferSize(int frameId, int scanBegin, int scanEnd) {
