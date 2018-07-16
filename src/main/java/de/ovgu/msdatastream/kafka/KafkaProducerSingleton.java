@@ -14,7 +14,7 @@ public class KafkaProducerSingleton {
 
     public static KafkaProducer<String, String> getSingletonInstance(ApplicationProperties properties){
         if (singletonInstance == null) {
-            Map<String, Object> producerConfig = new HashMap<>();
+            Map<String, Object> producerConfig = new HashMap<String, Object>();
             producerConfig.put("bootstrap.servers", properties.getKafkaUrl());
             producerConfig.put("metadata.fetch.timeout.ms", "3000");
             producerConfig.put("request.timeout.ms", "3000");

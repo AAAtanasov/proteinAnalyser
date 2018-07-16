@@ -28,13 +28,7 @@ public class ApplicationProperties {
 		return kafkaUrl;
 	}
 
-	public final String precursorJoinQuerry = "Select f.Id, nt.Frame, p.Id, f.Polarity, f.Time," +
-			" f.NumScans, f.NumPeaks, nt.ScanNumBegin, nt.ScanNumEnd, nt.Precursor, p.MonoisotopicMz," +
-			" p.Intensity, p.Charge From" +
-			" (Select pf.Frame, pf.Precursor, pf.ScanNumBegin, pf.ScanNumEnd from PasefFrameMsMsInfo as pf" +
-			" left join ProcessedFramePrecursorPairs as pp on pf.Precursor == pp.PrecursorId and pf.Frame = pp.FrameId" +
-			" where FrameId is Null) as nt \n" +
-			"inner join Frames as f on nt.Frame = f.Id inner join Precursors as p on nt.Precursor = p.Id";
+	public final String precursorJoinQuerry = "SELECT f.Id, ms2.Frame, p.Id, f.Polarity, f.Time, f.NumScans, f.NumPeaks, ms2.ScanNumBegin, ms2.ScanNumEnd, ms2.Precursor, p.MonoisotopicMz, p.Intensity, p.Charge  FROM Frames f INNER JOIN PasefFrameMSMsInfo ms2 ON f.Id = ms2.Frame INNER JOIN Precursors p ON p.Id = ms2.Precursor";
 
 	public final String insertProcessedIdsSqlString = "INSERT INTO ProcessedFramePrecursorPairs (FrameId, PrecursorId) VALUES (?, ?)";
 

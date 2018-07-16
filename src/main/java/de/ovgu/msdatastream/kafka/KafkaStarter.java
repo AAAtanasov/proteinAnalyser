@@ -18,7 +18,7 @@ public class KafkaStarter {
         ApplicationProperties applicationProperties = new ApplicationProperties("F:\\proteinProjData\\Roh\\Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.d");
 
         boolean shouldEnd = false;
-
+// hash set populate table , check if inside bruker
         while (true){
             if (shouldEnd) {
                 break;

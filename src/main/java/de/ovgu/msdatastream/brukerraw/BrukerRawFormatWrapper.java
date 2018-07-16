@@ -31,6 +31,7 @@ public class BrukerRawFormatWrapper {
 	// convenience mappings
 	private HashMap<Integer, HashSet<BrukerPrecusor>> frameToPrecursorMapping;
 	private HashMap<Integer, HashSet<BrukerFrame>> precursorToFrameMapping;
+	private HashSet<String> processedFramePrecursorPairs;
 
 	//constants
     private ApplicationProperties applicationProperties;
@@ -49,14 +50,33 @@ public class BrukerRawFormatWrapper {
 		createTableIfNotExist.execute();
 		createTableIfNotExist.close();
 
-		readMetaData();
+		// TODO: extract hash set from db
+		// how many times should it be executed?
+		processedFramePrecursorPairs = populateIteratedPairs();
+
+		readMetaData(processedFramePrecursorPairs);
 	}
 
 	public Connection getCurrentConnection() {
 		return this.sql.conn;
 	}
+
+	private HashSet<String> populateIteratedPairs() throws SQLException {
+		HashSet<String> resultSet = new HashSet<>();
+
+		PreparedStatement extractPairs = sql.conn.prepareStatement("SELECT * FROM ProcessedFramePrecursorPairs");
+		ResultSet rs = extractPairs.executeQuery();
+
+		while (rs.next()){
+			String constructedIdentifier = rs.getString("FrameId") + "_" + rs.getString("PrecursorId");
+			resultSet.add(constructedIdentifier);
+		}
+
+
+		return resultSet;
+	}
 	
-	public void readMetaData() {
+	public void readMetaData(HashSet<String> processedFramePrecursorSet) {
 		try {
 			PreparedStatement ps = sql.conn.prepareStatement(applicationProperties.precursorJoinQuerry);
 
@@ -65,6 +85,14 @@ public class BrukerRawFormatWrapper {
 			while (rs.next()) {
 				Integer frameID = rs.getInt("Frame");
 				Integer precursorID = rs.getInt("Precursor");
+				String framePrecursorIndex = frameID.toString() + "_" + precursorID.toString();
+
+				if (processedFramePrecursorSet.contains(framePrecursorIndex)){
+					continue;
+				}
+
+				processedFramePrecursorSet.add(framePrecursorIndex);
+				//TODO: store new values to persist in the db, persist only after sending the message
 
 				// read data
 				BrukerPasefFrameMSMSInfo bkFr = new BrukerPasefFrameMSMSInfo(this, rs);
