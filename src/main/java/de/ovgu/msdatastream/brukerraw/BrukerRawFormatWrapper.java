@@ -46,7 +46,7 @@ public class BrukerRawFormatWrapper {
 		precursorToFrameMapping = new HashMap<Integer, HashSet<BrukerFrame>>();
 
 		//ensure table is present
-		PreparedStatement createTableIfNotExist = sql.conn.prepareStatement("CREATE TABLE IF NOT EXISTS ProcessedFramePrecursorPairs (FrameId INTEGER , PrecursorId INTEGER, PRIMARY KEY(FrameId, PrecursorId), FOREIGN KEY (FrameId) REFERENCES  Frames (FrameId), FOREIGN  KEY (PrecursorId) REFERENCES Precursors (PrecursorId));");
+		PreparedStatement createTableIfNotExist = sql.conn.prepareStatement("CREATE TABLE IF NOT EXISTS ProcessedFramePrecursorPairs (FrameId INTEGER , PrecursorId INTEGER, PRIMARY KEY(FrameId, PrecursorId));");
 		createTableIfNotExist.execute();
 		createTableIfNotExist.close();
 

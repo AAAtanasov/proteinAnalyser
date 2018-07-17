@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a0635670-9bf6-43cb-9b1a-59c9b9db75e7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/ApplicationProperties.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/ApplicationProperties.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaProducerSingleton.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaProducerSingleton.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaStarter.java" afterPath="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaStarter.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/ovgu/msdatastream/ApplicationProperties.class" afterPath="$PROJECT_DIR$/target/classes/de/ovgu/msdatastream/ApplicationProperties.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.class" afterPath="$PROJECT_DIR$/target/classes/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.class" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="F:/Studies/ProteinProject/test-kafka/test-kafka/target/" />
@@ -24,21 +22,21 @@
       <file leaf-file-name="BrukerRawFormatWrapper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
+            <state relative-caret-position="248">
               <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2482#2483#0" expanded="true" />
-                <element signature="e#2509#2510#0" expanded="true" />
-                <element signature="e#5093#5094#0" expanded="true" />
-                <element signature="e#5126#5127#0" expanded="true" />
-                <element signature="e#5186#5187#0" expanded="true" />
-                <element signature="e#5227#5228#0" expanded="true" />
-                <element signature="e#6856#6857#0" expanded="true" />
-                <element signature="e#6891#6892#0" expanded="true" />
+                <element signature="e#2366#2367#0" expanded="true" />
+                <element signature="e#2393#2394#0" expanded="true" />
+                <element signature="e#4977#4978#0" expanded="true" />
+                <element signature="e#5010#5011#0" expanded="true" />
+                <element signature="e#5070#5071#0" expanded="true" />
+                <element signature="e#5111#5112#0" expanded="true" />
+                <element signature="e#6740#6741#0" expanded="true" />
+                <element signature="e#6775#6776#0" expanded="true" />
                 <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-                <marker date="1531743300457" expanded="true" signature="1932:2178" ph="CREATE TABLE... IF" />
-                <marker date="1531743300457" expanded="true" signature="2693:2735" ph="SELECT * FRO... ProcessedFramePrecursorPairs" />
+                <marker date="1531812298838" expanded="true" signature="1932:2062" ph="CREATE TABLE... IF" />
+                <marker date="1531812298838" expanded="true" signature="2577:2619" ph="SELECT * FRO... ProcessedFramePrecursorPairs" />
               </folding>
             </state>
           </provider>
@@ -47,8 +45,8 @@
       <file leaf-file-name="BrukerFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+            <state relative-caret-position="452">
+              <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1266#1267#0" expanded="true" />
@@ -61,7 +59,7 @@
       <file leaf-file-name="BrukerPasefFrameMSMSInfo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPasefFrameMSMSInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
+            <state relative-caret-position="129">
               <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
@@ -71,11 +69,31 @@
       <file leaf-file-name="KafkaStarter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaStarter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="35" column="0" lean-forward="true" selection-start-line="34" selection-start-column="61" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="275">
+              <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ISpectrum.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/ISpectrum.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="7" column="15" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BrukerPrecusor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="430">
+              <caret line="59" column="9" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="59" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,7 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rtinseconds</find>
       <find>bkFr</find>
       <find>sql</find>
       <find>time</find>
@@ -122,6 +139,7 @@
       <find>close</find>
       <find>applicationProperties</find>
       <find>res</find>
+      <find>precursors</find>
     </findStrings>
     <replaceStrings>
       <replace>this</replace>
@@ -151,14 +169,14 @@
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/model/Spectrum.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/dll/TimsdataDLLWrapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPasefFrameMSMSInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/SQLWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaProducerSingleton.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaStarter.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/ApplicationProperties.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaStarter.java" />
       </list>
     </option>
   </component>
@@ -751,32 +769,32 @@
       <workItem from="1531041424457" duration="9982000" />
       <workItem from="1531124092261" duration="1363000" />
       <workItem from="1531242336392" duration="10000" />
-      <workItem from="1531741368526" duration="2245000" />
+      <workItem from="1531741368526" duration="8546000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69143000" />
+    <option name="totallyTimeSpent" value="75444000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25688073" sideWeight="0.4975" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2566278" sideWeight="0.4975" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2634338" sideWeight="0.5025" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36090225" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42988205" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25874868" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.195625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16302083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873806" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -785,7 +803,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39842725" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39766702" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Control Flow Graph" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -836,13 +854,25 @@
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaStarter.java</url>
-          <line>61</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java</url>
+          <line>75</line>
           <properties />
-          <option name="timeStamp" value="41" />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java</url>
+          <line>124</line>
+          <properties />
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaStarter.java</url>
+          <line>77</line>
+          <properties />
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="42" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -903,15 +933,15 @@
         <state relative-caret-position="663">
           <caret line="44" column="37" lean-forward="false" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="37" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1070#1071#0" expanded="true" />
-            <element signature="e#1104#1105#0" expanded="true" />
-            <element signature="e#1137#1138#0" expanded="true" />
-            <element signature="e#1166#1167#0" expanded="true" />
-            <element signature="e#1197#1198#0" expanded="true" />
-            <element signature="e#1222#1223#0" expanded="true" />
-            <element signature="e#1287#1288#0" expanded="true" />
-            <element signature="e#1319#1320#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1070#1071#0" expanded="false" />
+            <element signature="e#1104#1105#0" expanded="false" />
+            <element signature="e#1137#1138#0" expanded="false" />
+            <element signature="e#1166#1167#0" expanded="false" />
+            <element signature="e#1197#1198#0" expanded="false" />
+            <element signature="e#1222#1223#0" expanded="false" />
+            <element signature="e#1287#1288#0" expanded="false" />
+            <element signature="e#1319#1320#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -922,17 +952,17 @@
           <caret line="96" column="26" lean-forward="false" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2482#2483#0" expanded="true" />
-            <element signature="e#2509#2510#0" expanded="true" />
-            <element signature="e#5093#5094#0" expanded="true" />
-            <element signature="e#5126#5127#0" expanded="true" />
-            <element signature="e#5186#5187#0" expanded="true" />
-            <element signature="e#5227#5228#0" expanded="true" />
-            <element signature="e#6856#6857#0" expanded="true" />
-            <element signature="e#6891#6892#0" expanded="true" />
+            <element signature="e#2366#2367#0" expanded="true" />
+            <element signature="e#2393#2394#0" expanded="true" />
+            <element signature="e#4977#4978#0" expanded="true" />
+            <element signature="e#5010#5011#0" expanded="true" />
+            <element signature="e#5070#5071#0" expanded="true" />
+            <element signature="e#5111#5112#0" expanded="true" />
+            <element signature="e#6740#6741#0" expanded="true" />
+            <element signature="e#6775#6776#0" expanded="true" />
             <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <marker date="1531743300457" expanded="true" signature="1932:2178" ph="CREATE TABLE... IF" />
-            <marker date="1531743300457" expanded="true" signature="2693:2735" ph="SELECT * FRO... ProcessedFramePrecursorPairs" />
+            <marker date="1531812298838" expanded="true" signature="1932:2062" ph="CREATE TABLE... IF" />
+            <marker date="1531812298838" expanded="true" signature="2577:2619" ph="SELECT * FRO... ProcessedFramePrecursorPairs" />
           </folding>
         </state>
       </provider>
@@ -993,15 +1023,15 @@
         <state relative-caret-position="663">
           <caret line="44" column="37" lean-forward="false" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="37" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1070#1071#0" expanded="true" />
-            <element signature="e#1104#1105#0" expanded="true" />
-            <element signature="e#1137#1138#0" expanded="true" />
-            <element signature="e#1166#1167#0" expanded="true" />
-            <element signature="e#1197#1198#0" expanded="true" />
-            <element signature="e#1222#1223#0" expanded="true" />
-            <element signature="e#1287#1288#0" expanded="true" />
-            <element signature="e#1319#1320#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1070#1071#0" expanded="false" />
+            <element signature="e#1104#1105#0" expanded="false" />
+            <element signature="e#1137#1138#0" expanded="false" />
+            <element signature="e#1166#1167#0" expanded="false" />
+            <element signature="e#1197#1198#0" expanded="false" />
+            <element signature="e#1222#1223#0" expanded="false" />
+            <element signature="e#1287#1288#0" expanded="false" />
+            <element signature="e#1319#1320#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1012,17 +1042,17 @@
           <caret line="96" column="26" lean-forward="false" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2482#2483#0" expanded="true" />
-            <element signature="e#2509#2510#0" expanded="true" />
-            <element signature="e#5093#5094#0" expanded="true" />
-            <element signature="e#5126#5127#0" expanded="true" />
-            <element signature="e#5186#5187#0" expanded="true" />
-            <element signature="e#5227#5228#0" expanded="true" />
-            <element signature="e#6856#6857#0" expanded="true" />
-            <element signature="e#6891#6892#0" expanded="true" />
+            <element signature="e#2366#2367#0" expanded="true" />
+            <element signature="e#2393#2394#0" expanded="true" />
+            <element signature="e#4977#4978#0" expanded="true" />
+            <element signature="e#5010#5011#0" expanded="true" />
+            <element signature="e#5070#5071#0" expanded="true" />
+            <element signature="e#5111#5112#0" expanded="true" />
+            <element signature="e#6740#6741#0" expanded="true" />
+            <element signature="e#6775#6776#0" expanded="true" />
             <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <marker date="1531743300457" expanded="true" signature="1932:2178" ph="CREATE TABLE... IF" />
-            <marker date="1531743300457" expanded="true" signature="2693:2735" ph="SELECT * FRO... ProcessedFramePrecursorPairs" />
+            <marker date="1531812298838" expanded="true" signature="1932:2062" ph="CREATE TABLE... IF" />
+            <marker date="1531812298838" expanded="true" signature="2577:2619" ph="SELECT * FRO... ProcessedFramePrecursorPairs" />
           </folding>
         </state>
       </provider>
@@ -1083,15 +1113,15 @@
         <state relative-caret-position="663">
           <caret line="44" column="37" lean-forward="false" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="37" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1070#1071#0" expanded="true" />
-            <element signature="e#1104#1105#0" expanded="true" />
-            <element signature="e#1137#1138#0" expanded="true" />
-            <element signature="e#1166#1167#0" expanded="true" />
-            <element signature="e#1197#1198#0" expanded="true" />
-            <element signature="e#1222#1223#0" expanded="true" />
-            <element signature="e#1287#1288#0" expanded="true" />
-            <element signature="e#1319#1320#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1070#1071#0" expanded="false" />
+            <element signature="e#1104#1105#0" expanded="false" />
+            <element signature="e#1137#1138#0" expanded="false" />
+            <element signature="e#1166#1167#0" expanded="false" />
+            <element signature="e#1197#1198#0" expanded="false" />
+            <element signature="e#1222#1223#0" expanded="false" />
+            <element signature="e#1287#1288#0" expanded="false" />
+            <element signature="e#1319#1320#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1180,32 +1210,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1070#1071#0" expanded="true" />
-            <element signature="e#1104#1105#0" expanded="true" />
-            <element signature="e#1137#1138#0" expanded="true" />
-            <element signature="e#1166#1167#0" expanded="true" />
-            <element signature="e#1197#1198#0" expanded="true" />
-            <element signature="e#1222#1223#0" expanded="true" />
-            <element signature="e#1287#1288#0" expanded="true" />
-            <element signature="e#1319#1320#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/ISpectrum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="15" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/Starter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1238,10 +1242,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaProducerSingleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#611#627#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/ISpectrum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="15" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2366#2367#0" expanded="true" />
+            <element signature="e#2393#2394#0" expanded="true" />
+            <element signature="e#4977#4978#0" expanded="true" />
+            <element signature="e#5010#5011#0" expanded="true" />
+            <element signature="e#5070#5071#0" expanded="true" />
+            <element signature="e#5111#5112#0" expanded="true" />
+            <element signature="e#6740#6741#0" expanded="true" />
+            <element signature="e#6775#6776#0" expanded="true" />
+            <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
+            <marker date="1531812298838" expanded="true" signature="1932:2062" ph="CREATE TABLE... IF" />
+            <marker date="1531812298838" expanded="true" signature="2577:2619" ph="SELECT * FRO... ProcessedFramePrecursorPairs" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        <state relative-caret-position="452">
+          <caret line="52" column="0" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1266#1267#0" expanded="true" />
@@ -1252,47 +1295,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPasefFrameMSMSInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
+        <state relative-caret-position="129">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaProducerSingleton.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/sqllite/BrukerPrecusor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#611#627#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/brukerraw/BrukerRawFormatWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2482#2483#0" expanded="true" />
-            <element signature="e#2509#2510#0" expanded="true" />
-            <element signature="e#5093#5094#0" expanded="true" />
-            <element signature="e#5126#5127#0" expanded="true" />
-            <element signature="e#5186#5187#0" expanded="true" />
-            <element signature="e#5227#5228#0" expanded="true" />
-            <element signature="e#6856#6857#0" expanded="true" />
-            <element signature="e#6891#6892#0" expanded="true" />
-            <element signature="method#fillIntensitiesAndIndexesForSpecter#0;class#BrukerRawFormatWrapper#0" expanded="false" />
-            <marker date="1531743300457" expanded="true" signature="1932:2178" ph="CREATE TABLE... IF" />
-            <marker date="1531743300457" expanded="true" signature="2693:2735" ph="SELECT * FRO... ProcessedFramePrecursorPairs" />
-          </folding>
+        <state relative-caret-position="430">
+          <caret line="59" column="9" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="59" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/ovgu/msdatastream/kafka/KafkaStarter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="35" column="0" lean-forward="true" selection-start-line="34" selection-start-column="61" selection-end-line="35" selection-end-column="0" />
+        <state relative-caret-position="275">
+          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

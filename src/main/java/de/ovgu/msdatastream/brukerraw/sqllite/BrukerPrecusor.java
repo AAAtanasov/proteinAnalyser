@@ -52,12 +52,11 @@ public class BrukerPrecusor implements ISpectrum {
 	
 	public Spectrum[] getSpectrum() {
 		Spectrum[] result = new Spectrum[pasefItems.size()];
-		// init empty spectrum
-		// retrieve data from each frame and append
-		Queue<BrukerPasefFrameMSMSInfo> pasefItemsCopueQueue = this.pasefItems;
+		int index = 0;
 
-		for (int i = 0; i < this.pasefItems.size(); i++) {
-			result[i] =  pasefItemsCopueQueue.remove().getSpecificSpectrum();
+		for (BrukerPasefFrameMSMSInfo bs: this.pasefItems) {
+			result[index] = bs.getSpecificSpectrum();
+			index++;
 		}
 
 		return result;
