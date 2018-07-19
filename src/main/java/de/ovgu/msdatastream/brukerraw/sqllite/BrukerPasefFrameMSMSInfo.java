@@ -1,10 +1,9 @@
 package de.ovgu.msdatastream.brukerraw.sqllite;
 
+import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
-import de.ovgu.msdatastream.model.Spectrum;
 
 public class BrukerPasefFrameMSMSInfo {
 
@@ -17,6 +16,7 @@ public class BrukerPasefFrameMSMSInfo {
 	public Integer timsId;
 	public Integer numScans;
 	public Integer numPeaks;
+	public Float retentionTime; //Time in Frames table
 	// PasefMSMSInfo
 	public Integer scanNumBegin;
 	public Integer scanNumEnd;
@@ -25,8 +25,9 @@ public class BrukerPasefFrameMSMSInfo {
 	public Double monoisotopicMz;
 	public Double intensity;
 	public Integer precursorParent;
-	// Spectrum
-	private Spectrum spectrum;
+	public Integer precursorCharge;
+	// PeakListContainer
+	private PeakListContainer peakListContainer;
 
 	public BrukerPasefFrameMSMSInfo(BrukerRawFormatWrapper brkFile, ResultSet rs, SQLWrapper sql) throws SQLException {
 		// File
@@ -38,6 +39,7 @@ public class BrukerPasefFrameMSMSInfo {
 		timsId = rs.getInt("TimsId");
 		numScans = rs.getInt("NumScans");
 		numPeaks = rs.getInt("NumPeaks");
+		retentionTime = rs.getFloat("Time");
 		// PasefMSMSInfo
 		scanNumBegin = rs.getInt("ScanNumBegin");
 		scanNumEnd = rs.getInt("ScanNumEnd");
@@ -46,9 +48,10 @@ public class BrukerPasefFrameMSMSInfo {
 		monoisotopicMz = (double) rs.getDouble("MonoisotopicMz");
 		intensity = (double) rs.getDouble("Intensity");
 		precursorParent = rs.getInt("Parent");
+		precursorCharge = rs.getInt("Charge");
 	}
 	
-	public Spectrum getSpectrum() {
+	public PeakListContainer getPeakListContainer() {
 		// read specific range from specific frame
 		return  bkFile.readRawdata(bkFile.getFrame(this.frameId), this.scanNumBegin, this.scanNumEnd);
 	}

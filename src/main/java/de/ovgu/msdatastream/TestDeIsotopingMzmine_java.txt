@@ -1,0 +1,397 @@
+package de.ovgu.msdatastream;
+
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+public class TestDeIsotopingMzmine extends IsotopeGrouperModule {
+    public static void main(String[] args) {
+
+
+        try {
+
+
+            double[] tempMz = new double[] {
+                    169.834,
+                    170.334,
+                    170.834,
+                    225.931,
+                    226.908,
+                    229.92,
+                    243.906,
+                    249.988,
+                    269.03,
+                    270.919,
+                    272.754,
+                    274.931,
+                    287.945,
+                    290.916,
+                    292.919,
+                    319.887,
+                    331.944,
+                    333.951,
+                    351.95,
+                    352.02,
+                    353.949,
+                    354.939,
+                    355.939,
+                    371.968,
+                    373.957,
+                    381.17,
+                    393.965,
+                    398.96,
+                    407.281,
+                    411.986,
+                    413.975,
+                    414.97,
+                    415.412,
+                    415.968,
+                    416.95,
+                    432.968,
+                    433.982,
+                    434.967,
+                    455.987,
+                    456.136,
+                    456.999,
+                    457.983,
+                    458.004,
+                    458.923,
+                    475.993,
+                    476.215,
+                    477,
+                    477.987,
+                    478.98,
+                    482.465,
+                    511.084,
+                    513.929,
+                    520.005,
+                    521.798,
+                    526.371,
+                    533.929,
+                    539.833,
+                    540.004,
+                    540.442,
+                    541.011,
+                    542.998,
+                    558.015,
+                    559.018,
+                    560.962,
+                    574.049,
+                    602.026,
+                    603.02,
+                    618.772,
+                    620.851,
+                    620.875,
+                    621.663,
+                    621.711,
+                    621.787,
+                    621.893,
+                    621.971,
+                    622.036,
+                    622.185,
+                    622.213,
+                    622.266,
+                    622.487,
+                    622.759,
+                    622.928,
+                    623.031,
+                    623.153,
+                    623.286,
+                    623.324,
+                    623.468,
+                    623.653,
+                    623.698,
+                    623.789,
+                    623.878,
+                    623.958,
+                    624.021,
+                    624.1,
+                    624.134,
+                    624.18,
+                    624.272,
+                    624.393,
+                    624.459,
+                    624.565,
+                    624.596,
+                    624.716,
+                    624.76,
+                    624.824,
+                    625.247,
+                    625.354,
+                    625.562,
+                    625.642,
+                    625.692,
+                    626.317,
+                    626.429,
+                    626.569,
+                    626.753,
+                    626.915,
+                    626.941,
+                    627.789,
+                    628.233,
+                    628.269,
+                    628.817,
+                    628.961,
+                    629.186,
+                    629.899,
+                    629.967,
+                    631.19,
+                    653.326,
+                    759.28,
+                    927.187,
+                    979.271,
+                    1125.32,
+                    1376.13,
+                    1520.808,
+                    1622.113,
+                    1658.011};
+            double[] tempInt = new double[]{
+                    2000,
+                    1000,
+                    500,
+                    64,
+                    61,
+                    167,
+                    54,
+                    138,
+                    9,
+                    84,
+                    9,
+                    87,
+                    26,
+                    63,
+                    61,
+                    9,
+                    209,
+                    86,
+                    118,
+                    93,
+                    115,
+                    224,
+                    47,
+                    74,
+                    254,
+                    9,
+                    310,
+                    58,
+                    9,
+                    10,
+                    246,
+                    82,
+                    57,
+                    493,
+                    31,
+                    67,
+                    155,
+                    109,
+                    744,
+                    10,
+                    43,
+                    47,
+                    63,
+                    9,
+                    481,
+                    23,
+                    50,
+                    1388,
+                    258,
+                    18,
+                    9,
+                    11,
+                    78,
+                    106,
+                    22,
+                    9,
+                    20,
+                    2697,
+                    29,
+                    583,
+                    75,
+                    1262,
+                    81,
+                    9,
+                    56,
+                    160,
+                    66,
+                    11,
+                    24,
+                    32,
+                    13,
+                    43,
+                    21,
+                    263,
+                    389,
+                    14569,
+                    78,
+                    33,
+                    84,
+                    52,
+                    490,
+                    27,
+                    3743,
+                    28,
+                    57,
+                    9,
+                    20,
+                    73,
+                    115,
+                    71,
+                    84,
+                    130,
+                    109,
+                    38,
+                    27,
+                    37,
+                    100,
+                    10,
+                    69,
+                    9,
+                    37,
+                    37,
+                    57,
+                    9,
+                    38,
+                    40,
+                    22,
+                    22,
+                    64,
+                    42,
+                    24,
+                    24,
+                    25,
+                    64,
+                    10,
+                    14,
+                    37,
+                    26,
+                    26,
+                    27,
+                    13,
+                    20,
+                    24,
+                    26,
+                    9,
+                    10,
+                    9,
+                    9,
+                    9,
+                    9,
+                    9,
+                    9,
+                    9};
+
+            DataPoint[] dataPointArray = new DataPoint[tempInt.length];
+
+            for (int i = 0; i < tempMz.length; i++) {
+                DataPoint dt = new SimpleDataPoint(tempMz[i], tempInt[i]);
+                dataPointArray[i] = dt;
+            }
+
+            MZmineProject project = new MZmineProjectImpl();
+
+            IsotopeGrouperParameters parametersTest = new IsotopeGrouperParameters();
+            parametersTest.monotonicShape.setValue(true);
+            parametersTest.maximumCharge.setValue(5);
+            parametersTest.autoRemove.setValue(true);
+            parametersTest.mzTolerance.setValue(new MZTolerance(1.0,500.0));
+            parametersTest.rtTolerance.setValue(new RTTolerance(true,0.5));
+
+
+            RawDataFile rawDataFile = new RawDataFileImpl("SampleDataFile");
+
+
+            ((RawDataFileImpl) rawDataFile).storeDataPoints(dataPointArray);
+
+
+           /* public SimpleScan(RawDataFile dataFile, int scanNumber, int msLevel,
+            double retentionTime, double precursorMZ,
+            int precursorCharge, int fragmentScans[], DataPoint[] dataPoints,
+                    MassSpectrumType spectrumType, PolarityType polarity,
+                    String scanDefinition, Range<Double> scanMZRange)*/
+
+
+            com.google.common.collect.Range<Double> scanMZRange = com.google.common.collect.Range.closed(50.0,2500.0);
+
+            SimpleScan simpleScan = new SimpleScan(rawDataFile, 56, 2, 15.87, 622.029, 1, null, dataPointArray, MassSpectrumType.THRESHOLDED, PolarityType.POSITIVE, "SimpleScan",scanMZRange);
+
+//            DataPoint[] dataPointArrayMs1 = new DataPoint[1];
+//            dataPointArrayMs1[0] = new SimpleDataPoint(622.029, 203644);
+            SimpleScan simpleScanMs1 = new SimpleScan(rawDataFile, 1, 1, 15.87, 622.029, 1, new int[] {56} , dataPointArray, MassSpectrumType.THRESHOLDED, PolarityType.POSITIVE, "SimpleScan",scanMZRange);
+
+            ((RawDataFileImpl) rawDataFile).addScan(simpleScanMs1);
+            ((RawDataFileImpl) rawDataFile).addScan(simpleScan);
+
+            SimplePeakList peakList = new SimplePeakList("Peak1", rawDataFile);
+
+
+            MZmineConfigurationImpl mZmineConfiguration = new MZmineConfigurationImpl();
+
+            MZmineCore.setConfiguration(mZmineConfiguration);
+
+            MsMsPeakPickerParameters peakPickParameterSet = new MsMsPeakPickerParameters();
+
+            MsMsPeakPickerParameters.mzWindow.setValue(1.0);
+            MsMsPeakPickerParameters.rtWindow.setValue(1.0);
+
+
+            new MsMsPeakPickingTask(project, rawDataFile, peakPickParameterSet).run();
+
+            System.out.println(((MZmineProjectImpl) project).getPeakListTreeModel().getPeakLists().length);
+            System.out.println(((MZmineProjectImpl) project).getPeakLists().length);
+            System.out.println(((MZmineProjectImpl) project).getPeakListTreeModel().getPeakLists().length);
+
+            RandomAccessFile dataPointsFiletemp = ((RawDataFileImpl) rawDataFile).getDataPointsFile();
+            System.out.println("Length: " + dataPointsFiletemp.length());
+            long pos = 0;
+            while (pos < dataPointsFiletemp.length()) {
+                dataPointsFiletemp.seek(pos);
+
+                System.out.print(dataPointsFiletemp.readFloat());
+                pos = dataPointsFiletemp.getFilePointer();
+                if (pos % 8 == 0) {
+                    System.out.print("\n");
+                } else
+                    System.out.print("\t");
+            }
+
+
+            IsotopeGrouperTask isg = new IsotopeGrouperTask(project, ((MZmineProjectImpl) project).getPeakListTreeModel().getPeakLists()[0], parametersTest);
+
+            isg.run();
+
+            final PeakList deisotopedPeakList = isg.deisotopedPeakList;
+
+            final RawDataFile[] rawDataFiles_new = deisotopedPeakList.getRawDataFiles();
+
+
+            System.out.println("hi");
+            for (RawDataFile rw : rawDataFiles_new) {
+                System.out.println(rw.getName());
+
+                RawDataFileImpl rw1 = (RawDataFileImpl) rw;
+
+                RandomAccessFile dataPointsFile = rw1.getDataPointsFile();
+
+                System.out.println("Length: " + dataPointsFile.length());
+
+                long pos2 = 0;
+                while (pos2 < dataPointsFile.length()) {
+                    dataPointsFile.seek(pos2);
+
+                    System.out.print(dataPointsFile.readFloat());
+                    pos2 = dataPointsFile.getFilePointer();
+                    if (pos2 % 8 == 0) {
+                        System.out.print("\n");
+                    } else
+                        System.out.print("\t");
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+}

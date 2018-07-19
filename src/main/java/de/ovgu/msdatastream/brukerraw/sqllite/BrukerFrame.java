@@ -1,9 +1,8 @@
 package de.ovgu.msdatastream.brukerraw.sqllite;
 
-import java.util.ArrayList;
-
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
-import de.ovgu.msdatastream.model.Spectrum;
+
+import java.util.ArrayList;
 
 public class BrukerFrame {
 
@@ -16,10 +15,11 @@ public class BrukerFrame {
 	public Integer timsId;
 	public Integer numScans;
 	public Integer numPeaks;
+	public Float retentionTime;
 	// PasefItems
 	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
-	// Spectrum
-	private Spectrum spectrum;
+	// PeakListContainer
+	private PeakListContainer peakListContainer;
 	
 	// TODO: Implementation for remaining data
 
@@ -33,6 +33,7 @@ public class BrukerFrame {
 		timsId = pasefItem.timsId;
 		numScans = pasefItem.numScans;
 		numPeaks = pasefItem.numPeaks;
+		retentionTime = pasefItem.retentionTime;
 		// PasefItems
 		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);
@@ -42,7 +43,7 @@ public class BrukerFrame {
 		pasefItems.add(pasefItem);
 	}
 	
-	public Spectrum getSpectrum() {
+	public PeakListContainer getPeakListContainer() {
 		// read from 0 to numScans (= entire frame)
 		return bkFile.readRawdata(this, 0, this.numScans);
 	}

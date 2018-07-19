@@ -5,14 +5,15 @@
   <version>0.0.1-SNAPSHOT</version>
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
-        <configuration>
-          <source/>
-          <target/>
-        </configuration>
-      </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>8</source>
+                <target>8</target>
+            </configuration>
+        </plugin>
     </plugins>
   </build>
   
@@ -38,7 +39,22 @@
     	<version>0.9.1</version>
     	<scope>test</scope>
 	</dependency>
-</dependencies>
-  
+
+      <!-- EBI repo -->
+
+      <dependency>
+          <groupId>org.expasy.mzjava</groupId>
+          <artifactId>mzjava-proteomics</artifactId>
+          <version>1.1.0</version>
+      </dependency>
+
+  </dependencies>
+    <repositories>
+        <repository>
+            <id>Expasy MzJava</id>
+            <url>http://mzjava.expasy.org/maven</url>
+        </repository>
+    </repositories>
+
 </project>
 

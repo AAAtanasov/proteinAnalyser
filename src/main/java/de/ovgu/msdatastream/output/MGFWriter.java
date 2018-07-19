@@ -1,11 +1,11 @@
 package de.ovgu.msdatastream.output;
 
+import de.ovgu.msdatastream.brukerraw.sqllite.PeakListContainer;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import de.ovgu.msdatastream.model.Spectrum;
 
 public class MGFWriter {
 
@@ -20,14 +20,18 @@ public class MGFWriter {
 		}
 	}
 	
-	public void writeSpectrum(Spectrum spec) throws IOException {
+	public void writeSpectrum(PeakListContainer spec) throws IOException {
 		bw.write("BEGIN IONS");
 		bw.write("\n");
-		bw.write("PEPMASS=" + spec.precursorMZ + "\t" + spec.precursorINT);
+		bw.write("TITLE= ");
+		bw.write("\n");
+		bw.write("CHARGE=" + "+");
+		bw.write("\n");
+		bw.write("PEPMASS=" );
 		bw.write("\n");
 		for (int i = 0; i < spec.intensitiesArray.length; i++) {
 			if (spec.intensitiesArray[i] != 0) {
-				bw.write(spec.mzArray[i] + "\t" + spec.intensitiesArray[i]);
+				bw.write(spec.mzArray[i] + " " + spec.intensitiesArray[i]);
 				bw.write("\n");
 			}
 		}

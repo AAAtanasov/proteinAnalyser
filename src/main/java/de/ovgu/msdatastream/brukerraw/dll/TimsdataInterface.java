@@ -2,7 +2,6 @@ package de.ovgu.msdatastream.brukerraw.dll;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
-
 import de.ovgu.msdatastream.Properties;
 
 public interface TimsdataInterface extends Library {

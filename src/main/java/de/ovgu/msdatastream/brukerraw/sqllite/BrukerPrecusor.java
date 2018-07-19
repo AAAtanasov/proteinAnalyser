@@ -1,9 +1,8 @@
 package de.ovgu.msdatastream.brukerraw.sqllite;
 
-import java.util.ArrayList;
-
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
-import de.ovgu.msdatastream.model.Spectrum;
+
+import java.util.ArrayList;
 
 public class BrukerPrecusor {
 
@@ -11,13 +10,19 @@ public class BrukerPrecusor {
 	public BrukerRawFormatWrapper bkFile;
 	// Precursor
 	public Integer precursorId;
-	private Double monoisotopicMz;
-	private Double intensity;
+	public Double monoisotopicMz;
+	public Double intensity;
 	private Integer precursorParent;
+	public Integer precursorCharge;
+
+	public ArrayList<BrukerPasefFrameMSMSInfo> getPasefItems() {
+		return pasefItems;
+	}
+
 	// PasefItems
 	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
-	// Spectrum
-	private Spectrum spectrum;
+	// PeakListContainer
+	private PeakListContainer peakListContainer;
 	
 	public BrukerPrecusor(BrukerPasefFrameMSMSInfo pasefItem) {
 		// File
@@ -27,6 +32,7 @@ public class BrukerPrecusor {
 		monoisotopicMz = pasefItem.monoisotopicMz;
 		intensity = pasefItem.intensity;
 		precursorParent = pasefItem.precursorParent;
+		precursorCharge = pasefItem.precursorCharge;
 		// PasefItems
 		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);
@@ -36,17 +42,15 @@ public class BrukerPrecusor {
 		pasefItems.add(pasefItem);
 	}
 	
-	public Spectrum getSpectrum() {
-		// init empty spectrum
-		Spectrum spectrum = new Spectrum();
+	public PeakListContainer getPeakListContainer() {
+		// init empty peakListContainer
+		 peakListContainer = new PeakListContainer();
 		// retrieve data from each frame and append
 		for (BrukerPasefFrameMSMSInfo pasefItem : this.pasefItems) {
-			Spectrum newSpectrum = bkFile.readRawdata(bkFile.getFrame(pasefItem.frameId), pasefItem.scanNumBegin, pasefItem.scanNumEnd);
-			spectrum.appendData(newSpectrum);
+			PeakListContainer newPeakListContainer = bkFile.readRawdata(bkFile.getFrame(pasefItem.frameId), pasefItem.scanNumBegin, pasefItem.scanNumEnd);
+			peakListContainer.appendData(newPeakListContainer);
 		}
-		spectrum.precursorMZ = this.monoisotopicMz;
-		spectrum.precursorINT = this.intensity;
-		return spectrum; 
+		return peakListContainer;
 	}
 	
 	
