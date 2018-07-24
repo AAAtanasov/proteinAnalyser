@@ -78,7 +78,7 @@ public class BrukerRawFormatWrapper {
 	
 	public void readMetaData(HashSet<String> processedFramePrecursorSet) {
 		try {
-			PreparedStatement ps = sql.conn.prepareStatement(applicationProperties.precursorJoinQuerry);
+			PreparedStatement ps = sql.conn.prepareStatement(applicationProperties.getPrecursorJoinQuerry());
 
 			ResultSet rs = ps.executeQuery();
 

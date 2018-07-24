@@ -15,10 +15,14 @@ public class KafkaStarter {
     public final static String KAFKA_TOPIC = "test-topic";
 
     public static void main(String[] args){
-        ApplicationProperties applicationProperties = new ApplicationProperties("F:\\proteinProjData\\Roh\\Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.d");
+        ApplicationProperties applicationProperties = new ApplicationProperties();
 
         boolean shouldEnd = false;
-// hash set populate table , check if inside bruker
+
+
+        // move to a better file locations
+        // decide flow -> either kafka or mgf writer
+        // calculate elapsed time: use System.nano
         while (true){
             if (shouldEnd) {
                 break;
@@ -51,7 +55,7 @@ public class KafkaStarter {
     private static void processData(BrukerRawFormatWrapper bruker) throws SQLException{
         int iterationCount = 0;
         Connection connection = bruker.getCurrentConnection();
-        PreparedStatement pstmt = connection.prepareStatement(bruker.getApplicationProperties().insertProcessedIdsSqlString);
+        PreparedStatement pstmt = connection.prepareStatement(bruker.getApplicationProperties().getInsertProcessedIdsSqlString());
         KafkaProducer<String, String> kafkaProducer = KafkaProducerSingleton.getSingletonInstance(bruker.getApplicationProperties());
 
         // Set auto commit to false so we can perform batch commits.
@@ -65,6 +69,8 @@ public class KafkaStarter {
                 for (Spectrum spec : spectrums){
                     if (spec != null){
                         // Producer sends messaged
+                        //write to mgf file to show
+                        //TODO: time measure, txt file as properties, solution as jar, if write to mgf or kafka, evaluation of time, write in file , possible optimisation, total time, function time
                         sendMessage(bruker.getApplicationProperties().getKafkaUrl(), spec.getSpectrumInformationAsString(), kafkaProducer);
 
                         //We prepare a statement to insert the already processed Frame-Precursor Pair
