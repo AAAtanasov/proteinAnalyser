@@ -92,5 +92,9 @@ public class ApplicationProperties {
 	public Integer getMaxEmptyIterations() {
 		return Integer.parseInt(getProperty("maxEmptyIterations"));
 	}
-	
+
+	public Integer getThreadSleepTime() {
+		return Integer.parseInt(getProperty("threadSleepTime"));
+	}
+
 }

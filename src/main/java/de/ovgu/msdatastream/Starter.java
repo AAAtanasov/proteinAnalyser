@@ -20,30 +20,36 @@ public class Starter {
 			ApplicationProperties applicationProperties = new ApplicationProperties(tdfDicrectory);
 			boolean isKafkaProducer = applicationProperties.getIsKafkaProducer();
 			Integer maxEmptyIterations = applicationProperties.getMaxEmptyIterations();
+            boolean hasProcessedSomething;
+            Integer threadSleepTime = applicationProperties.getThreadSleepTime();
 
-			// calculate elapsed time: use System.nano
+			//TODO: calculate elapsed time: use System.nano
 			int emptyIterationIndex = 0;
 			while (emptyIterationIndex < maxEmptyIterations) {
 				try {
 					BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(applicationProperties);
 
-					processDataWithKafka(bruker, isKafkaProducer);
+                    hasProcessedSomething = processData(bruker, isKafkaProducer);
 
 					System.out.println("Processed iteration...");
 
-					Thread.sleep(5000);
+					if (hasProcessedSomething) {
+					    emptyIterationIndex = 0;
+                    } else {
+					    emptyIterationIndex++;
+                    }
+
+					Thread.sleep(threadSleepTime);
 
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					//FIXME: or should it break?
 					break;
 				}
 			}
-
 	}
 
-	private static void processDataWithKafka(BrukerRawFormatWrapper bruker, boolean isKafkaProducer) throws SQLException {
+	private static boolean processData(BrukerRawFormatWrapper bruker, boolean isKafkaProducer) throws SQLException {
 		String kafkaTopic = isKafkaProducer ? bruker.getApplicationProperties().getKafkaTopic() : "";
 		MGFWriter writer = isKafkaProducer ? null : new MGFWriter(bruker.getApplicationProperties().getTargetFile());
 		KafkaProducer<String, String> kafkaProducer = isKafkaProducer ? KafkaProducerSingleton.getSingletonInstance(bruker.getApplicationProperties()) : null;
@@ -62,7 +68,7 @@ public class Starter {
 
 				for (Spectrum spec : spectrums){
 					if (spec != null){
-						//TODO: time measure, txt file as properties, solution as jar, if write to mgf or kafka, evaluation of time, write in file , possible optimisation, total time, function time
+						//TODO: time measure, solution as jar, possible optimisation, total time, function time
 						if (isKafkaProducer) {
 							// Producer sends messaged
 							sendMessage(spec.getSpectrumInformationAsString(),
@@ -94,6 +100,7 @@ public class Starter {
 				writer.close();
 			}
 
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -106,7 +113,10 @@ public class Starter {
 		} finally {
 			bruker.close();
 		}
-	}
+
+        return iterationCount > 0;
+
+    }
 
 	private static void sendMessage(String content, KafkaProducer kafkaProducer, String kafkaTopic) {
 		String message = content;

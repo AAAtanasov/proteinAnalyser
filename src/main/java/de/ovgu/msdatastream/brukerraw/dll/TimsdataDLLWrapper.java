@@ -2,9 +2,7 @@ package de.ovgu.msdatastream.brukerraw.dll;
 
 // Helper class used to call timsdata.dll methods
 public class TimsdataDLLWrapper {
-	
 	private TimsdataInterface tdInterface = TimsdataInterface.INSTANCE;
-	// TODO get rid of this hack
 	private long handle = 0;
 	
 	public TimsdataDLLWrapper(String analysisDir) {

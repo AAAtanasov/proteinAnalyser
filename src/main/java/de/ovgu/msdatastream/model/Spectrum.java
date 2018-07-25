@@ -41,9 +41,8 @@ public class Spectrum {
 				intensitiesArray[i] = newSpectrum.intensitiesArray[i - oldlength];
 			}
 		} catch (NullPointerException e) {
-			//FIXME: shouldn't we throw an exception here?
+			System.out.println(e.getMessage());
 			e.printStackTrace();
-
 		}
 	}
 
