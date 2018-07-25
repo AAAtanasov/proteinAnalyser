@@ -5,8 +5,6 @@ import de.ovgu.msdatastream.model.Spectrum;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -17,17 +15,11 @@ public class BrukerFrame implements ISpectrum {
 	// Frame
 	public Integer frameId;
 	public String polarity;
-	public Integer msmsType;
-	public Integer timsId;
 	public Integer numScans;
 	public Integer numPeaks;
 	public Double time;
 	// PasefItems
 	private Queue<BrukerPasefFrameMSMSInfo> pasefItems;
-	// Spectrum
-	private Spectrum spectrum;
-	
-	// TODO: Implementation for remaining data
 
 	public BrukerFrame(BrukerRawFormatWrapper brkFile, ResultSet rs, BrukerPasefFrameMSMSInfo pasefItem) throws SQLException {
 		// File

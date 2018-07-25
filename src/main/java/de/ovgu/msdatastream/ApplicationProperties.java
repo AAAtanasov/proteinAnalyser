@@ -14,7 +14,7 @@ public class ApplicationProperties {
 	public static final String timsdatadllLocation = "src/main/resources/timsdata.dll"; // always here
 	private int initialFrameBufferSize = 0;
 
-	public ApplicationProperties(){
+	public ApplicationProperties(String tdfDirectory){
 		properties = new Properties();
 		try {
 			InputStream propertiesRes = getClass().getResourceAsStream("/project.properties");
@@ -25,7 +25,7 @@ public class ApplicationProperties {
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to read plugin.properties: " + e.getMessage(), e);
 		}
-		this.analysisDir = getProperty("tdfDirectory");
+		this.analysisDir = tdfDirectory;
 		this.connectionUrl = "jdbc:sqlite:" + this.analysisDir + "\\analysis.tdf";
 
 	}
@@ -87,6 +87,10 @@ public class ApplicationProperties {
 
 	public void setInitialFrameBufferSize(int newValue){
 		this.initialFrameBufferSize = newValue;
+	}
+
+	public Integer getMaxEmptyIterations() {
+		return Integer.parseInt(getProperty("maxEmptyIterations"));
 	}
 	
 }

@@ -50,8 +50,6 @@ public class BrukerRawFormatWrapper {
 		createTableIfNotExist.execute();
 		createTableIfNotExist.close();
 
-		// TODO: extract hash set from db
-		// how many times should it be executed?
 		processedFramePrecursorPairs = populateIteratedPairs();
 
 		readMetaData(processedFramePrecursorPairs);
@@ -92,7 +90,6 @@ public class BrukerRawFormatWrapper {
 				}
 
 				processedFramePrecursorSet.add(framePrecursorIndex);
-				//TODO: store new values to persist in the db, persist only after sending the message
 
 				// read data
 				BrukerPasefFrameMSMSInfo bkFr = new BrukerPasefFrameMSMSInfo(this, rs);
