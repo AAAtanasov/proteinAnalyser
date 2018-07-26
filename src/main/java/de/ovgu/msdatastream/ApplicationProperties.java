@@ -11,7 +11,7 @@ public class ApplicationProperties {
 	//Fields
 	private String analysisDir;
 	private String connectionUrl;
-	public static final String timsdatadllLocation = "src/main/resources/timsdata.dll"; // always here
+	public static final String timsdatadllLocation = "timsdata.dll"; // always here
 	private int initialFrameBufferSize = 0;
 
 	public ApplicationProperties(String tdfDirectory){
