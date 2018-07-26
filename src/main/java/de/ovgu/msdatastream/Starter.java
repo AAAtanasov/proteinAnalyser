@@ -20,6 +20,7 @@ public class Starter {
 			ApplicationProperties applicationProperties = new ApplicationProperties(tdfDicrectory);
 			boolean isKafkaProducer = applicationProperties.getIsKafkaProducer();
 			Integer maxEmptyIterations = applicationProperties.getMaxEmptyIterations();
+			System.out.println("Max empty iterations are : " + maxEmptyIterations);
             boolean hasProcessedSomething;
             Integer threadSleepTime = applicationProperties.getThreadSleepTime();
 
@@ -49,7 +50,7 @@ public class Starter {
 			}
 	}
 
-	private static boolean processData(BrukerRawFormatWrapper bruker, boolean isKafkaProducer) throws SQLException {
+	private static boolean processData(BrukerRawFormatWrapper bruker, boolean isKafkaProducer) throws SQLException, IOException {
 		String kafkaTopic = isKafkaProducer ? bruker.getApplicationProperties().getKafkaTopic() : "";
 		MGFWriter writer = isKafkaProducer ? null : new MGFWriter(bruker.getApplicationProperties().getTargetFile());
 		KafkaProducer<String, String> kafkaProducer = isKafkaProducer ? KafkaProducerSingleton.getSingletonInstance(bruker.getApplicationProperties()) : null;
@@ -96,10 +97,6 @@ public class Starter {
 			// ensure no trailing changes are left
 			pstmt.executeBatch();
 			connection.commit();
-			if (writer != null) {
-				writer.close();
-			}
-
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -112,6 +109,9 @@ public class Starter {
 
 		} finally {
 			bruker.close();
+			if (writer != null) {
+				writer.close();
+			}
 		}
 
         return iterationCount > 0;

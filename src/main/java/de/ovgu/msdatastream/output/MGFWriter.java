@@ -14,7 +14,8 @@ public class MGFWriter {
 	// constructor
 	public MGFWriter(String filename) {
 		try {
-			bw = new BufferedWriter(new FileWriter(new File(filename), true));
+			File file = new File(filename);
+			bw = new BufferedWriter(new FileWriter(file, true));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -8,8 +8,6 @@ public class TimsdataDLLWrapper {
 	private long handle = 0;
 	
 	public TimsdataDLLWrapper(String analysisDir) {
-		System.load("C:\\Users\\Anton\\Documents\\sqliteReader\\src\\main\\resources\\timsdata.dll");
-
 		this.timsOpen(analysisDir);
 	}
 	
