@@ -17,7 +17,8 @@ public class Starter {
 
 	public static void main(String[] args) {
 			String tdfDicrectory = args[0];
-			ApplicationProperties applicationProperties = new ApplicationProperties(tdfDicrectory);
+			String targetFile = args[1];
+			ApplicationProperties applicationProperties = new ApplicationProperties(tdfDicrectory, targetFile);
 			boolean isKafkaProducer = applicationProperties.getIsKafkaProducer();
 			Integer maxEmptyIterations = applicationProperties.getMaxEmptyIterations();
 			System.out.println("Max empty iterations are : " + maxEmptyIterations);

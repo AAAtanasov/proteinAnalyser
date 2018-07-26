@@ -13,8 +13,9 @@ public class ApplicationProperties {
 	private String connectionUrl;
 	public static final String timsdatadllLocation = "timsdata.dll"; // always here
 	private int initialFrameBufferSize = 0;
+	private String targetFile;
 
-	public ApplicationProperties(String tdfDirectory){
+	public ApplicationProperties(String tdfDirectory, String targetFile){
 		properties = new Properties();
 		try {
 			InputStream propertiesRes = getClass().getResourceAsStream("/project.properties");
@@ -27,6 +28,7 @@ public class ApplicationProperties {
 		}
 		this.analysisDir = tdfDirectory;
 		this.connectionUrl = "jdbc:sqlite:" + this.analysisDir + "\\analysis.tdf";
+		this.targetFile = targetFile;
 
 	}
 
@@ -55,7 +57,7 @@ public class ApplicationProperties {
 	};
 
 	public String getTargetFile(){
-		return getProperty("targetFile");
+		return this.targetFile;
 	}
 
 	public Boolean getIsKafkaProducer() {
