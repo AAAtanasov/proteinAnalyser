@@ -1,9 +1,0 @@
-src/main/resources/timsdata.dll
-target/classes/timsdata.dll
-test.mgf
-/bin/
-/.classpath
-/.project
-/target/
-/OURPARSER3_Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.mgf
-/OURPARSER_Ecoli_1400V_200grad_PASEF_16_RD2_01_1290.mgf
