@@ -1,29 +1,28 @@
 package de.ovgu.msdatastream.brukerraw.sqllite;
 
+<<<<<<< HEAD
 import de.ovgu.msdatastream.Properties;
+=======
+import de.ovgu.msdatastream.ApplicationProperties;
+>>>>>>> refs/heads/merge_branch_streaming_processing
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLWrapper {
-
-	// fields
-
 	public Connection conn;
+	private ApplicationProperties applicationProperties;
 
-	// constructor
-
-	public SQLWrapper() {
+	public SQLWrapper(ApplicationProperties applicationProperties) {
+		this.applicationProperties = applicationProperties;
 		openConnection();
 	}
-
-	// connection
 
 	public void openConnection() {
 		try {
 			if (conn == null || !conn.isClosed()) {
-				conn = DriverManager.getConnection(Properties.connectionUrl);
+				conn = DriverManager.getConnection(this.applicationProperties.getConnectionUrl());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,5 +36,4 @@ public class SQLWrapper {
 			e.printStackTrace();
 		}
 	}
-	
 }

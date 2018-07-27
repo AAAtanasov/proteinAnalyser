@@ -1,60 +1,73 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>msdatastream</groupId>
-  <artifactId>msdatastream</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <build>
-    <plugins>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>msdatastream</groupId>
+	<artifactId>msdatastream</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<build>
+		<plugins>
 
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>8</source>
-                <target>8</target>
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
-  
-  <dependencies>
-  	<!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
-	<dependency>
-   	 	<groupId>org.xerial</groupId>
-   	 	<artifactId>sqlite-jdbc</artifactId>
-   		 <version>3.23.1</version>
-	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
-	<dependency>
-   		<groupId>net.java.dev.jna</groupId>
-   		 <artifactId>jna</artifactId>
-   		 <version>4.5.1</version>
-	</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/org.nd4j/nd4j-native-platform -->
-	<dependency>
-    	<groupId>org.nd4j</groupId>
-    	<artifactId>nd4j-native-platform</artifactId>
-    	<version>0.9.1</version>
-    	<scope>test</scope>
-	</dependency>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-      <!-- EBI repo -->
+	<applicationProperties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</applicationProperties>
 
-      <dependency>
-          <groupId>org.expasy.mzjava</groupId>
-          <artifactId>mzjava-proteomics</artifactId>
-          <version>1.1.0</version>
-      </dependency>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.23.1</version>
+		</dependency>
 
-  </dependencies>
-    <repositories>
-        <repository>
-            <id>Expasy MzJava</id>
-            <url>http://mzjava.expasy.org/maven</url>
-        </repository>
-    </repositories>
+		<!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.nd4j/nd4j-native-platform -->
+		<dependency>
+			<groupId>org.nd4j</groupId>
+			<artifactId>nd4j-native-platform</artifactId>
+			<version>0.9.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- EBI repo -->
+		<dependency>
+			<groupId>org.expasy.mzjava</groupId>
+			<artifactId>mzjava-proteomics</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.12</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>Expasy MzJava</id>
+			<url>http://mzjava.expasy.org/maven</url>
+		</repository>
+	</repositories>
+
 
 </project>
 

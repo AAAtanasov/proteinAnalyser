@@ -4,12 +4,18 @@ import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
 
 import java.util.ArrayList;
 
-public class BrukerPrecusor {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BrukerPrecusor implements ISpectrum {
 
 	// File
 	public BrukerRawFormatWrapper bkFile;
 	// Precursor
 	public Integer precursorId;
+<<<<<<< HEAD
 	public Double monoisotopicMz;
 	public Double intensity;
 	private Integer precursorParent;
@@ -19,15 +25,27 @@ public class BrukerPrecusor {
 		return pasefItems;
 	}
 
+=======
+	private Double monoisotopicMz;
+	private Double intensity;
+	private Integer charge;
+>>>>>>> refs/heads/merge_branch_streaming_processing
 	// PasefItems
+<<<<<<< HEAD
 	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
 	// PeakListContainer
 	private PeakListContainer peakListContainer;
 	
 	public BrukerPrecusor(BrukerPasefFrameMSMSInfo pasefItem) {
+=======
+	private Queue<BrukerPasefFrameMSMSInfo> pasefItems;
+
+	public BrukerPrecusor(BrukerRawFormatWrapper brkFile, ResultSet rs, BrukerPasefFrameMSMSInfo pasefItem) throws SQLException {
+>>>>>>> refs/heads/merge_branch_streaming_processing
 		// File
-		bkFile = pasefItem.bkFile;
+		bkFile = brkFile;
 		// Precursor
+<<<<<<< HEAD
 		precursorId = pasefItem.precursorId;
 		monoisotopicMz = pasefItem.monoisotopicMz;
 		if (monoisotopicMz == 0.0) {
@@ -40,15 +58,34 @@ public class BrukerPrecusor {
 			precursorCharge = 1;
 		}
 		
+=======
+		precursorId = rs.getInt("Precursor");
+		monoisotopicMz = rs.getDouble("MonoisotopicMz");
+		intensity = rs.getDouble("Intensity");;
+>>>>>>> refs/heads/merge_branch_streaming_processing
 		// PasefItems
-		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
+		pasefItems = new LinkedList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);
+		charge = rs.getInt("Charge");
+	}
+
+	public double getMonoisotopicMz(){
+		return  this.monoisotopicMz;
+	}
+
+	public double getIntensity() {
+		return  this.intensity;
+	}
+
+	public Integer getCharge() {
+		return this.charge;
 	}
 
 	public void addPasefItem(BrukerPasefFrameMSMSInfo pasefItem) {
 		pasefItems.add(pasefItem);
 	}
 	
+<<<<<<< HEAD
 	public PeakListContainer getPeakListContainer() {
 		// init empty peakListContainer
 		 peakListContainer = new PeakListContainer();
@@ -56,8 +93,22 @@ public class BrukerPrecusor {
 		for (BrukerPasefFrameMSMSInfo pasefItem : this.pasefItems) {
 			PeakListContainer newPeakListContainer = bkFile.readRawdata(bkFile.getFrame(pasefItem.frameId), pasefItem.scanNumBegin, pasefItem.scanNumEnd);
 			peakListContainer.appendData(newPeakListContainer);
+=======
+	public Spectrum[] getSpectrum() {
+		Spectrum[] result = new Spectrum[pasefItems.size()];
+		int index = 0;
+
+		for (BrukerPasefFrameMSMSInfo bs: this.pasefItems) {
+			result[index] = bs.getSpecificSpectrum();
+			index++;
+>>>>>>> refs/heads/merge_branch_streaming_processing
 		}
+<<<<<<< HEAD
 		return peakListContainer;
+=======
+
+		return result;
+>>>>>>> refs/heads/merge_branch_streaming_processing
 	}
 	
 	
