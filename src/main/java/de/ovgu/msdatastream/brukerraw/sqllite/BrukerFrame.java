@@ -1,6 +1,7 @@
 package de.ovgu.msdatastream.brukerraw.sqllite;
 
 import de.ovgu.msdatastream.brukerraw.BrukerRawFormatWrapper;
+import de.ovgu.msdatastream.model.Spectrum;
 
 import java.util.ArrayList;
 
@@ -18,27 +19,27 @@ public class BrukerFrame implements ISpectrum {
 	public String polarity;
 	public Integer numScans;
 	public Integer numPeaks;
-<<<<<<< HEAD
 	public Float retentionTime;
-=======
 	public Double time;
->>>>>>> refs/heads/merge_branch_streaming_processing
+	
 	// PasefItems
-<<<<<<< HEAD
-	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
+	private LinkedList<BrukerPasefFrameMSMSInfo> pasefItems;
 	// PeakListContainer
 	private PeakListContainer peakListContainer;
 	
+	// TODO: are these correct types?
+	private Integer msmsType;
+	private Integer timsId;
+	
 	// TODO: Implementation for remaining data
-=======
-	private Queue<BrukerPasefFrameMSMSInfo> pasefItems;
->>>>>>> refs/heads/merge_branch_streaming_processing
+
+//	private Queue<BrukerPasefFrameMSMSInfo> pasefItems;
+
 
 	public BrukerFrame(BrukerRawFormatWrapper brkFile, ResultSet rs, BrukerPasefFrameMSMSInfo pasefItem) throws SQLException {
 		// File
 		bkFile = brkFile;
 		// Frame
-<<<<<<< HEAD
 		frameId = pasefItem.frameId;
 		polarity = pasefItem.polarity;
 		msmsType = pasefItem.msmsType;
@@ -46,13 +47,13 @@ public class BrukerFrame implements ISpectrum {
 		numScans = pasefItem.numScans;
 		numPeaks = pasefItem.numPeaks;
 		retentionTime = pasefItem.retentionTime;
-=======
+
 		frameId = rs.getInt("Frame");
 		polarity = rs.getString("Polarity");
 		time = rs.getDouble("Time");
 		numScans = rs.getInt("NumScans");
 		numPeaks = rs.getInt("NumPeaks");
->>>>>>> refs/heads/merge_branch_streaming_processing
+
 		// PasefItems
 		pasefItems = new LinkedList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);
@@ -62,11 +63,12 @@ public class BrukerFrame implements ISpectrum {
 		pasefItems.add(pasefItem);
 	}
 	
-<<<<<<< HEAD
+
 	public PeakListContainer getPeakListContainer() {
 		// read from 0 to numScans (= entire frame)
 		return bkFile.readRawdata(this, 0, this.numScans);
-=======
+	}
+
 	public Spectrum[] getSpectrum() {
 		Spectrum[] result = new Spectrum[pasefItems.size()];
 		int index = 0;
@@ -77,7 +79,6 @@ public class BrukerFrame implements ISpectrum {
 		}
 
 		return result;
->>>>>>> refs/heads/merge_branch_streaming_processing
 	}
 	
 }

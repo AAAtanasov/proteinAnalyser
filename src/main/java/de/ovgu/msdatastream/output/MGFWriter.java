@@ -1,10 +1,8 @@
 package de.ovgu.msdatastream.output;
 
-<<<<<<< HEAD
+
 import de.ovgu.msdatastream.brukerraw.sqllite.PeakListContainer;
-=======
 import de.ovgu.msdatastream.model.Spectrum;
->>>>>>> refs/heads/merge_branch_streaming_processing
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,7 +23,6 @@ public class MGFWriter {
 		}
 	}
 	
-<<<<<<< HEAD
 	public void writeSpectrum(PeakListContainer spec) throws IOException {
 		bw.write("BEGIN IONS");
 		bw.write("\n");
@@ -44,10 +41,10 @@ public class MGFWriter {
 		bw.write("END IONS");
 		bw.write("\n");
 		bw.write("\n");
-=======
+	}
+
 	public void writeSpectrum(String spectrumInformation) throws IOException {
 		bw.write(spectrumInformation);
->>>>>>> refs/heads/merge_branch_streaming_processing
 	}
 
 	public void close() throws IOException {

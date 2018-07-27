@@ -1,11 +1,9 @@
 package de.ovgu.msdatastream.brukerraw;
 
-<<<<<<< HEAD
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataDLLWrapper;
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataPayloadContainer;
 import de.ovgu.msdatastream.brukerraw.sqllite.*;
 
-=======
 import de.ovgu.msdatastream.ApplicationProperties;
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataDLLWrapper;
 import de.ovgu.msdatastream.brukerraw.dll.TimsdataPayloadContainer;
@@ -16,7 +14,6 @@ import de.ovgu.msdatastream.brukerraw.sqllite.SQLWrapper;
 import de.ovgu.msdatastream.model.Spectrum;
 
 import java.sql.Connection;
->>>>>>> refs/heads/merge_branch_streaming_processing
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +23,6 @@ import java.util.HashSet;
 
 public class BrukerRawFormatWrapper {
 
-<<<<<<< HEAD
     // file access
     private SQLWrapper sql;
     private TimsdataDLLWrapper dll;
@@ -39,16 +35,24 @@ public class BrukerRawFormatWrapper {
     // convenience mappings
     private HashMap<Integer, HashSet<BrukerPrecusor>> frameToPrecursorMapping;
     private HashMap<Integer, HashSet<BrukerFrame>> precursorToFrameMapping;
-
-    public BrukerRawFormatWrapper(String analysisDir) {
-        dll = new TimsdataDLLWrapper(analysisDir);
-        sql = new SQLWrapper();
-        frames = new HashMap<Integer, BrukerFrame>();
-        precursors = new HashMap<Integer, BrukerPrecusor>();
-        pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
-        frameToPrecursorMapping = new HashMap<Integer, HashSet<BrukerPrecusor>>();
-        precursorToFrameMapping = new HashMap<Integer, HashSet<BrukerFrame>>();
-        readMetaData();
+    
+	//constants
+    private ApplicationProperties applicationProperties;
+    
+    public BrukerRawFormatWrapper(ApplicationProperties applicationProperties) throws SQLException {
+    	this.applicationProperties = applicationProperties;
+    	this.dll = new TimsdataDLLWrapper(applicationProperties.getAnalysisDir());
+    	this.sql = new SQLWrapper(applicationProperties);
+    	this.frames = new HashMap<Integer, BrukerFrame>();
+    	this.precursors = new HashMap<Integer, BrukerPrecusor>();
+    	this.pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
+    	this.frameToPrecursorMapping = new HashMap<Integer, HashSet<BrukerPrecusor>>();
+    	this.precursorToFrameMapping = new HashMap<Integer, HashSet<BrukerFrame>>();
+    }
+    
+    public boolean checkForNewFrames() {
+    	// TODO: code
+    	return false;
     }
 
     public void readMetaData() {
@@ -97,8 +101,6 @@ public class BrukerRawFormatWrapper {
     }
 
     public ArrayList<BrukerFrame> getFrames() {
-//        ArrayList<BrukerFrame> returnList = new ArrayList<BrukerFrame>();
-//        returnList.addAll(frames.values());
         return new ArrayList <BrukerFrame>(frames.values());
     }
 
@@ -107,88 +109,62 @@ public class BrukerRawFormatWrapper {
     }
 
     public ArrayList<BrukerPrecusor> getPrecursors() {
-//        ArrayList<BrukerPrecusor> returnList = new ArrayList<BrukerPrecusor>();
-//        returnList.addAll(precursors.values());
         return new ArrayList <BrukerPrecusor>(precursors.values());
     }
 
 
-    public PeakListContainer readRawdata(BrukerFrame f, int scanBegin, int scanEnd) {
-
-        // TODO: clean up :)
-        // TODO: more comments!!
-        // TODO: hard-coded values into the property file!
-
-
-        PeakListContainer peakListContainer = new PeakListContainer();
-
-      /*  *//* Trying API*//*
-        Comparable id = "xx";
-        String name = "1";
-        int index =1;
-        DataProcessing defaultDataProcessing = new DataProcessing(id, null);
-        List<BinaryDataArray> barray = new ArrayList<BinaryDataArray>();
-        String spotID = "";
-        SourceFile sourceFile = new SourceFile(null,null);
-        ScanList scanList = new ScanList(null,null);
-        List < Precursor > precursors  = new ArrayList<Precursor>();
-        List < ParamGroup > products = new ArrayList<ParamGroup>();
-        List < Peptide > peptide  = new ArrayList<Peptide>();*/
-
-
-
-        int[] pivotArr = new int[512];
-        long requiredLength = dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, 512);
-        int correctSize = ((int) requiredLength / 4) + 1;
-        if (correctSize > 16777216) {
-            throw new RuntimeException("Maximum expected frame size exceeded");
-        }
-        pivotArr = new int[correctSize];
-        dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, correctSize * 4);
-
-        // figure out size of arrays
-        int arraySize = 0;
-        for (int i = 0; i < (scanEnd - scanBegin); i++) {
-            arraySize += pivotArr[i];
-        }
-        // initialize with correct size
-        int[] indicies = new int[arraySize];
-=======
-	// file access
-	private SQLWrapper sql;
-	private TimsdataDLLWrapper dll;
-	
-	// data
-	private HashMap<Integer, BrukerFrame> frames;
-	private HashMap<Integer, BrukerPrecusor> precursors;
-	private ArrayList<BrukerPasefFrameMSMSInfo> pasefItems;
-	
-	// convenience mappings
-	private HashMap<Integer, HashSet<BrukerPrecusor>> frameToPrecursorMapping;
-	private HashMap<Integer, HashSet<BrukerFrame>> precursorToFrameMapping;
-	private HashSet<String> processedFramePrecursorPairs;
-
-	//constants
-    private ApplicationProperties applicationProperties;
-
-	public BrukerRawFormatWrapper(ApplicationProperties applicationProperties) throws SQLException {
-	    this.applicationProperties = applicationProperties;
-		dll = new TimsdataDLLWrapper(applicationProperties.getAnalysisDir());
-		sql = new SQLWrapper(applicationProperties);
-		frames = new HashMap<Integer, BrukerFrame>();
-		precursors = new HashMap<Integer, BrukerPrecusor>();
-		frameToPrecursorMapping = new HashMap<Integer, HashSet<BrukerPrecusor>>();
-		precursorToFrameMapping = new HashMap<Integer, HashSet<BrukerFrame>>();
-
-		//ensure table is present
-		PreparedStatement createTableIfNotExist = sql.conn.prepareStatement("CREATE TABLE IF NOT EXISTS ProcessedFramePrecursorPairs (FrameId INTEGER , PrecursorId INTEGER, PRIMARY KEY(FrameId, PrecursorId));");
-		createTableIfNotExist.execute();
-		createTableIfNotExist.close();
-
-		processedFramePrecursorPairs = populateIteratedPairs();
-
-		readMetaData(processedFramePrecursorPairs);
-	}
+//    public PeakListContainer readRawdata_ATIN(BrukerFrame f, int scanBegin, int scanEnd) {
+//
+//        // TODO: clean up :)
+//        // TODO: more comments!!
+//        // TODO: hard-coded values into the property file!
+//
+//
+//        PeakListContainer peakListContainer = new PeakListContainer();
+//
+//      /*  *//* Trying API*//*
+//        Comparable id = "xx";
+//        String name = "1";
+//        int index =1;
+//        DataProcessing defaultDataProcessing = new DataProcessing(id, null);
+//        List<BinaryDataArray> barray = new ArrayList<BinaryDataArray>();
+//        String spotID = "";
+//        SourceFile sourceFile = new SourceFile(null,null);
+//        ScanList scanList = new ScanList(null,null);
+//        List < Precursor > precursors  = new ArrayList<Precursor>();
+//        List < ParamGroup > products = new ArrayList<ParamGroup>();
+//        List < Peptide > peptide  = new ArrayList<Peptide>();*/
+//
+//
+//
+//        int[] pivotArr = new int[512];
+//        long requiredLength = dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, 512);
+//        int correctSize = ((int) requiredLength / 4) + 1;
+//        if (correctSize > 16777216) {
+//            throw new RuntimeException("Maximum expected frame size exceeded");
+//        }
+//        pivotArr = new int[correctSize];
+//        dll.timsReadScansV2(dll.handle, f.frameId, scanBegin, scanEnd, pivotArr, correctSize * 4);
+//
+//        // figure out size of arrays
+//        int arraySize = 0;
+//        for (int i = 0; i < (scanEnd - scanBegin); i++) {
+//            arraySize += pivotArr[i];
+//        }
+//        // initialize with correct size
+//        int[] indicies = new int[arraySize];
+//        
+//
+//
+//		//ensure table is present
+//		PreparedStatement createTableIfNotExist = sql.conn.prepareStatement("CREATE TABLE IF NOT EXISTS ProcessedFramePrecursorPairs (FrameId INTEGER , PrecursorId INTEGER, PRIMARY KEY(FrameId, PrecursorId));");
+//		createTableIfNotExist.execute();
+//		createTableIfNotExist.close();
+//
+//		processedFramePrecursorPairs = populateIteratedPairs();
+//
+//		readMetaData(processedFramePrecursorPairs);
+//	}
 
 	public Connection getCurrentConnection() {
 		return this.sql.conn;
@@ -263,27 +239,6 @@ public class BrukerRawFormatWrapper {
 		System.out.println("Precursors: " + precursors.size());
 	}
 	
-	public ArrayList<BrukerFrame> getFrames() {
-		ArrayList<BrukerFrame> returnList = new ArrayList<BrukerFrame>();
-		returnList.addAll(frames.values());
-		return returnList;
-	}
-	
-	public BrukerFrame getFrame(Integer frameID) {
-		return frames.get(frameID);
-	}
-
-	public BrukerPrecusor getPrecursor(Integer precursorID) {
-		return precursors.get(precursorID);
-	}
-	
-	public ArrayList<BrukerPrecusor> getPrecursors() {
-		ArrayList<BrukerPrecusor> returnList = new ArrayList<BrukerPrecusor>();
-		returnList.addAll(precursors.values());
-		return returnList;
-	}
-	
-	
 	public Spectrum readRawdata(BrukerFrame brukerFrame, int scanBegin, int scanEnd) {
 		Spectrum spectrum = new Spectrum();
 		int[] pivotArr = growBufferSize(brukerFrame.frameId, scanBegin, scanEnd);
@@ -296,9 +251,7 @@ public class BrukerRawFormatWrapper {
 		}
 		// initialize with correct size 
 		Integer[] indicies = new Integer[arraySize];
->>>>>>> refs/heads/merge_branch_streaming_processing
         int[] intensities = new int[arraySize];
-<<<<<<< HEAD
         // the index running over the concatenated part of the pivotArr where the actual data is
         int indexPivotArr = (scanEnd - scanBegin);
         // the indicies for our indicies/intensities arrays
@@ -324,22 +277,16 @@ public class BrukerRawFormatWrapper {
                 }
             }
         }
-=======
 
 		fillIntensitiesAndIndexesForSpecter(pivotArr, indicies, intensities, scanRange );
 
->>>>>>> refs/heads/merge_branch_streaming_processing
         // prepare payload container and retrieve mzvalues
-<<<<<<< HEAD
         TimsdataPayloadContainer container = new TimsdataPayloadContainer();
-        container.handle = dll.handle;
-        container.frameId = f.frameId;
-        container.inArrayOfPointers = new double[indicies.length];
-=======
-		TimsdataPayloadContainer container = new TimsdataPayloadContainer();
+        
 		container.handle = dll.getHandle();
 		container.frameId = brukerFrame.frameId;
 		container.inArrayOfPointers = new double[indicies.length];
+		
 		for (int i = 0; i < indicies.length; i++) {
 			container.inArrayOfPointers[i] = (double)indicies[i];
 		}
@@ -354,39 +301,32 @@ public class BrukerRawFormatWrapper {
 
 		return spectrum;
 	}
->>>>>>> refs/heads/merge_branch_streaming_processing
 
-<<<<<<< HEAD
-
-        /*double[] binaryDoubleArray = new double[arraySize];
-        uk.ac.ebi.pride.data.core.Spectrum spectrum1 = new uk.ac.ebi.pride.data.core.Spectrum(id, name,index
-                , defaultDataProcessing,*//*int defaultArrayLength*//* arraySize ,barray, spotID,  sourceFile,
-                scanList,  precursors, products, (Peptide) peptide);*/
-
-        for (int i = 0; i < indicies.length; i++) {
-            container.inArrayOfPointers[i] = indicies[i];
-        }
-        container.outArrayOfPointers = new double[indicies.length];
-        container.count = indicies.length;
-        // Load mzindex into container.outArrayOfPointers
-        dll.indexToMz(container);
-        if (container.outArrayOfPointers.length > 0) {
-            peakListContainer.appendData(new PeakListContainer(container.outArrayOfPointers, intensities));
-
-        }
-        return peakListContainer;
-    }
+	
+	// TODO: is this useful or garbage?
+//        /*double[] binaryDoubleArray = new double[arraySize];
+//        uk.ac.ebi.pride.data.core.Spectrum spectrum1 = new uk.ac.ebi.pride.data.core.Spectrum(id, name,index
+//                , defaultDataProcessing,*//*int defaultArrayLength*//* arraySize ,barray, spotID,  sourceFile,
+//                scanList,  precursors, products, (Peptide) peptide);*/
+//
+//        for (int i = 0; i < indicies.length; i++) {
+//            container.inArrayOfPointers[i] = indicies[i];
+//        }
+//        container.outArrayOfPointers = new double[indicies.length];
+//        container.count = indicies.length;
+//        // Load mzindex into container.outArrayOfPointers
+//        dll.indexToMz(container);
+//        if (container.outArrayOfPointers.length > 0) {
+//            peakListContainer.appendData(new PeakListContainer(container.outArrayOfPointers, intensities));
+//
+//        }
+//        return peakListContainer;
+//    }
 
     public void close() {
         this.dll = null;
         this.sql.closeConnection();
     }
-
-=======
-	public void close() {
-		this.dll = null;
-		this.sql.closeConnection();
-	}
 
 	public ApplicationProperties getApplicationProperties() {
 		return applicationProperties;
@@ -444,5 +384,4 @@ public class BrukerRawFormatWrapper {
 		}
 	}
 	
->>>>>>> refs/heads/merge_branch_streaming_processing
 }

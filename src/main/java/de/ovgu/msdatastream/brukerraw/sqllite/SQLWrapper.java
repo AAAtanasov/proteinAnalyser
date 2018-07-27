@@ -1,10 +1,7 @@
 package de.ovgu.msdatastream.brukerraw.sqllite;
 
-<<<<<<< HEAD
 import de.ovgu.msdatastream.Properties;
-=======
 import de.ovgu.msdatastream.ApplicationProperties;
->>>>>>> refs/heads/merge_branch_streaming_processing
 
 import java.sql.Connection;
 import java.sql.DriverManager;
