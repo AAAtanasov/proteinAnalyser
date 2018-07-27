@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact name="timsdata_dll">
-    <output-path>$PROJECT_DIR$/out/artifacts/timsdata_dll</output-path>
-    <root id="root">
-      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/timsdata.dll" />
-    </root>
-  </artifact>
-</component>
