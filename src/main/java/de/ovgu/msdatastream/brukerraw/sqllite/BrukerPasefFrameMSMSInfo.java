@@ -23,6 +23,7 @@ public class BrukerPasefFrameMSMSInfo {
 	// Precursor
 	public Integer precursorId;
 	public Double monoisotopicMz;
+	public Double averageMz;
 	public Double intensity;
 	public Integer precursorParent;
 	public Integer precursorCharge;
@@ -46,6 +47,7 @@ public class BrukerPasefFrameMSMSInfo {
 		// Precursor
 		precursorId = rs.getInt("Precursor");
 		monoisotopicMz = (double) rs.getDouble("MonoisotopicMz");
+		averageMz = (double) rs.getDouble("AverageMz");
 		intensity = (double) rs.getDouble("Intensity");
 		precursorParent = rs.getInt("Parent");
 		precursorCharge = rs.getInt("Charge");

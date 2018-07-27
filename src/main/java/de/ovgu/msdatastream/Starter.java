@@ -90,7 +90,7 @@ public class Starter {
                 mzPairFinal = PeakListUtilities.removeIsotopePeaklist(mzPairFinal,false);
 
                 /* Noise filtering**/
-                double noiseIntLimit = 100.0;
+                double noiseIntLimit = 8.0;
                 //noinspection Convert2MethodRef (As Map.Entry::getKey & Map.Entry::getValue static method references cannot be called within a non-static method)
                 mzPairFinal = (HashMap<Double, Double>) mzPairFinal.entrySet().stream().filter(x -> x.getValue() >= noiseIntLimit).collect(Collectors.toMap(x->x.getKey(), x->x.getValue()));
    /*             HashMap <Double, Double> copyOfMzPairFinal = new HashMap <>(mzPairFinal);

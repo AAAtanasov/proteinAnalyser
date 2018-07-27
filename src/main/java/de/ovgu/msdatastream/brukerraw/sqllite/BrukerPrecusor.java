@@ -30,9 +30,16 @@ public class BrukerPrecusor {
 		// Precursor
 		precursorId = pasefItem.precursorId;
 		monoisotopicMz = pasefItem.monoisotopicMz;
+		if (monoisotopicMz == 0.0) {
+			monoisotopicMz = pasefItem.averageMz;
+		}
 		intensity = pasefItem.intensity;
 		precursorParent = pasefItem.precursorParent;
 		precursorCharge = pasefItem.precursorCharge;
+		if (precursorCharge == 0)  {
+			precursorCharge = 1;
+		}
+		
 		// PasefItems
 		pasefItems = new ArrayList<BrukerPasefFrameMSMSInfo>();
 		pasefItems.add(pasefItem);
