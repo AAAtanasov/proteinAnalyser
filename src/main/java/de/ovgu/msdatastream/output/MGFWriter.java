@@ -20,6 +20,11 @@ public class MGFWriter {
 			e.printStackTrace();
 		}
 	}
+
+
+	public void plainWrite(String information) throws IOException {
+		bw.write(information);
+	}
 	
 	public void writeSpectrum(String spectrumInformation) throws IOException {
 		bw.write(spectrumInformation);

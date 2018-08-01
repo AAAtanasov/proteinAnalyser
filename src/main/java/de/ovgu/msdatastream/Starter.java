@@ -7,15 +7,19 @@ import de.ovgu.msdatastream.model.Spectrum;
 import de.ovgu.msdatastream.output.MGFWriter;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-
+import java.util.Date;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class Starter {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 			String tdfDicrectory = args[0];
 			String targetFile = args[1];
 			ApplicationProperties applicationProperties = new ApplicationProperties(tdfDicrectory, targetFile);
@@ -24,31 +28,61 @@ public class Starter {
 			System.out.println("Max empty iterations are : " + maxEmptyIterations);
             boolean hasProcessedSomething;
             Integer threadSleepTime = applicationProperties.getThreadSleepTime();
+			DateFormat formatter = new SimpleDateFormat("mm:ss:SSS");
+			MGFWriter timeWriter = new MGFWriter("times.txt");
 
 			//TODO: calculate elapsed time: use System.nano
 			int emptyIterationIndex = 0;
-			while (emptyIterationIndex < maxEmptyIterations) {
-				try {
-					BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(applicationProperties);
+			try	{
+				timeWriter.plainWrite("Start experiment : \n");
+				timeWriter.plainWrite("----------------: \n");
 
-                    hasProcessedSomething = processData(bruker, isKafkaProducer);
+				while (emptyIterationIndex < maxEmptyIterations) {
+					try {
+						long startTimeBruker = System.nanoTime();
+						BrukerRawFormatWrapper bruker = new BrukerRawFormatWrapper(applicationProperties);
 
-					System.out.println("Processed iteration...");
+						long endTimeBruker = System.nanoTime();
+						long elapsedMiliSeconds = TimeUnit.NANOSECONDS.toMillis(endTimeBruker - startTimeBruker);
 
-					if (hasProcessedSomething) {
-					    emptyIterationIndex = 0;
-                    } else {
-					    emptyIterationIndex++;
-                    }
+						System.out.println("Elapsed miliseconds are: " + elapsedMiliSeconds);
+						timeWriter.plainWrite("Bruker miliseconds elapsed: " + elapsedMiliSeconds + "\n");
 
-					Thread.sleep(threadSleepTime);
+						long startTimeProcessor = System.nanoTime();
+						hasProcessedSomething = processData(bruker, isKafkaProducer);
 
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					e.printStackTrace();
-					break;
+						long endTimeProcessor = System.nanoTime();
+						long elapsedMiliSecondsProcess = TimeUnit.NANOSECONDS.toMillis(endTimeProcessor - startTimeProcessor);
+
+						timeWriter.plainWrite("Processor miliseconds elapsed: " + elapsedMiliSecondsProcess + "\n");
+
+						System.out.println("Processed iteration...");
+
+						if (hasProcessedSomething) {
+							emptyIterationIndex = 0;
+						} else {
+							emptyIterationIndex++;
+						}
+
+						Thread.sleep(threadSleepTime);
+
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+						e.printStackTrace();
+						break;
+					}
 				}
+
+				timeWriter.plainWrite("Start experiment : \n");
+				timeWriter.plainWrite("----------------: \n");
+			} catch (Exception ex ) {
+				System.out.println(ex.getMessage());
+				throw ex;
+
+			} finally {
+				timeWriter.close();
 			}
+
 	}
 
 	private static boolean processData(BrukerRawFormatWrapper bruker, boolean isKafkaProducer) throws SQLException, IOException {
