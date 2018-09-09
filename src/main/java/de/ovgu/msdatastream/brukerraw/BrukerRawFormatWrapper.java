@@ -147,6 +147,23 @@ public class BrukerRawFormatWrapper {
 		returnList.addAll(precursors.values());
 		return returnList;
 	}
+
+	private void test(){
+		int a = 5;
+		int b = 6;
+		int c = a + 1;
+		int d = 0;
+		if (c > 5){
+			d = c;
+		} else {
+			d = 8;
+		}
+
+		System.out.println(b);
+		System.out.println(c);
+		System.out.println(d);
+
+	}
 	
 	
 	public Spectrum readRawdata(BrukerFrame brukerFrame, int scanBegin, int scanEnd) {

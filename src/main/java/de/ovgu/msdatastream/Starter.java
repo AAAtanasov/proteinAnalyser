@@ -98,7 +98,8 @@ public class Starter {
 		connection.setAutoCommit(false);
 
 		try {
-			for (ISpectrum spectrumContainer : bruker.getPrecursors()) {
+			for (ISpectrum spectrumContainer : bruker.getFrames()) {
+				long startTime = System.nanoTime();
 				iterationCount++;
 				Spectrum[] spectrums = spectrumContainer.getSpectrum();
 
@@ -127,7 +128,13 @@ public class Starter {
 					pstmt.executeBatch();
 					connection.commit();
 				}
-			}
+
+				long endTime = System.nanoTime();
+                long elapsedMiliSeconds = TimeUnit.NANOSECONDS.toMillis(endTime - startTime);
+                System.out.println("One frame was proices in:" + elapsedMiliSeconds);
+
+
+            }
 
 			// ensure no trailing changes are left
 			pstmt.executeBatch();
