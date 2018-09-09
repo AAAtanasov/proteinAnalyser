@@ -1,1 +1,3 @@
-lib/timsdata/timsdata.dll
+src/main/resources/timsdata.dll
+target/classes/timsdata.dll
+test.mgf
